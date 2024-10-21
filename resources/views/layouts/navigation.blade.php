@@ -1,4 +1,4 @@
-<header id="nav-area" class="fixed-top container-fluid container-md px-5">
+<header id="nav-area" class="fixed-top container-fluid px-5">
         <div class="d-flex align-items-start">
 
             <a href="index.html" class="logo d-flex align-items-center ms-auto me-3 mt-2">

@@ -1,3 +1,4 @@
+let staticStart = false;
 (function () {
   ("use strict");
 
@@ -15,7 +16,7 @@
     }
     /** count statistic */
     const statisticElement = document.getElementById("statistic");
-    if (isInViewport(statisticElement)) DoCount();
+    if (!staticStart && isInViewport(statisticElement)) {DoCount(); staticStart = true;}
   };
   carousel();
 })();

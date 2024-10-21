@@ -16,11 +16,11 @@
 	--color-salmon-5: #df1f2c;
 	--color-white: #fff;
 	--color-grey-1: #ecf1f9;
-	--color-grey-2: #7c869a40;
+	--color-grey-2: #d7d7d7;
 	--color-grey-3: #7C869A;
 	--color-grey-4: #494e59;
 	--color-grey-6: #323232;
-	--color-grey-7: #222;
+	--color-grey-7: #252525;
 	--heading-color: #323232;
 }
 
@@ -33,7 +33,6 @@
 body {
 	font-family: var(--default-font);
 	color: var(--color-grey-3);
-	background-color: var(--color-white);
 }
 
 html {
@@ -160,6 +159,15 @@ p {
 
 
 /* ===================================== */
+/* ***************** nav-area **************** */
+/* ===================================== */
+header {
+	/* background-color: #fdf9eccd; */
+	margin: 0 5% !important;
+	width: 90% !important;
+}
+
+/* ===================================== */
 /* ***************** header **************** */
 /* ===================================== */
 
@@ -206,9 +214,9 @@ input[type='search']:focus {
 /* ===================================== */
 #cover-area {
 	height: 100vh;
-	margin: 0 10%;
+	margin: 0 5%;
 	transition: all 0.5s;
-	background-color: var(--color-grey-2);
+	background-image:linear-gradient(var(--color-white) 2%, 20%, rgba(0, 0, 0, 0)  ) , url('/assets/images/cover/cover.jpg');
 }
 
 /* ===================================== */
@@ -481,19 +489,20 @@ input[type='search']:focus {
 	z-index: 99999;
 	width: 35px;
 	height: 35px;
-	background: var(--color-salmon-5);
+	background: var(--color-grey-2);
+	color: var(--color-grey-7);
 	text-align: center;
 	line-height: 35px;
 	font-size: 20px;
-	color: #fff;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: all 0.3s ease-out 0s;
 	margin-top: 2px;
+	border-radius: 0;
 }
 
 .fixed-button a {
-	color: #fff;
+	color: var(--color-grey-7);
 }
 
 .back-to-top {

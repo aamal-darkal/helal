@@ -12,10 +12,10 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title> {{ config('app.name' , 'library') }} | @yield('title')</title>
+    <title> {{ config('app.name' , 'SRAC') }} | @yield('title')</title>
 
-    <link href="{{ asset('css/bootstrap-5.0.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard-assets/css/bootstrap-5.0.css') }}" rel="stylesheet">
+    <link href="{{ asset('dashboard-assets/css/app.css') }}" rel="stylesheet">
     @stack('css')
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">

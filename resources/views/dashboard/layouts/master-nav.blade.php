@@ -4,16 +4,7 @@
      </a>
 
      <div class="navbar-collapse collapse">
-         <ul class="navbar-nav navbar-align">
-                <li>
-                    <form action="{{ route('language') }}" >
-                        <select name="lang" class="form-select" onchange="submit()">
-                            <option value="" hidden >--language</option>
-                            <option value="ar">Arabic</option>
-                            <option value="en">English</option>
-                        </select>
-                    </form>
-                </li>
+         <ul class="navbar-nav navbar-align">                
              <li class="nav-item dropdown">
                  <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                      <div class="position-relative">

@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['article', 'compaign', 'news', 'story']);            
-            $table->string('title' , 100)->index();
-            $table->string('content' , 1000);
-            $table->boolean('visible')->default(true);
-            $table->integer('order');
+            $table->enum('type', ['article', 'compaign', 'news', 'story']);
+            $table->string('title', 100)->index();
+            $table->string('content', 1000);
+            $table->boolean('visible')->default(true);        
             $table->foreignId('image_id')->nullable()->constrained;
             $table->timestamps();
         });

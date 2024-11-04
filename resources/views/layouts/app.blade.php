@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('layouts.head')
-<body>
+<body dir="@lang('helal.dir')">
+        @include('layouts.header')
         @include('layouts.navigation')
         @yield('content')
         @include('layouts.footer')

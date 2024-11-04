@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Client\LangController;
 use App\Http\Controllers\Clients\HomeController;
+use App\Http\Controllers\Clients\LangController;
 use App\Http\Controllers\Dashboard\MartyerController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 /** ------------------- client ------------------ */
-// Route::get('/language', [LangController::class, 'setLang'])->name('language');
+Route::get('/language', [LangController::class, 'setLang'])->name('language');
 
 /** ------------------- dashboard ------------------ */
 Route::get('/dashboard', function () {

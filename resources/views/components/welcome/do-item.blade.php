@@ -8,6 +8,6 @@
         <div class="icon">
             <i class="lni lni-{{ $icon }}"></i>
         </div>
-        <h3>{{ $title }}</h3>
+        <h3>@lang($title)</h3>
     </a>
 </div>

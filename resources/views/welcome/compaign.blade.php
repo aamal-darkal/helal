@@ -1,4 +1,4 @@
-<section id="compaign-area" class="container section-wrapper center-container text-center">
+<section id="compaign-area" class="center-container text-center">
     <h2 class="section-title">campaigns</h2>
     <div class="px-5">
         <h3 class="text-white text-shadow-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia animi  </h3>

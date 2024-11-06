@@ -6,11 +6,8 @@
                     eos laudantium fuga vel eveniet rem.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe natus praesentium nam. Debitis cumque
                     eos laudantium
-                <p>Lorem ipsum dolor sit ametconsectetur adipisicing elit. Saepe natus praesentium nam. Debitis cumque
-                    eos laudantium fuga vel eveniet rem.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe natus praesentium nam. Debitis cumque
-                    eos laudantium fuga vel eveniet rem.</p>
-                fuga vel eveniet rem.</p>
+               
+               
             </div>
             <div class="col-md-7">
                 <div class="wpb_wrapper">

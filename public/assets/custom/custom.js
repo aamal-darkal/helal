@@ -1,29 +1,6 @@
 let staticStart = false;
 (function () {
     "use strict";    
-    /**
-     * Init swiper sliders
-     */
-    function initSwiper() {
-        document
-            .querySelectorAll(".init-swiper")
-            .forEach(function (swiperElement) {
-                let config = JSON.parse(
-                    swiperElement
-                        .querySelector(".swiper-config")
-                        .innerHTML.trim()
-                );
-
-                if (swiperElement.classList.contains("swiper-tab")) {
-                    initSwiperWithCustomPagination(swiperElement, config);
-                } else {
-                    new Swiper(swiperElement, config);
-                }
-            });
-    }
-
-    window.addEventListener("load", initSwiper);
-
     /*=====================================
     Sticky
     ======================================= */
@@ -34,34 +11,9 @@ let staticStart = false;
             navbar.classList.add("sticky");
         } else {
             navbar.classList.remove("sticky");
-        }
-        /** count statistic */
-        const statisticElement = document.getElementById("statistic");
-        if (!staticStart && isInViewport(statisticElement)) {
-            DoCount();
-            staticStart = true;
-        }
+        }       
     };
-    carousel();
 })();
-
-function carousel() {
-    let items = document.querySelectorAll("#news-carousel .carousel-item");
-
-    items.forEach((el) => {
-        const minPerSlide = 4;
-        let next = el.nextElementSibling;
-        for (var i = 1; i < minPerSlide; i++) {
-            if (!next) {
-                next = items[0];
-            }
-
-            let cloneChild = next.cloneNode(true);
-            el.appendChild(cloneChild.children[0]);
-            next = next.nextElementSibling;
-        }
-    });
-}
 
 /** animation */
 window.addEventListener("load", () =>
@@ -73,7 +25,6 @@ window.addEventListener("load", () =>
     })
 );
 
-
 function isInViewport(element) {
     var rect = element.getBoundingClientRect();
     var html = document.documentElement;
@@ -84,3 +35,58 @@ function isInViewport(element) {
         rect.right <= (window.innerWidth || html.clientWidth)
     );
 }
+
+var swiper = new Swiper(".martyer-swiper", {
+    loop: true,
+    speed: 600,
+    autoplay: {
+        delay: 5000,
+    },
+    slidesPerView: 1,
+    pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+    },
+    breakpoints: {
+        // 768: {
+        //     slidesPerView: 2,
+        //     spaceBetween: 5,
+        // },
+        992: {
+            slidesPerView: 3,
+            spaceBetween: 5,
+        },
+    },
+});
+
+var swiper = new Swiper(".news-swipper", {
+    slidesPerView: 1,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            spaceBetween: 5,
+        },
+        768: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+        },
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
+
+var swiper = new Swiper(".stories-swiper", {
+    slidesPerView: 1,    
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    }
+});

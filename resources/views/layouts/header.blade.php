@@ -1,5 +1,5 @@
-<header id="nav-area" class="fixed-top container-fluid">
-    <div class="mx-8 d-flex justify-content-between align-items-center">
+<header id="header-area" class="fixed-top container-fluid p-1">
+    <div class="header-wrapper d-flex justify-content-between align-items-center">
 
         <a href="index.html" class="logo">
             <img class="logo" src="{{ asset('assets/images/logo/logo.png') }} " alt="Logo">

@@ -7,6 +7,8 @@ return [
     'font' => 'Montserrat',
     'dir' => 'ltr',
     'align' => 'left',
+    'sign' => '+1',
+
 
     /** MAIN MENU */
     'who' => 'Who We Are?',

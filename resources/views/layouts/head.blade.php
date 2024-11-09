@@ -34,7 +34,12 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/swiper/swiper-bundle.min.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    
+    <style>
+        :root {
+            --align: @lang('helal.align');
+            --sign: @lang('helal.sign')
+        }
+    </style>
     <!--====== aos custom ======-->
     <link rel="stylesheet" href="{{ asset('assets/custom/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/custom/c.css') }}">
@@ -42,10 +47,7 @@
     <style>
         body {
             font-family: @lang('helal.font')
-        }
-        * {
-            text-align: @lang('helal.align') 
-        }        
+        }              
     </style>
     <title> @lang("helal." . config('app.name', 'SARC'))  | @yield('title')</title>
 

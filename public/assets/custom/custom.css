@@ -217,6 +217,7 @@ p {
 }
 
 .dropdown-menu {
+	text-align: var(--align);
 	border-radius: 0;
 	border-top: none;
 	transition: 0.7s !important;
@@ -425,7 +426,7 @@ input {
 
 .story-img {
 	position: relative;
-	left: 25px;
+	left: calc( 25px * var(--sign));
 	bottom: 15px;
 }
 
@@ -435,7 +436,7 @@ input {
 
 .story-content {
 	position: relative;
-	right: 25px;
+	right:  calc(25px * var(--sign));
 	top: 15px;
 	text-align: justify;
 }

@@ -8,6 +8,7 @@ return [
     'font'=> 'Tajawal',
     'dir' => 'rtl',
     'align' => 'right',
+    'sign' => '-1',
 
     /** MAIN MENU */
     'who' => 'من نحن؟',

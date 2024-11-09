@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-xl">
+
     <div class="container">
         <button class="navbar-toggler btn-salmon" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -6,12 +7,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
+            <ul class="navbar-nav mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         @lang ('helal.who')
-                    </a>                    
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">@lang('helal.about')</a></li>
                         <li><a class="dropdown-item" href="#">@lang('helal.story')</a></li>
@@ -84,7 +85,11 @@
                         <li><a class="dropdown-item" href="#">@lang('helal.volunteer')</a></li>
 
                     </ul>
+                <li class="nav-search">
+                    <a class="mx-3 search"><i class="fas fa-search"></i></a>
+                </li>
             </ul>
         </div>
     </div>
+    
 </nav>

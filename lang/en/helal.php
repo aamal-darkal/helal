@@ -6,7 +6,7 @@ return [
     'lang' => 'العربية',
     'font' => 'Montserrat',
     'dir' => 'ltr',
-
+    'align' => 'left',
 
     /** MAIN MENU */
     'who' => 'Who We Are?',
@@ -22,7 +22,7 @@ return [
     'story' => 'Our Story',
     'principles' => 'Our Principles',
     'where' => 'Where We Work?',
-    'Movement' => 'About the International Red Cross and Red Crescent Movement',
+    'movement' => 'About the International Red Cross and Red Crescent Movement',
     
     // What We Do
     'relief' => 'Relief',
@@ -36,8 +36,8 @@ return [
     'humanitarian' => 'Humanitarian Support Project',
     
     // Our News
-    'sarc_news' => 'SARC News',
-    'branch_news' => 'Branch News',
+    'sarc-news' => 'SARC News',
+    'branch-news' => 'Branch News',
     'stories' => 'Humanitarian Stories',
     'press' => 'Press Releases',
     

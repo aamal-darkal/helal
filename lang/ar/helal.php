@@ -7,11 +7,13 @@ return [
     'lang' => 'English',
     'font'=> 'Tajawal',
     'dir' => 'rtl',
+    'align' => 'right',
 
     /** MAIN MENU */
     'who' => 'من نحن؟',
     'do' => 'ماذا نفعل؟',
     'news' => 'أخبارنا',
+
     'achievements' => 'إنجازاتنا',
     'awareness' => 'توعية وإرشادات',
     'join' => 'انضم إلينا',
@@ -22,7 +24,7 @@ return [
     'story' => 'قصتنا',
     'principles' => 'مبادئنا',
     'where' => 'أين نعمل؟',
-    'Movement' => 'عن الحركة الدولية للصليب الأحمر والهلال الأحمر',
+    'movement' => 'عن الحركة الدولية للصليب الأحمر والهلال الأحمر',
 
     // What We Do
     'relief' => 'الإغاثة',
@@ -36,8 +38,8 @@ return [
     'humanitarian' => 'مشروع الدعم الإنساني',
 
     // Our News
-    'sarc_news' => 'أخبار المنظمة',
-    'branch_news' => 'أخبار الفروع',
+    'sarc-news' => 'أخبار المنظمة',
+    'branch-news' => 'أخبار الفروع',
     'stories' => 'قصص إنسانية',
     'press' => 'البيانات الصحفية',
 

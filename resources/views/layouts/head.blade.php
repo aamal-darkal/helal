@@ -4,7 +4,6 @@
 
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
-    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css">
 
     <!-- Fonts -->
     {{--  Arabic font --}}
@@ -44,8 +43,10 @@
         body {
             font-family: @lang('helal.font')
         }
+        * {
+            text-align: @lang('helal.align') 
+        }        
     </style>
     <title> @lang("helal." . config('app.name', 'SARC'))  | @yield('title')</title>
 
 </head>
-

@@ -155,7 +155,7 @@ p {
 	background-color: rgb(255, 255, 255);
 	padding: 2px 4%;
 	transition: 1s;
-	z-index: 99 ;
+	z-index: 99;
 	position: fixed;
 	border-bottom: solid 1px var(--color-grey-1);
 }
@@ -172,7 +172,7 @@ p {
 /* ************** nav-bar *********** */
 /* ===================================== */
 
-.navbar {	
+.navbar {
 	width: calc(93% - 130px);
 	margin: auto;
 	position: sticky;
@@ -199,9 +199,7 @@ p {
 	transition: 1s;
 }
 
-.sticky .nav-link,
-.sticky .dropdown-menu {
-	background-color: transparent;
+.sticky .nav-link {
 	padding: 0;
 }
 
@@ -262,6 +260,8 @@ p {
 @media (max-width:1199px) {
 	.navbar-nav {
 		background-color: #fff !important;
+		box-shadow: 0px 0px 20px var(--color-grey-1);
+		padding: 5px 20px;		
 	}
 
 	.sticky .navbar-toggler {
@@ -269,10 +269,10 @@ p {
 	}
 
 	.nav-link,
-	.dropdown-menu {		
+	.dropdown-menu {
 		padding: 5px !important;
-		text-align:inherit;
-	}	
+		text-align: inherit;
+	}
 
 }
 

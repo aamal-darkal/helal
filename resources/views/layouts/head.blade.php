@@ -38,6 +38,7 @@
     
     <!--====== aos custom ======-->
     <link rel="stylesheet" href="{{ asset('assets/custom/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/custom/c.css') }}">
 
     <style>
         body {

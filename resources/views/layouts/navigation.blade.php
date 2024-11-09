@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-
         <button class="navbar-toggler btn-salmon" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -12,7 +11,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         @lang ('helal.who')
-                    </a>
+                    </a>                    
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">@lang('helal.about')</a></li>
                         <li><a class="dropdown-item" href="#">@lang('helal.story')</a></li>
@@ -39,7 +38,7 @@
                         <li><a class="dropdown-item" href="#">@lang('helal.water')
                             </a></li>
                         <li><a class="dropdown-item" href="#">@lang('helal.cash')</a></li>
-                        <li><a class="dropdown-item" href="#">L@lang('helal.livelihoods')</a></li>
+                        <li><a class="dropdown-item" href="#">@lang('helal.livelihoods')</a></li>
                         <li><a class="dropdown-item" href="#">@lang('helal.risk')</a></li>
                         <li><a class="dropdown-item" href="#">@lang('helal.humanitarian')</a></li>
 

@@ -9,6 +9,7 @@ use App\Models\Keyword;
 use App\Models\Section;
 use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage as FacadesStorage;
 
 class SectionController extends Controller
@@ -16,6 +17,11 @@ class SectionController extends Controller
     /** 
      * Display a listing of the resource.
      */
+    public $type;
+    public function __construct(Request $request)
+    {
+        session()->flash('type', $request->type);
+    }
     public function index(Request $request)
     {
         $type = $request->type;
@@ -38,7 +44,10 @@ class SectionController extends Controller
     public function store(SectionRequest $request)
     {
         $validated = $request->validated();
-        $validated['order'] = section::where('type' , $validated['type'] )->max('order') + 1;
+        $validated['created_by'] = Auth::user()->id;
+
+        $type = $validated['type'];
+
         if ($request->hasFile('image')) {
             $validated['image_id'] = upload::save($request->type, $request->file('image'))->id;
         }
@@ -50,6 +59,9 @@ class SectionController extends Controller
                 'section_id' => $section->id,
                 'keyword' => $keyword]);
         }
+
+        return to_route('dashboard.sections.index' , ['type' => $type])->with('success', "تمت إضافة بيانات  $validated[type] بنجاح");
+
     }
 
     /**
@@ -75,11 +87,13 @@ class SectionController extends Controller
     public function update(SectionRequest $request, Section $section)
     {
         $validated = $request->validated();
+        $validated['updated_by'] = Auth::user()->id;
+        $type = $validated['type'];
       
         if ($request->hasFile('image')) {
             FacadesStorage::disk('public')->delete($section->image->name);
 
-            $validated['image_id'] = upload::save($request->type, $request->file('image'))->id;
+            $validated['image_id'] = upload::save($type, $request->file('image'))->id;
         }
 
         if ($request->keywords) {
@@ -92,6 +106,7 @@ class SectionController extends Controller
         }
         $section = $section->update($validated);
 
+        return to_route('dashboard.sections.index' , ['type' => $type])->with('success', "تمت حفظ بيانات  $validated[type] بنجاح");
     }
 
     /**

@@ -1,17 +1,47 @@
 @extends('dashboard.layouts.master')
 @section('title', 'تعديل' . config("section.$type.singular", 'section'))
 @section('content')
-    <h4 class="title"> تعديل {{ config("section.$type.singular", 'section') }} </h4>
 
+    <h4 class="title"> إضافة {{ config("section.$type.singular", 'section') }} </h4>
+
+    <div id="template-keyword" class="d-none">
+        <div class="alert alert-success p-1 d-inline ms-1 mb-5">
+            <input type="hidden" name="keywords[]">
+            <span class="d-inline"></span>
+            <button type="button" class="btn btn-sm bg-transparent mb-3" onclick="deleteKeyword(this)">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+    </div>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="text-danger">{{ $error }}</div>
+        @endforeach
+    @endif
     <form action="{{ route('dashboard.sections.update', ['section' => $section, 'type' => $type]) }}" method="post"
-        enctype="multipart/form-data">
+        enctype="multipart/form-data" onsubmit="getcontent();addKeyword()" name="sectionForm">
         @csrf
+        @method('put')
+        <div class="group-fields">
+            <div class="group-title">العنوان</div>
+            <x-edit-input name="title" :dbValue="$section->title" label="بالعربي" />
+            <x-edit-input name="title_en" :dbValue="$section->title_en" label="بالانكليزي" />
+        </div>
 
-        <x-edit-input name="title" :dbValue="$section->title" label="العنوان" />
-        <x-edit-input name="content" :dbValue="$section->content" label="المحتوى" />
-
+        <div class="group-fields">
+            <div class="group-title">المحتوى</div>
+            <label for="content" class="form-label"> بالعربي</label>
+            <div id="richtext"></div>
+            <textarea id="content" name="content" class="d-none">{{ $section->content }}</textarea>
+            <br>
+            <label for="content" class="form-label"> بالانكليزي</label>
+            <div id="richtext-en"></div>
+            <textarea id="content_en" name="content_en" class="d-none">{{ $section->content_en }}</textarea>
+        </div>
+        <br>
         <div class="d-flex align-items-center">
-            <x-edit-input data-name="keyword" name="" label="الكلمات المفتاحية" />
+            <x-create-input data-name="keyword" name="" label="الكلمات المفتاحية" />
             <button type="button" onclick="addKeyword()" class="btn btn-outline-secondary mt-1 me-1">+</button>
         </div>
         <div id="keywords"></div>
@@ -32,39 +62,37 @@
                 width="300">
         </div>
 
-        <button class="btn btn-secondary">تعديل {{ config("section.$type.singular", 'section') }}</button>
+        <button class="btn btn-secondary">حفظ {{ config("section.$type.singular", 'section') }}</button>
         <a href="{{ route('dashboard.sections.index') }}" class="btn btn-outline-secondary">عودة</a>
+
+
     </form>
+    <button class='btn btn-primary' onclick="event.preventDefault();Do_SetHTML();return false;">Set
+        HTML</button>
+@endsection
+
+@push('css')
+    @include('dashboard.css-components.richtext')
+@endpush
+
+@push('js')
+    @include('dashboard.js-components.richtext')
+
     <script>
-        function addKeyword() {
-            const inp = document.querySelector("[data-name='keyword']");
-            if (inp.value == '') return;
-            const label = inp.value;
-            inp.value = ''
-            const template = document.getElementById("template-keyword").children[0]
-            const newKeyword = template.cloneNode(true)
-            newKeyword.querySelector('input').value = label
-            newKeyword.querySelector('span').innerHTML = label
-            document.querySelector("#keywords").appendChild(newKeyword)
-        }
+        var editor_ar = new RichTextEditor("#richtext");
+        var editor_en = new RichTextEditor("#richtext-en");
+        document.body.onload = function() {
+            editor_ar.setHTMLCode(document.getElementById('content').value)
+            editor_en.setHTMLCode(document.getElementById('content_en').value)
+        }        
 
-        function deleteKeyword(inp) {
-            inp.parentNode.remove();
-        }
+        function getcontent() {
+            document.getElementById('content').value = editor_ar.getHTMLCode();
+            document.getElementById('content_en').value = editor_en.getHTMLCode();
 
-        function showFile(input) {
-            let file = input.files[0];
-
-            if (file.type && !file.type.startsWith('image/')) {
-                console.log('File is not an image.', file.type, file);
-                return;
-            }
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                document.getElementById('img-review').src = reader.result;
-            });
-            //readAsDataURL method encodes the file as a base64 encoded string, which can be used directly in image elements.
-            reader.readAsDataURL(file);
         }
     </script>
-@endsection
+
+    @include('dashboard.js-components.keywords')
+    @include('dashboard.js-components.showfile')
+@endpush

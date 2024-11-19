@@ -9,5 +9,13 @@ class Branch extends Model
 {
     /** @use HasFactory<\Database\Factories\BranchFactory> */
     use HasFactory;
-    public $timestamps = false;
+    public $fillable = ['name' , 'name_en' ,'location','location_en' , 'phone'];
+
+    function sections(){
+        return $this->hasMany(Section::class);
+    }
+    function users(){
+        return $this->hasMany(User::class);
+    }
+
 }

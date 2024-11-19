@@ -7,13 +7,12 @@ use App\Models\Branch;
 use Illuminate\Http\Request;
 
 class BranchController extends Controller
+
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $branches = Branch::get();
+        return view('dashboard.branches.index', compact('branches'));
     }
 
     /**
@@ -21,7 +20,8 @@ class BranchController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('dashboard.branches.create');
     }
 
     /**
@@ -29,23 +29,23 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'name' => 'required|string|max:30|unique:branches',
+            'name_en' => 'nullable|string|max:30|unique:branches',
+            'location' => 'nullable|string|max:255',
+            'location_en' => 'nullable|string|max:255',
+            'phone' => 'nullable|digits:10'
+        ]);
+
+        Branch::create($validated);
+        return to_route('dashboard.branches.index')->with('success', "تم إضافة الفرع بنجاح");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Branch $branch)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Branch $branch)
     {
-        //
+
+        return view('dashboard.branches.edit',  compact('branch'));
     }
 
     /**
@@ -53,7 +53,18 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        $validated =  $request->validate([
+            'name' => "required|string|max:30|unique:branches,name,$branch->id",
+            'name_en' => "required|string|max:30|unique:branches,name_en,$branch->id",
+            'location' => 'nullable|string|max:255',
+            'location_en' => 'nullable|string|max:255',
+            'phone' => 'nullable|digits:10'
+        ]);
+
+        $branch->update($validated);
+
+
+        return to_route('dashboard.branches.index')->with('success', "تم تعديل الفرع بنجاح");
     }
 
     /**
@@ -61,6 +72,16 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        $users = $branch->users->count();
+        if ($users)
+            return back()->with('error', " لايمكن محي الفرع لوجد مستخدم  $users مرتبط به");
+
+        $sections = $branch->sections->count();
+        if ($sections)
+            return back()->with('error', " لايمكن محي الفرع لوجد $sections عنصر مرتبطة به");
+
+        $branch->delete();
+        
+        return back()->with('success', " تم محي الفرع بنجاح");
     }
 }

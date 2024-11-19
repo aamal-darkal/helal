@@ -24,11 +24,12 @@ class SectionRequest extends FormRequest
         return [
             'type' => "required|in:article,compaign,news,story",
             'title' => 'required:string|max:100',
-            'content' => 'required:string|max:100',
-            'url' => 'nullable|string|max:255',
+            'title_en' => 'required:string|max:100',
+            'content' => 'required:string|max:75000',
+            'content_en' => 'required:string|max:7500',
             'visible' => "nullable|in:1,0",
-            'order' => 'nullable|integer',
-            'image' => 'nullable|file|max:2000',
+            'image' => 'nullable|file|max:5000',
+            'branch_id' => 'required|exists:branches,id',
             'keywords' => 'nullable|array',
             'keywords.*' => 'required|string|max:30',
         ];

@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Image;
 
-class upload
+class Upload
 {
     static function save($type, $file)
     {
@@ -12,6 +12,10 @@ class upload
         return Image::create([
             'name' => $filename,
             'type' => $type,
-        ]);
+        ])->id;
+    }
+
+    static function getImgUrl($id){
+        return  '/storage/' . Image::find($id)->name;
     }
 }

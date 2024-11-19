@@ -5,7 +5,7 @@
     'type' => 'text',   
 ])
 <div class="mb-3">
-    <label for="{{ $name }}" class="form-label">{{ $name }}</label>
+    <label for="{{ $name }}" class="form-label">{{ $label }}</label>
     <input type="{{ $type }}" name="{{ $name }}" value="{{ old( $name , $dbValue ) }}" id="{{ $name }}"
      {{ $attributes }} class="form-control @error($name) is-invalid @enderror">
     

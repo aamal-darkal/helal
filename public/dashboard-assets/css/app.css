@@ -13836,16 +13836,16 @@ a.sidebar-link svg {
 }
 
 .sidebar.collapsed {
-    margin-left: -260px
+    margin-right: -260px
 }
 
 @media (min-width:1px) and (max-width:991.98px) {
     .sidebar {
-        margin-left: -260px
+        margin-right: -260px
     }
 
     .sidebar.collapsed {
-        margin-left: 0
+        margin-right: 0
     }
 }
 
@@ -15241,11 +15241,32 @@ html {
 body {
     line-height: 1;
 }
+
 * {
     direction: rtl;
     font-family: Calibri;
 }
 
-.table>:not(caption)>*>* {
-    padding: 0.2rem
+
+.table > :not(caption)>*>* {
+    padding: 0.2rem;
+}
+
+.group-fields{
+    border: ridge;
+    padding: 0 10px;
+    margin-bottom: 2em;
+}
+
+.group-title{
+    position: relative;
+    bottom: .8em;
+    background-color: rgb(245, 247, 251);
+    display: inline-block;
+    padding: 5px;
+}
+
+
+.table-input  td{
+    padding: 10px ;
 }

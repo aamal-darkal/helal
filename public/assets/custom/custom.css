@@ -296,7 +296,6 @@ input {
 /* ===================================== */
 #cover-area {
 	height: 80vh;
-	background-image: url('/assets/images/cover/cover.jpg');
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;

@@ -15,10 +15,9 @@
 
             <tr>
                 <th> # </th>
-                <th> العنوان </th>
-                <th> المحتوى</th>
+                <th>  العنوان بالعربي </th>
+                <th> العنوان بالانكليزي</th>
                 <th> مرئي</th>
-                <th> الترتيب</th>
                 <th> الصورة </th>
                 <th> أوامر </th>
             </tr>
@@ -28,14 +27,13 @@
                 <tr>
                     <td> {{ $section->id }}</td>
                     <td> {{ $section->title }}</td>
-                    <td> {{ $section->content }}</td>
-                    <td> {{ $section->visible }}</td>
-                    <td> {{ $section->order }}</td>
+                    <td> {{ $section->title_en }}</td>
+                    <td> <input type="checkbox" @checked($section->visible) disabled></td>
                     <td><img src="{{ asset('storage/' .  ($section->image?$section->image->name:"images/no-image.png")) }}" width="75" 
                         alt="{{ asset('storage/' . ($section->image?$section->image->name:"images/no-image.png")) }}"></td>
 
                     <td class="text-nowrap">
-                        <a href="{{ route('dashboard.sections.edit', $section) }}" class="btn btn-outline-primary">
+                        <a href="{{ route('dashboard.sections.edit', ['type' => $type , 'section' => $section ]) }}" class="btn btn-outline-primary">
                             <i data-feather="edit"></i>
                         </a>
                         <form action="{{ route('dashboard.sections.destroy', $section) }}" method="post" class="d-inline-block"

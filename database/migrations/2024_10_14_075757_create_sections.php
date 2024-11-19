@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['article', 'compaign', 'news', 'story']);
             $table->string('title', 100)->index();
-            $table->string('content', 1000);
+            $table->string('title_en', 100)->index();
+            $table->string('content', 7500);
+            $table->string('content_en', 7500);
             $table->boolean('visible')->default(true);        
             $table->foreignId('image_id')->nullable()->constrained;
+            $table->foreignId('branch_id')->nullable()->constrained;
+            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('updated_by')->constrained('users')->nullable();
             $table->timestamps();
         });
     }

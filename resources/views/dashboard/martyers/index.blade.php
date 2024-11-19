@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', 'martyers')
+@section('title', 'الشهداء')
 @section('content')
     <div class="d-flex justify-content-between">
         <h4 class="title"> شهداء </h4>

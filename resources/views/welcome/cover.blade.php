@@ -1,4 +1,6 @@
- <div id="cover-area" class="bg-cover text-center pt-6">
-        <h1 class="text-white text-shadow-black mb-30" data-aos="fade-up"> @lang('helal.SARC') </h1>
-        <h2 class="text-white text-shadow-black" data-aos="fade-up">@lang('helal.slogan')</h2>
+ <div id="cover-area" class="bg-cover text-center pt-6" 	
+ style="background-image: url({{ App\Helpers\Upload::getImgUrl( $components['main-img']) }})">
+ {{-- style="background-image: url({{ $coverImg }})"> --}}
+        <h1 class="text-white text-shadow-black mb-30" data-aos="fade-up"> {{ $components['title'] }} </h1>
+        <h2 class="text-white text-shadow-black" data-aos="fade-up">{{ $components['sub-title'] }}</h2>
  </div>

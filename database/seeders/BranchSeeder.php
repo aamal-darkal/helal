@@ -12,10 +12,11 @@ class BranchSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {   
-        // save lang keys for name & location
+    {
+        
         $branches = [
-            ['name' => '' , 'location' => '' , 'phone' => 13],
+            ['name' => 'damascus' ,'name_en' => 'damascus', 'location' => 'ابورمانة', 'location_en' => 'AboRemaneh', 'phone' => '0112312344'],
+            ['name' => 'daraa', 'name_en' => 'daraa', 'location' => 'درعا البلد' ,'location_en' => 'daraa', 'phone' => '0152312344'],
         ];
         Branch::insert($branches);
     }

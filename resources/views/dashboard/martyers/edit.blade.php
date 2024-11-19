@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 @section('title', 'Edit Category')
 @section('content')
-    <h4>Edit Martyer</h4>
+    <h4>تعديل بيانات الشهيد </h4>
 
     <form action="{{ route('dashboard.martyers.update', $martyer) }}" method="post">
         @csrf

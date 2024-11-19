@@ -2,7 +2,8 @@
     <div class="d-flex justify-content-between align-items-center">
         <div class="logo-wrapper">
             <a href="index.html">
-                <img class="logo" src="{{ asset('assets/images/logo/logo.png') }} " alt="Logo">
+                {{-- <img class="logo" src="{{ asset($logo) }} " alt="Logo"> --}}
+                <img class="logo" src="{{ App\Helpers\Upload::getImgUrl( $components['logo'] ) }}" alt="Logo">
             </a>
         </div>
 

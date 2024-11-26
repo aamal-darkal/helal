@@ -21,7 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'branch_id'         
+        'province_id'         
     ];
 
     /**
@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    function branch(){
-        return $this->belongsTo(branch::class);
+    function province(){
+        return $this->belongsTo(Province::class);
     }
 }

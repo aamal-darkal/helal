@@ -7,11 +7,12 @@
         @csrf
         @method('put')
 
-        <x-edit-input name="name" :dbValue="$martyer->name" label="اسم الشهيد" required maxlength="50"/>
-        <x-edit-input name="name_en" :dbValue="$martyer->name_en" label="الاسم باللغة الإنكليزية" required maxlength="50"/>
-        <x-edit-input name="DOB" :dbValue="$martyer->DOB" label="مواليد/عام" type="number" min="1901" max="2200" />
-        <x-edit-input name="city" :dbValue="$martyer->city" label="محافظة" maxlength="50"/>     
+        <x-input name="name_ar" :dbValue="$martyer->name" label="الاسم بالعربي" required maxlength="50"  />
+        <x-input name="name_en" :dbValue="$martyer->name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
+        <x-input name="DOB" :dbValue="$martyer->DOB" type="number" label="مواليد/عام" min="1901" max="2200" />
 
+        <x-select-edit name="province_id" :dbValue="$martyer->province_id" label="branch" :options=$provinces  />
+            
         <button class="btn btn-secondary">حفظ بيانات الشهيد </button>
         <a href="{{ route('dashboard.martyers.index') }}" class="btn btn-outline-secondary">عودة</a>
     </form>

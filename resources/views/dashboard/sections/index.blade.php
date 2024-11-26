@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', 'sections')
+@section('title', config("section.$type.plural" , 'section') )
 @section('content')
     <div class="d-flex justify-content-between">
         <h4 class="title"> {{ config("section.$type.plural", 'section') }} </h4>
@@ -17,23 +17,22 @@
                 <th> # </th>
                 <th>  العنوان بالعربي </th>
                 <th> العنوان بالانكليزي</th>
-                <th> مرئي</th>
+                <th> مخفي</th>
                 <th> الصورة </th>
                 <th> أوامر </th>
-            </tr>
+            </tr>   
         </thead>
         <tbody>
             @foreach ($sections as $section)
                 <tr>
                     <td> {{ $section->id }}</td>
-                    <td> {{ $section->title }}</td>
+                    <td> {{ $section->title_ar }}</td>
                     <td> {{ $section->title_en }}</td>
                     <td> <input type="checkbox" @checked($section->visible) disabled></td>
-                    <td><img src="{{ asset('storage/' .  ($section->image?$section->image->name:"images/no-image.png")) }}" width="75" 
-                        alt="{{ asset('storage/' . ($section->image?$section->image->name:"images/no-image.png")) }}"></td>
+                    <td><img src="{{ getImgUrl($section->image_id) }}" width="75" ></td>
 
                     <td class="text-nowrap">
-                        <a href="{{ route('dashboard.sections.edit', ['type' => $type , 'section' => $section ]) }}" class="btn btn-outline-primary">
+                        <a href="{{ route('dashboard.sections.edit',  $section ) }}" class="btn btn-outline-primary">
                             <i data-feather="edit"></i>
                         </a>
                         <form action="{{ route('dashboard.sections.destroy', $section) }}" method="post" class="d-inline-block"
@@ -42,6 +41,9 @@
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>
                         </form>
+                        <a href="{{ route('dashboard.sections.show',  $section ) }}" class="btn btn-outline-success">
+                            <i data-feather="eye"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

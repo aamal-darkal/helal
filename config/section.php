@@ -5,4 +5,5 @@ return [
     'news' => ['singular' => 'خبر', 'plural' => 'الأخبار'],
     'story' => ['singular' => 'قصة', 'plural' => 'القصص'],
     'section' => ['singular' => 'فقرة', 'plural' => 'الفقرات'],
+    'vacancy' => ['singular' => 'وظيفة', 'plural' => 'وظائف'],
 ];

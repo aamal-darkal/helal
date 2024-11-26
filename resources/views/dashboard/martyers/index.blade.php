@@ -14,10 +14,11 @@
         <thead class="table-secondary">
             <tr>
                 <th> # </th>
-                <th> الاسم </th>
-                <th> (en)الاسم</th>
+                <th>  الاسم بالعربي</th>
+                <th> الاسم بالإنكليزي</th>
                 <th> تاريخ الولادة </th>
-                <th> المحافظة </th>
+                <th> المحافظة بالعربي </th>
+                <th> المحافظة بالإنكليزي </th>
                 <th> أوامر </th>
             </tr>
         </thead>
@@ -25,10 +26,11 @@
             @foreach ($martyers as $martyer)
                 <tr>
                     <td> {{ $martyer->id }}</td>
-                    <td> {{ $martyer->name }}</td>
+                    <td> {{ $martyer->name_ar }}</td>
                     <td> {{ $martyer->name_en }}</td>
                     <td> {{ $martyer->DOB }}</td>
-                    <td> {{ $martyer->city }}</td>
+                    <td> {{ $martyer->city_ar }}</td>
+                    <td> {{ $martyer->city_en }}</td>
 
                     <td class="text-nowrap">
                         <a href="{{ route('dashboard.martyers.edit', $martyer) }}" class="btn btn-outline-primary">

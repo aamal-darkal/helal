@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Keyword extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    public $fillable = ['section_id', 'keyword'];
+    public $fillable = ['word_ar' , 'word_en' , 'created_by'];
 
+    function sections(){
+        return $this->belongsToMany(section::class);
+    }
 }

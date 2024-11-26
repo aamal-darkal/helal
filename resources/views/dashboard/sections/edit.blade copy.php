@@ -7,11 +7,11 @@
         enctype="multipart/form-data">
         @csrf
 
-        <x-edit-input name="title" :dbValue="$section->title" label="العنوان" />
-        <x-edit-input name="content" :dbValue="$section->content" label="المحتوى" />
+        <x-input name="title" :dbValue="$section->title" label="العنوان" />
+        <x-input name="content" :dbValue="$section->content" label="المحتوى" />
 
         <div class="d-flex align-items-center">
-            <x-edit-input data-name="keyword" name="" label="الكلمات المفتاحية" />
+            <x-input data-name="keyword" name="" label="الكلمات المفتاحية" />
             <button type="button" onclick="addKeyword()" class="btn btn-outline-secondary mt-1 me-1">+</button>
         </div>
         <div id="keywords"></div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="mb-3">
-            <x-create-input name="image" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
+            <x-input name="image" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
             <img class="border border-secondary" id="img-review" src="{{ asset('assets/images/form/no-image.png') }}"
                 width="300">
         </div>

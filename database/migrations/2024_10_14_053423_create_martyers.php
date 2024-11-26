@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('martyers', function (Blueprint $table) {
             $table->id();
-            $table->string('name' ,50)->index();
+            $table->string('name_ar' ,50)->index();
             $table->string('name_en' ,50)->index();
             $table->year('DOB');
-            $table->string('city' ,30);
+            $table->foreignId('province_id')->constrained();
             $table->timestamps();
         });
     }

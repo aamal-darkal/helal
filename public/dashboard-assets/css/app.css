@@ -13788,7 +13788,8 @@ a.sidebar-link svg {
 
 .sidebar-link:hover {
     background: #222e3c;
-    border-left-color: transparent
+    border-left-color: transparent;
+    text-decoration: none;
 }
 
 .sidebar-link:hover,

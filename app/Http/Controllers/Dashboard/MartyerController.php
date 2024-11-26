@@ -37,14 +37,14 @@ class MartyerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:50',
+            'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',            
             'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
-            'city' => 'nullable|max:30'
+            'province_id' => 'exists:province,id',
         ]);
         Martyer::create($validated);        
 
-        return to_route('dashboard.martyers.index')->with('success', "تمت إضافة بيانات الشهيد $validated[name] بنجاح");
+        return to_route('dashboard.martyers.index')->with('success', "تمت إضافة بيانات الشهيد $validated[name_ar] بنجاح");
     }
     
 
@@ -62,14 +62,14 @@ class MartyerController extends Controller
     public function update(Request $request, Martyer $martyer)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:50',
+            'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',
             'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
-            'city' => 'nullable|max:30'
+            'province_id' => 'exists:province,id',
         ]);
         $martyer->update($validated);
 
-        return to_route('dashboard.martyers.index')->with('success', "تم تعديل بيانات  $validated[name] بنجاح");
+        return to_route('dashboard.martyers.index')->with('success', "تم تعديل بيانات  $validated[name_ar] بنجاح");
     }
 
     /**
@@ -77,9 +77,9 @@ class MartyerController extends Controller
      */
     public function destroy(Martyer $martyer)
     {
-        $martyeName = $martyer->name;
+        $martyeName = $martyer->name_ar;
         $martyer->delete();
 
-        return back()->with('success', "updated $martyeName is added successfully");
+        return back()->with('success', "تم محي سجل  $martyeName بنجاح");
     }
 }

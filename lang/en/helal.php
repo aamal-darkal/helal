@@ -2,15 +2,16 @@
 return [
     /** General */
     'SARC' => 'Syrian Arabic Red Crescent',
-    'slogan' => 'Large Humanitarian Network',
+    // 'slogan' => 'Large Humanitarian Network',
     'lang' => 'العربية',
     'font' => 'Montserrat',
     'dir' => 'ltr',
     'align' => 'left',
     'sign' => '+1',
-
+    'readmore' => 'read more',
 
     /** MAIN MENU */
+    'home' => 'Home',
     'who' => 'Who We Are?',
     'do' => 'What We Do?',
     'news' => 'Our News',
@@ -59,12 +60,12 @@ return [
     'martyr' => 'Martyrs',
     'year' => 'years',
     'volunteers'  => 'Volunteers',
-    'branch' => 'Branches',
+    'branch' => 'provinces',
     
     'center' => ' Media Center',
     'media' => 'News and Media',
 
-    /** branches */
+    /** provinces */
     'damascus' => 'Damascus',
     'aleppo' => 'Aleppo',
     'rural' => 'Rural Damascus',
@@ -81,12 +82,13 @@ return [
     'homs' => 'Homs',
     'intro' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility,
     and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence.', 
-    'info' => 'It has a headquarters in Damascus and fourteen branches in the fourteen governorates of Syria, and sub branches.',
+    'info' => 'It has a headquarters in Damascus and fourteen provinces in the fourteen governorates of Syria, and sub provinces.',
 
     /** footer */
     'about_sarc' => 'About The SARC',
     'about_us' => 'About Us',
     'follow' => 'Follow Us',
 
-
+    /** FORM */
+    'Back' => 'عودة'
 ];

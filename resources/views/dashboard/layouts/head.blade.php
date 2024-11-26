@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title> {{ config('app.name' , 'SRAC') }} | @yield('title')</title>
+    <title> @yield('title') | @lang("helal." . config('app.name', 'SARC'))  </title>
 
     <link href="{{ asset('dashboard-assets/css/bootstrap-5.0.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard-assets/css/app.css') }}" rel="stylesheet">

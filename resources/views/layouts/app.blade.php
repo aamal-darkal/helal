@@ -8,5 +8,6 @@
         @include('layouts.footer')
         @include('layouts.fixed-btn')
         @include('layouts.js')
+        @stack('js')
 </body>
 </html>

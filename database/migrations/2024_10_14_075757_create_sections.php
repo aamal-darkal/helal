@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,16 +14,18 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['article', 'compaign', 'news', 'story']);
-            $table->string('title', 100)->index();
+            $table->enum('type', ['article', 'compaign', 'news', 'story' , 'vacancy'])->index();
+            $table->string('title_ar', 100)->index();
             $table->string('title_en', 100)->index();
-            $table->string('content', 7500);
-            $table->string('content_en', 7500);
-            $table->boolean('visible')->default(true);        
-            $table->foreignId('image_id')->nullable()->constrained;
-            $table->foreignId('branch_id')->nullable()->constrained;
-            $table->foreignId('created_by')->constrained('users');
-            $table->foreignId('updated_by')->constrained('users')->nullable();
+            $table->text('content_ar');
+            $table->text('content_en');
+            $table->integer('summary_length')->default(100);
+            $table->date('date')->default(DB::raw('CURDATE()'));
+            $table->boolean('hidden')->default(false);  
+            $table->foreignId('image_id')->nullable()->constrained();
+            $table->foreignId('province_id')->nullable()->constrained();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

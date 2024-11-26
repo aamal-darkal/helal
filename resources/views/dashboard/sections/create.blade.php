@@ -1,121 +1,107 @@
 @extends('dashboard.layouts.master')
-@section('title', 'إضافة فرع')
-@section('content')
-    <h4 class="title"> إضافة فرع</h4>
-    
-    <form action="{{ route('dashboard.branches.store') }}" method="post" >
-        @csrf
-
-        <x-create-input name="name" label="الاسم بالعربي" required maxlength="30"  />
-        <x-create-input name="name_en" label="الاسم بالانكليزي " required maxlength="30"/>
-        <x-create-input name="location" label="العنوان بالعربي" required maxlength="255"  />
-        <x-create-input name="location_en" label="العنوان بالانكليزي " required maxlength="255"/>
-        <x-create-input name="phone"  label="الهاتف" maxlength="10" minlength="10" pattern="[0-9]{10}" title="10 digits"/>
-
-        <button class="btn btn-secondary">إضافة فرع</button>
-        <a href="{{ route('dashboard.branches.index') }}" class="btn btn-outline-secondary">عودة</a>
-    </form>
-@endsection
-
-@extends('dashboard.layouts.master')
-@section('title', 'إضافة' . config("section.$type.singular", 'section'))
+@section('title', 'إضافة ' . config("section.$type.singular", 'section'))
 @section('content')
     <h4 class="title"> إضافة {{ config("section.$type.singular", 'section') }} </h4>
 
-    <div id="template-keyword" class="d-none">
-        <div class="alert alert-success p-1 d-inline ms-1 mb-5">
-            <input type="hidden" name="keywords[]">
-            <span class="d-inline"></span>
-            <button type="button" class="btn btn-sm bg-transparent mb-3" onclick="deleteKeyword(this)">
-                <i data-feather="x"></i>
-            </button>
-        </div>
-    </div>
-
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="text-danger">{{ $error }}</div>
-        @endforeach
-    @endif
-
     <form action="{{ route('dashboard.sections.store', ['type' => $type]) }}" method="post" enctype="multipart/form-data"
-        onsubmit="getcontent();addKeyword()" name="sectionForm">
+        onsubmit="readRich()" name="sectionForm">
         @csrf
-
-        <button type="button" onclick="setContent()">test</button> <br>
-        <br>
-        <br>
 
         <div class="group-fields">
             <div class="group-title">العنوان</div>
-            <x-create-input name="title" label="بالعربي" />
-            <x-create-input name="title_en" label="بالانكليزي" />
+            <x-input name="title_ar" label="بالعربي" />
+            <x-input name="title_en" label="بالانكليزي" />
         </div>
 
         <div class="group-fields">
             <div class="group-title">المحتوى</div>
-
-            <label for="content" class="form-label"> بالعربي</label>
-            <div id="richtext"></div>
-            {{-- <textarea name="content" class="d-none"></textarea> --}}
-            <textarea name="content" id="content"></textarea>
             <br>
-            <label for="content" class="form-label"> بالانكليزي</label>
-            <div id="richtext-en"></div>
-            {{-- <textarea name="content_en" class="d-none"></textarea> --}}
-            <textarea name="content_en" id="content_en"></textarea>
+
+            <label for="content_ar" class="form-label"> بالعربي </label>
+            <div id="content_ar"></div>
+            <textarea name="content_ar" class="d-none">{{ old('content_ar') }}</textarea>
+            @error('content_ar')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
+            <br>
+            <label for="content_en" class="form-label"> بالانكليزي </label>
+            <div id="content_en"></div>
+            <textarea name="content_en" class="d-none">{{ old('content_en') }}</textarea>
+            @error('content_en')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <br>
-        <div class="d-flex align-items-center">
-            <x-create-input data-name="keyword" name="" label="الكلمات المفتاحية" />
-            <button type="button" onclick="addKeyword()" class="btn btn-outline-secondary mt-1 me-1">+</button>
-        </div>
-        <div id="keywords"></div>
+
+        <x-input type="date" name="date" label='تاريخ ال{{ config("section.$type.singular", 'section') }}' />
+
+        <x-checkbox name="hidden" label="مخفي" />
+
 
         <div class="mb-3">
-            <label for="visible" class="form-label">مرئي</label>
-            <input type="checkbox" name="visible" id="visible" checked class="ms-2" value="1">
-            @error('visible')
+            <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
+
+            <img class="border border-secondary" id="img-review" src="{{ asset('storage/no-image.png') }}" width="300">
+        </div>
+
+        <x-select-create-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords />
+
+        <x-select-create name="province_id" label="المحافظة" :options=$provinces />
+
+        <div class="mb-3">
+            <label for="summary_length" class="form-label">عدد محارف الجزء المعروض في الصفحة الرئيسية</label>
+            <input type="number" name="summary_length" id="summary_length"
+                class="form-control @error('summary_length') is-invalid @enderror"
+                value="{{ getValue('news-sammery-length') }}">
+
+            @error('summary_length')
                 <div class="text-danger">
                     {{ $message }}
                 </div>
             @enderror
         </div>
 
-        <div class="mb-3">
-            <x-create-input name="image" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
-            <img class="border border-secondary" id="img-review" src="{{ asset('assets/images/form/no-image.png') }}"
-                width="300">
-        </div>
-
         <button class="btn btn-secondary">إضافة {{ config("section.$type.singular", 'section') }}</button>
-        <a href="{{ route('dashboard.sections.index') }}" class="btn btn-outline-secondary">عودة</a>
+        <a href="{{ route('dashboard.sections.index', ['type' => $type]) }}" class="btn btn-outline-secondary">عودة</a>
+
     </form>
 @endsection
 
 @push('css')
     @include('dashboard.css-components.richtext')
+    @include('dashboard.css-components.multi-select')
 @endpush
 
 @push('js')
     @include('dashboard.js-components.richtext')
+    @include('dashboard.js-components.multi-select')
 
     <script>
-        var editor_ar = new RichTextEditor("#richtext");
-        var editor_en = new RichTextEditor("#richtext-en");
+        // Initiating the multi-select  & richtext  
 
-        function setContent(){
-            console.log(editor_ar.getHTMLCode())
-            document.getElementById('content').value = editor_ar.getHTMLCode()
-            sectionForm.content.value = editor_ar.getHTMLCode();
-            sectionForm.content_en.value = editor_en.getHTMLCode();
+        var editor_en = new RichTextEditor("#content_en");
+        var editor_ar = new RichTextEditor("#content_ar");
+
+        $(document).ready(function() {
+            $("#keywords").chosen();
+            fillRich();
+        })
+
+        function fillRich() {
+            editor_ar.setHTMLCode(sectionForm.content_ar.value);
+            editor_en.setHTMLCode(sectionForm.content_en.value);
         }
-        function getcontent() {
-            document.getElementById('content').value = editor_ar.getHTMLCode();
-            document.getElementById('content_en').value = editor_en.getHTMLCode();
+
+        function readRich() {
+            sectionForm.content_ar.value = editor_ar.getHTMLCode();
+            sectionForm.content_en.value = editor_en.getHTMLCode();
         }
     </script>
 
-    @include('dashboard.js-components.keywords')
     @include('dashboard.js-components.showfile')
 @endpush

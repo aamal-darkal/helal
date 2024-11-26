@@ -21,17 +21,16 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'type' => "required|in:article,compaign,news,story",
-            'title' => 'required:string|max:100',
+        return [            
+            'title_ar' => 'required:string|max:100',
             'title_en' => 'required:string|max:100',
-            'content' => 'required:string|max:75000',
-            'content_en' => 'required:string|max:7500',
-            'visible' => "nullable|in:1,0",
-            'image' => 'nullable|file|max:5000',
-            'branch_id' => 'required|exists:branches,id',
+            'content_ar' => 'required',
+            'content_en' => 'required',
+            'summary-length' => 'nullable|int',
+            'hidden' => "nullable|in:1,0",
+            'image_id' => 'nullable|file|max:5000',
+            'province_id' => 'required|exists:provinces,id',
             'keywords' => 'nullable|array',
-            'keywords.*' => 'required|string|max:30',
         ];
     }
 }

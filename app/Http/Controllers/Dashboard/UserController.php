@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Branch;
+use App\Models\Province;
 use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class userController extends Controller
         $state = '';
         if($request->has('state') && $request->state == 'change-password')
             $state = 'change-password';
-        $users = user::with('branch')->get();
+        $users = User::with('province')->get();
         return view('dashboard.users.index', compact('users' , 'state'));
     }
 
@@ -25,8 +25,8 @@ class userController extends Controller
      */
     public function create()
     {
-        $branches = Branch::all();
-        return view('dashboard.users.create', compact('branches'));
+        $provinces = Province::select('id' , 'name_ar as name')->get();
+        return view('dashboard.users.create', compact('provinces'));
     }
 
     /**
@@ -38,18 +38,19 @@ class userController extends Controller
             'name' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:users',
             'type' => 'required|in:admin,user,banned',
-            'branch_id' => 'required|exists:branches,id',
+            'province_id' => 'required|exists:provinces,id',
         ]);
 
-        user::create($validated);
+        User::create($validated);
         return to_route('dashboard.users.index')->with('success', "تم إضافة الحساب بنجاح");
     }
 
 
     public function edit(user $user)
     {
-        $branches = Branch::all();
-        return view('dashboard.users.edit',  compact('user', 'branches'));
+        $provinces = Province::select('id', 'name_ar as name')->get();
+
+        return view('dashboard.users.edit',  compact('user', 'provinces'));
     }
 
     /**
@@ -61,7 +62,7 @@ class userController extends Controller
             'name' => 'required|string|max:50',
             'email' => "required|string|max:50|unique:users,email,$user->id",
             'type' => 'required|in:admin,user,banned',
-            'branch_id' => 'required|exists:branches,id',
+            'province_id' => 'required|exists:provinces,id',
         ]);
         $user->update($validated);
 

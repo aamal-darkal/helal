@@ -13,7 +13,7 @@
                 <th> # </th>
                 <th> الاسم </th>
                 <th> البريد الالكتروني </th>
-                <th> الفرع </th>
+                <th> المحافظة </th>
                 <th> نوع الحساب </th>
                 <th> أوامر </th>
             </tr>
@@ -24,12 +24,12 @@
                     <td> {{ $user->id }}</td>
                     <td> {{ $user->name }}</td>
                     <td> {{ $user->email }}</td>
-                    <td> {{ $user->branch->name }}</td>
+                    <td> {{ $user->province->name_ar }}</td>
                     <td>
                         @if ($user->type == 'banned')
                             <span class="text-danger"><i data-feather="user-x"></i></span>
                         @elseif ($user->type == 'admin')
-                            <span class="text-primary"><i data-feather="user-plus"></i></span>
+                            <span class="text-warning"><i data-feather="user-plus"></i></span>
                         @else
                             <span class="text-success"><i data-feather="user-check"></i></span>
                         @endif
@@ -44,7 +44,7 @@
 
                         </a>
 
-                        <button type="button" class="btn btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                        {{-- <button type="button" class="btn btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                             data-bs-target="#passwordModal">
                             <i data-feather="unlock"></i>
                         </button>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </td>
                 </tr>
             @endforeach

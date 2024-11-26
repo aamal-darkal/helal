@@ -1,13 +1,18 @@
-<nav class="navbar navbar-expand-xl">
+<nav class="navbar navbar-expand-xl p-0">
 
-    <div class="container">
+    <div class="container p-0">
         <button class="navbar-toggler btn-salmon" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            {{-- <i class="fa-solid fa-square-caret-down"></i> --}}
+            <i class="fa-solid fa-caret-down"></i>
+            {{-- <i class="fa-solid fa-bars"></i> --}}
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-lg-0">
+            <ul class="navbar-nav mb-lg-0 p-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">@lang('helal.home')</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -27,22 +32,11 @@
                         @lang('helal.do')
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">@lang('helal.relief')
-                            </a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.medical')</a></li>
-                        <li>
-                            <!-- <hr class="dropdown-divider"> -->
-                        </li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.medical')</a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.community')
-                            </a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.water')
-                            </a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.cash')</a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.livelihoods')</a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.risk')</a></li>
-                        <li><a class="dropdown-item" href="#">@lang('helal.humanitarian')</a></li>
-
+                        @foreach ($doings as $doing)
+                            <li><a class="dropdown-item"
+                                    href="{{ route('home.search', ['doing' => $doing]) }}">{{ $doing->title }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item dropdown" aria-current="page">
@@ -85,11 +79,22 @@
                         <li><a class="dropdown-item" href="#">@lang('helal.volunteer')</a></li>
 
                     </ul>
-                <li class="nav-search">
-                    <a class="mx-3 search"><i class="fas fa-search"></i></a>
+                <li class="search-item">
+                    <a class="mx-1 search open-modal"><i class="fas fa-search"></i></a>
+
+                    <div id="search-modal" class="search-modal">
+                        <div class="modal-content">
+                            <form action="{{ route('home.search') }}">
+                                <button type="button" class="btn btn-outline-secondary close-modal" >&times;</button>
+                                <input type="search" name="search">
+                                <button class="btn btn-secondary">search</button>
+                                
+                            </form>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
-    
+
 </nav>

@@ -6,10 +6,11 @@
     <form action="{{ route('dashboard.martyers.store') }}" method="post" >
         @csrf
 
-        <x-create-input name="name" label="اسم الشهيد" required maxlength="50"  />
-        <x-create-input name="name_en" label="الاسم باللغة الأنكليزية" required maxlength="50"/>
-        <x-create-input name="DOB" type="number" label="مواليد/عام" min="1901" max="2200" />
-        <x-create-input name="city" label="محافظة" maxlength="50"/>
+        <x-input name="name_ar" label="الاسم بالعربي" required maxlength="50"  />
+        <x-input name="name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
+        <x-input name="DOB" type="number" label="مواليد/عام" min="1901" max="2200" />
+
+        <x-select-create name="province_id" label="المحافظة"  :options=$provinces />
 
         <button class="btn btn-secondary">إضافة شهيد</button>
         <a href="{{ route('dashboard.martyers.index') }}" class="btn btn-outline-secondary">عودة</a>

@@ -6,12 +6,16 @@ let staticStart = false;
     ======================================= */
     window.onscroll = function () {
         const navbar = document.querySelector(".navbar");
+        const modalContent = document.querySelector(".modal-content");
+        
 
-        if (window.scrollY > 100) {
+        if (window.scrollY > 10) {
             navbar.classList.add("sticky");
+            modalContent.classList.add("search-sticky");
             
         } else {
             navbar.classList.remove("sticky");
+            modalContent.classList.remove("search-sticky");
         }       
     };
 })();
@@ -91,3 +95,24 @@ var swiper = new Swiper(".stories-swiper", {
         prevEl: ".swiper-button-prev",
     }
 });
+
+
+
+// search modal
+ var modal = document.getElementById("search-modal");
+ var openModalBtn = document.querySelector(".open-modal");
+ var closeModalBtn = document.querySelector(".close-modal");
+
+ openModalBtn.onclick = function () {
+     modal.style.display = "block";
+ };
+
+ closeModalBtn.onclick = function () {
+     modal.style.display = "none";
+ };
+
+ modal.onclick = function (event) {
+     if (event.target == modal) {
+         modal.style.display = "none";
+     }
+ };

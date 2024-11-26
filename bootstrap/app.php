@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Middleware\LangMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;

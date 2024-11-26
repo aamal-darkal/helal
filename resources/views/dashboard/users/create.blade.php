@@ -6,9 +6,9 @@
     <form action="{{ route('dashboard.users.store') }}" method="post">
         @csrf
 
-        <x-create-input name="name" label="الاسم" required maxlength="50" />
-        <x-create-input name="email" label="البريد الالكتروني" required maxlength="50" />
-        <x-create-input name="password" label="كلمة المرور" required maxlength="15" />
+        <x-input name="name" label="الاسم" required maxlength="50" />
+        <x-input name="email" label="البريد الالكتروني" required maxlength="50" />
+        <x-input name="password" label="كلمة المرور" required maxlength="15" />
        
         <div>
             <label class="form-label">نوع المستحدم</label> <br>
@@ -21,7 +21,7 @@
             <label for="admin" class="text-danger"> banned </label>
         </div>
 
-        <x-select-create name="branch_id" label="الفرع"  :options=$branches />
+        <x-select-create name="province_id" label="المحافظة"  :options=$provinces />
 
 
         <button class="btn btn-secondary">إضافة حساب</button>

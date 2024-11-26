@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('keywords', function (Blueprint $table) {
-            $table->foreignId('section_id')->constrained();            
-            $table->string('keyword' , 30)->index();
-            $table->primary(['section_id' , 'keyword']);
+            $table->id();
+            $table->string('word_ar', 30)->index()->unique();
+            $table->string('word_en' , 30)->index()->unique();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->timestamps();            
         });
     }
 

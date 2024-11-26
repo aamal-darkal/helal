@@ -31,7 +31,7 @@
     </div>
 
     <script src="{{ asset('dashboard-assets/js/app.js') }}"></script>
-    {{-- @stack('js') --}}
+    @stack('js')
 </body>
 
 </html>

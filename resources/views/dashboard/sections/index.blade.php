@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.master')
-@section('title', config("section.$type.plural" , 'section') )
+@section('title', __("helal.section-types.$type.plural") )
 @section('content')
     <div class="d-flex justify-content-between">
-        <h4 class="title"> {{ config("section.$type.plural", 'section') }} </h4>
-        <a href="{{ route('dashboard.sections.create' , ['type' => $type]) }}" class="btn btn-secondary mb-2">إضافة {{ config("section.$type.singular", 'section') }}</a>
+        <h4 class="title"> {{ __("helal.section-types.$type.plural") }} </h4>
+        <a href="{{ route('dashboard.sections.create' , ['type' => $type]) }}" class="btn btn-secondary mb-2">إضافة {{ __("helal.section-types.$type.singular") }}</a>
     </div>
     <form action="{{ route('dashboard.sections.index') }}" class="d-flex mb-2">
-        <a href="{{ route('dashboard.sections.index') }}" class="btn btn-secondary text-nowrap">كافة {{ config("section.$type.plural", 'section') }}</a>
+        <a href="{{ route('dashboard.sections.index') }}" class="btn btn-secondary text-nowrap">كافة {{ __("helal.section-types.$type.plural") }}</a>
         <input type="text" class="form-control" name="search">
         <button class="btn btn-secondary">بحث</button>
     </form>

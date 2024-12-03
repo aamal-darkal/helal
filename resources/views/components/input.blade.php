@@ -7,7 +7,7 @@
 <div class="mb-3">
     <label for="{{ $name }}" class="form-label">{{ $label }}</label>
     <input type="{{ $type }}" name="{{ $name }}" value="{{ old( $name , $dbValue ) }}" id="{{ $name }}"
-     {{ $attributes }} class="form-control @error($name) is-invalid @enderror">
+     {{ $attributes->merge( ['class'=> "form-control " . ($errors->has($name)? 'is-invalid':'')])}}>
     
         @error($name )
         <div class="text-danger">

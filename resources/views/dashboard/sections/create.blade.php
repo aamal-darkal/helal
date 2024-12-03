@@ -1,16 +1,19 @@
 @extends('dashboard.layouts.master')
-@section('title', 'إضافة ' . config("section.$type.singular", 'section'))
+@section('title', 'إضافة ' . __("helal.section-types.$type.singular"))
 @section('content')
-    <h4 class="title"> إضافة {{ config("section.$type.singular", 'section') }} </h4>
+    <h4 class="title"> إضافة {{ __("helal.section-types.$type.singular") }}
+        
+        @if($menu)  لبند القائمة: {{ $menu->title_ar }} @endif
+    </h4>
 
     <form action="{{ route('dashboard.sections.store', ['type' => $type]) }}" method="post" enctype="multipart/form-data"
         onsubmit="readRich()" name="sectionForm">
         @csrf
-
+        @if($menu) <input type="hidden" name="menu_id" value="{{ $menu->id }}"> @endif
         <div class="group-fields">
             <div class="group-title">العنوان</div>
             <x-input name="title_ar" label="بالعربي" />
-            <x-input name="title_en" label="بالانكليزي" />
+            <x-input name="title_en" label="بالانكليزي" class="dir-ltr"/>
         </div>
 
         <div class="group-fields">
@@ -28,7 +31,7 @@
 
             <br>
             <label for="content_en" class="form-label"> بالانكليزي </label>
-            <div id="content_en"></div>
+            <div id="content_en" class="dir-ltr"></div>
             <textarea name="content_en" class="d-none">{{ old('content_en') }}</textarea>
             @error('content_en')
                 <div class="text-danger">
@@ -38,11 +41,10 @@
         </div>
         <br>
 
-        <x-input type="date" name="date" label='تاريخ ال{{ config("section.$type.singular", 'section') }}' />
+        <x-input type="date" name="date" label='تاريخ ال{{ __("helal.section-types.$type.singular") }}' />
 
         <x-checkbox name="hidden" label="مخفي" />
-
-
+        
         <div class="mb-3">
             <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
 
@@ -66,7 +68,7 @@
             @enderror
         </div>
 
-        <button class="btn btn-secondary">إضافة {{ config("section.$type.singular", 'section') }}</button>
+        <button class="btn btn-secondary">إضافة  @lang("helal.section-types.$type.singular") </button>
         <a href="{{ route('dashboard.sections.index', ['type' => $type]) }}" class="btn btn-outline-secondary">عودة</a>
 
     </form>

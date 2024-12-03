@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Doing;
 use App\Models\Keyword;
+use App\Models\Menu;
+use App\Models\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +25,7 @@ class DoingController extends Controller
     public function create()
     {
         $keywords = Keyword::select('id', DB::raw("concat(word_en , ' - ' , word_ar) as name"))->get();
-        return view('dashboard.doings.create' , compact('keywords'));
+        return view('dashboard.doings.create', compact('keywords'));
     }
 
     /**
@@ -34,7 +36,7 @@ class DoingController extends Controller
         $validated =  $request->validate([
             'title_ar' => 'required|string|max:50|unique:doings',
             'title_en' => 'nullable|string|max:50|unique:doings',
-            'icon' => 'nullable|string',   
+            'icon' => 'nullable|string',
             'keywords' => 'nullable|array',
         ]);
 
@@ -42,6 +44,14 @@ class DoingController extends Controller
 
         if ($request->keywords)
             $doing->Keywords()->attach($validated['keywords']);
+
+        if ($request->menu) {
+            SubMenu::create([
+                'title_ar' =>  $validated['title_ar'],
+                'title_en' => $validated['title_en'],
+                'url' => "search?doing=$doing->id",
+            ]);
+        }
         return to_route('dashboard.doings.index')->with('success', "تم إضافة سجل أعمالنا بنجاح");
     }
 
@@ -51,7 +61,7 @@ class DoingController extends Controller
         $keywords = Keyword::select('id', DB::raw("concat(word_en , ' - ' , word_ar) as name"))->get();
         $currKeywords = $doing->keywords->modelKeys();
 
-        return view('dashboard.doings.edit',  compact('doing' , 'keywords' , 'currKeywords'));
+        return view('dashboard.doings.edit',  compact('doing', 'keywords', 'currKeywords'));
     }
 
     /**
@@ -78,7 +88,7 @@ class DoingController extends Controller
      */
     public function destroy(Doing $doing)
     {
-        
+
         $title = $doing->title;
         $doing->delete();
 

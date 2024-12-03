@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('location_ar')->nullable();
             $table->string('location_en')->nullable();
             $table->char('phone' ,10);
+            $table->foreignId('menu_id')->nullable();
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
     }

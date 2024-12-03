@@ -15,31 +15,31 @@
              <li class="sidebar-item @if( session()->get('type') == 'article') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'article']) }}">
                      <i class="align-middle" data-feather="book-open"></i>
-                     <span class="align-middle">{{ config('section.article.plural', 'section') }} </span>
+                     <span class="align-middle">{{ config('section.article.plural') }} </span>
                  </a>
              </li>
              <li class="sidebar-item @if( session()->get('type') == 'compaign') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'compaign']) }}">
                      <i class="align-middle" data-feather="navigation"></i>
-                     <span class="align-middle">{{ config('section.compaign.plural', 'section') }}</span>
+                     <span class="align-middle">{{ config('section.compaign.plural') }}</span>
                  </a>
              </li>
              <li class="sidebar-item @if( session()->get('type') == 'news') active @endif ">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'news']) }}">
                      <i class="align-middle" data-feather="file-text"></i>
-                     <span class="align-middle"> {{ config('section.news.plural', 'section') }}</span>
+                     <span class="align-middle"> {{ config('section.news.plural') }}</span>
                  </a>
              </li>
              <li class="sidebar-item @if( session()->get('type') == 'story') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'story']) }}">
                      <i class="align-middle" data-feather="heart"></i>
-                     <span class="align-middle"> {{ config('section.story.plural', 'section') }}</span>
+                     <span class="align-middle"> {{ config('section.story.plural') }}</span>
                  </a>
              </li>
              <li class="sidebar-item @if( session()->get('type') == 'vacancy') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'vacancy']) }}">
                      <i class="align-middle" data-feather="feather"></i>
-                     <span class="align-middle"> {{ config('section.vacancy.plural', 'section') }}</span>
+                     <span class="align-middle"> {{ config('section.vacancy.plural') }}</span>
                  </a>
              </li>
              @if (Route::has('dashboard.martyers.index'))
@@ -60,11 +60,11 @@
                  </li>
              @endif             
              
-             @if (Route::has('dashboard.provinces.index'))
+             @if (Route::has('dashboard.doings.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'doings')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.doings.index') }}">
                          <i class="align-middle" data-feather="briefcase"></i>
-                         <span class="align-middle">قائمة ماذا نفعل</span>
+                         <span class="align-middle">صناديق ماذا نفعل</span>
                      </a>
                  </li>
              @endif             
@@ -77,16 +77,16 @@
                      </a>
                  </li>
              @endif             
-             
-             @if (Route::has('dashboard.vacancies.index'))
-                 <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'keywords')) active @endif">
-                     <a class="sidebar-link" href="{{ route('dashboard.vacancies.index') }}">
-                         <i class="align-middle" data-feather="cast"></i>
-                         <span class="align-middle">الشواغر الوظيفية</span>
+                        
+             @if (Route::has('dashboard.menus.index'))
+                 <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'menus')) active @endif">
+                     <a class="sidebar-link" href="{{ route('dashboard.menus.index') }}">
+                         <i class="align-middle" data-feather="arrow-down-circle"></i>
+                         <span class="align-middle">القائمة العلوية</span>
                      </a>
                  </li>
              @endif             
-             
+                        
              @if (Route::has('dashboard.users.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'users')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.users.index') }}">

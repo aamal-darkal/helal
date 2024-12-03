@@ -32,7 +32,7 @@
                                         </div>
                                     @else
                                     <div>
-                                        <textarea name="value_ar" class="form-control" disabled>{{ $setting->value_ar }}</textarea>
+                                        <textarea name="value_ar" class="form-control" disabled >{{ $setting->value_ar }}</textarea>
                                         <textarea name="value_en" class="form-control" disabled>{{ $setting->value_en }}</textarea>
                                     </div>
                                     @endif
@@ -68,8 +68,9 @@
             function closeEdit(btn) {
                 btn.previousElementSibling.classList.toggle('btn-secondary')
                 btn.previousElementSibling.classList.toggle('btn-primary')
+                btn.previousElementSibling.setAttribute("data-state" , "modify")
                 btn.classList.add('invisible')
-                for (let element of btn.parentNode.previousElementSibling.children)
+                for (let element of btn.parentNode.previousElementSibling.children[0].children)
                     element.disabled = true
                 btn.previousElementSibling.innerHTML = "تعديل"
             }

@@ -8,15 +8,5 @@
     @include('welcome.stories')
     @include('welcome.compaign')
     @include('welcome.martyrs')
-    @include('welcome.map')
-    @push('js')
-        <script>
-            const contentElements = document.querySelectorAll('.summary')
-            for (let contentElement of contentElements) {
-                const length = contentElement.getAttribute('data-length')
-                let summary= contentElement.previousElementSibling.innerText.trim().substring(0, length) + "..."
-                contentElement.innerHTML = summary.substring(0, summary.lastIndexOf(" "))
-            }
-        </script>
-    @endpush
+    @include('welcome.map')    
 @endsection

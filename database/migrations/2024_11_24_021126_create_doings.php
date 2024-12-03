@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title_ar', 50);
             $table->string('title_en', 50);
             $table->text('icon')->nullable();
+            $table->foreignId('menu_id')->nullable()->constrained();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();

@@ -17,7 +17,7 @@ if (!function_exists('saveImg')) {
 if (!function_exists('getImgUrl')) {
     function getImgUrl($id)
     {
-        $nameRec = Image::find($id);
+        $nameRec = Image::find($id);        
         return  $nameRec ? "/storage/$nameRec->name" : "/storage/no-image.png";
     }
 }

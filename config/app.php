@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'section-type' => ['article' ,  'compaign' ,   'news' ,  'story' , 'vacancy' , 'page'],
+
 ];

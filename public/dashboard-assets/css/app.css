@@ -15271,3 +15271,10 @@ body {
 .table-input  td{
     padding: 10px ;
 }
+
+.dir-ltr{
+    direction: ltr !important;
+}
+.dir-rtl{
+    direction: rtl !important;
+}

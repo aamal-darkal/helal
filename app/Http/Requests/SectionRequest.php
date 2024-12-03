@@ -29,7 +29,7 @@ class SectionRequest extends FormRequest
             'summary-length' => 'nullable|int',
             'hidden' => "nullable|in:1,0",
             'image_id' => 'nullable|file|max:5000',
-            'province_id' => 'required|exists:provinces,id',
+            'province_id' => 'nullable|exists:provinces,id',
             'keywords' => 'nullable|array',
         ];
     }

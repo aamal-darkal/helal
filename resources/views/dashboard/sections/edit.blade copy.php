@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
-@section('title', 'تعديل' . config("section.$type.singular", 'section'))
+@section('title', 'تعديل' . __("helal.section-types.$type.singular"))
 @section('content')
-    <h4 class="title"> تعديل {{ config("section.$type.singular", 'section') }} </h4>
+    <h4 class="title"> تعديل {{ __("helal.section-types.$type.singular") }} </h4>
 
     <form action="{{ route('dashboard.sections.update', ['section' => $section, 'type' => $type]) }}" method="post"
         enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                 width="300">
         </div>
 
-        <button class="btn btn-secondary">تعديل {{ config("section.$type.singular", 'section') }}</button>
+        <button class="btn btn-secondary">تعديل {{ __("helal.section-types.$type.singular") }}</button>
         <a href="{{ route('dashboard.sections.index') }}" class="btn btn-outline-secondary">عودة</a>
     </form>
     <script>

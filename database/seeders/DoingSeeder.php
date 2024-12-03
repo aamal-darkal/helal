@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Doing;
+use App\Models\Keyword;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -361,16 +362,43 @@ class DoingSeeder extends Seeder
 </svg>';
 
         $doings = [
-            ['title_ar' => 'الإغاثة', 'title_en' => 'Relief', 'icon' => $relief],
-            ['title_ar' => 'الخدمات الطبية', 'title_en' => 'Medical Services', 'icon' => $medical],
-            ['title_ar' => 'الخدمات الطبية الطارئة', 'title_en' => 'Emergency Medical Services', 'icon' => $emergency],
-            ['title_ar' => 'الخدمات المجتمعية والحماية', 'title_en' => 'Community Services and Protection', 'icon' => $community],
-            ['title_ar' => 'المياه وإعادة التأهيل', 'title_en' => 'Water and Rehabilitation', 'icon' => $water],
-            ['title_ar' => 'المساعدات النقدية والقسائم', 'title_en' => 'Cash and Vouchers', 'icon' => $cash],
-            ['title_ar' => 'سبل العيش', 'title_en' => 'Livelihoods', 'icon' => $livelihoods],
-            ['title_ar' => 'التوعية بالمخاطر', 'title_en' => 'Risk Awareness', 'icon' => $risk],
-            ['title_ar' => 'مشروع الدعم الإنساني', 'title_en' => 'Humanitarian Support Project', 'icon' => $humanitarian],
+            ['id' => 1 ,'title_ar' => 'الإغاثة', 'title_en' => 'Relief', 'icon' => $relief, 'menu_id'  => 13 ],
+            ['id' => 2 ,'title_ar' => 'الخدمات الطبية', 'title_en' => 'Medical Services', 'icon' => $medical, 'menu_id'  => 14 ],
+            ['id' => 3 ,'title_ar' => 'الخدمات الطبية الطارئة', 'title_en' => 'Emergency Medical Services', 'icon' => $emergency, 'menu_id'  => 15 ],
+            ['id' => 4 ,'title_ar' => 'الخدمات المجتمعية والحماية', 'title_en' => 'Community Services and Protection', 'icon' => $community, 'menu_id'  => 16 ],
+            ['id' => 5 ,'title_ar' => 'المياه وإعادة التأهيل', 'title_en' => 'Water and Rehabilitation', 'icon' => $water, 'menu_id'  => 17 ],
+            ['id' => 6 ,'title_ar' => 'المساعدات النقدية والقسائم', 'title_en' => 'Cash and Vouchers', 'icon' => $cash, 'menu_id'  => 18 ],
+            ['id' => 7 ,'title_ar' => 'سبل العيش', 'title_en' => 'Livelihoods', 'icon' => $livelihoods, 'menu_id'  => 19 ],
+            ['id' => 8 ,'title_ar' => 'التوعية بالمخاطر', 'title_en' => 'Risk Awareness', 'icon' => $risk, 'menu_id'  => 20 ],
+            ['id' => 9 ,'title_ar' => 'مشروع الدعم الإنساني', 'title_en' => 'Humanitarian Support Project', 'icon' => $humanitarian, 'menu_id'  => 21 ],
         ];
+		$keywords = [
+			['id' => 1, 'word_en' => 'relief', 'word_ar' => 'إغاثة'],
+			['id' => 2, 'word_en' => 'medical ', 'word_ar' => 'طبي'],
+			['id' => 3, 'word_en' => 'emergency', 'word_ar' => 'طارئ'],
+			['id' => 4, 'word_en' => 'community', 'word_ar' => 'مجتمعي'],
+			['id' => 5, 'word_en' => 'Protection', 'word_ar' => 'حماية'],
+			['id' => 6, 'word_en' => 'water', 'word_ar' => 'مياه'],
+			['id' => 7, 'word_en' => 'rehabilitation', 'word_ar' => 'تأهيل'],
+			['id' => 8, 'word_en' => 'cash', 'word_ar' => 'نقدي'],
+			['id' => 9, 'word_en' => 'vouchers', 'word_ar' => 'قسائم'],
+			['id' => 10, 'word_en' => 'livelihoods', 'word_ar' => 'معيشي'],
+			['id' => 11, 'word_en' => 'risk', 'word_ar' => 'مخاطر'],
+			['id' => 12, 'word_en' => 'awareness', 'word_ar' => 'توعية'],
+			['id' => 13, 'word_en' => 'support', 'word_ar' => 'دعم'],
+			['id' => 14, 'word_en' => 'humanitarian', 'word_ar' => 'إنساني'],
+		];
+		Keyword::insert($keywords);			
         Doing::insert($doings);
+
+		Doing::find(1)->keywords()->attach(1);
+		Doing::find(2)->keywords()->attach(2);
+		Doing::find(3)->keywords()->attach(3);
+		Doing::find(4)->keywords()->attach([4,5]);
+		Doing::find(5)->keywords()->attach([6,7]);
+		Doing::find(6)->keywords()->attach([8,9]);
+		Doing::find(7)->keywords()->attach(10);
+		Doing::find(8)->keywords()->attach([11,12]);
+		Doing::find(9)->keywords()->attach([13 ,14]);		
     }
 }

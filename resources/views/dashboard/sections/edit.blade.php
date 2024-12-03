@@ -1,13 +1,15 @@
 @extends('dashboard.layouts.master')
-@section('title', 'تعديل ' . config("section.$type.singular", 'section'))
+@section('title', 'تعديل ' . __("helal.section-types.$type.singular"))
 @section('content')
 
-    <h4 class="title"> تعديل {{ config("section.$type.singular", 'section') }} </h4>
+    <h4 class="title"> تعديل {{ __("helal.section-types.$type.singular") }} </h4>
 
     <form action="{{ route('dashboard.sections.update', $section) }}" method="post" enctype="multipart/form-data"
         onsubmit="readRich()" name="sectionForm">
         @csrf
         @method('put')
+        @if($menu) <input type="hidden" name="menu_id" value="{{ $menu->id }}"> @endif
+
         <div class="group-fields">
             <div class="group-title">العنوان</div>
             <x-input name="title_ar" :dbValue="$section->title_ar" label="بالعربي" />
@@ -41,10 +43,9 @@
         <br>
 
         <x-input type="date" :dbValue="$section->date" name="date"
-            label='تاريخ ال{{ config("section.$type.singular", 'section') }}' />
+            label='تاريخ ال{{ __("helal.section-types.$type.singular") }}' />
 
         <x-checkbox name="hidden" label="مخفي" :dbValue="$section->hidden" />
-
 
         <div class="mb-3">
             <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
@@ -70,8 +71,7 @@
             @enderror
         </div>
 
-        <button class="btn btn-secondary">حفظ
-            {{ config("section.$type.singular", 'section') }}</button>
+        <button class="btn btn-secondary">حفظ ال{{ __("helal.section-types.$type.singular") }}</button>
         <a href="{{ route('dashboard.sections.index', ['type' => $type]) }}" class="btn btn-outline-secondary">عودة</a>
     </form>
 @endsection

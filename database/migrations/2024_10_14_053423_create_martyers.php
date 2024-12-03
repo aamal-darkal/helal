@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name_en' ,50)->index();
             $table->year('DOB');
             $table->foreignId('province_id')->constrained();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

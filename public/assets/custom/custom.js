@@ -1,26 +1,22 @@
-let staticStart = false;
-(function () {
-    "use strict";    
-    /*=====================================
+/** =====================================
     Sticky
-    ======================================= */
-    window.onscroll = function () {
-        const navbar = document.querySelector(".navbar");
-        const modalContent = document.querySelector(".modal-content");
-        
+  ======================================= */
+window.onscroll = function () {
+    const navbar = document.querySelector(".navbar");
+    const modalContent = document.querySelector(".modal-content");
 
-        if (window.scrollY > 10) {
-            navbar.classList.add("sticky");
-            modalContent.classList.add("search-sticky");
-            
-        } else {
-            navbar.classList.remove("sticky");
-            modalContent.classList.remove("search-sticky");
-        }       
-    };
-})();
+    if (window.scrollY > 10) {
+        navbar.classList.add("sticky");
+        modalContent.classList.add("search-sticky");
+    } else {
+        navbar.classList.remove("sticky");
+        modalContent.classList.remove("search-sticky");
+    }
+};
 
-/** animation */
+/** =====================================
+    Animation depending on AOS pkg
+  ======================================= */
 window.addEventListener("load", () =>
     AOS.init({
         duration: 600,
@@ -30,17 +26,9 @@ window.addEventListener("load", () =>
     })
 );
 
-function isInViewport(element) {
-    var rect = element.getBoundingClientRect();
-    var html = document.documentElement;
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || html.clientHeight) &&
-        rect.right <= (window.innerWidth || html.clientWidth)
-    );
-}
-
+/** =====================================
+    Defining swipers (slider) depending on Swiper pkg
+  ======================================= */
 var swiper = new Swiper(".martyer-swiper", {
     loop: true,
     speed: 600,
@@ -87,32 +75,62 @@ var swiper = new Swiper(".news-swipper", {
     },
 });
 
-
 var swiper = new Swiper(".stories-swiper", {
-    slidesPerView: 1,    
+    slidesPerView: 1,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-    }
+    },
 });
 
+/** =====================================
+   Search modal
+  ======================================= */
+var modal = document.getElementById("search-modal");
+var openModalBtn = document.querySelector(".open-modal");
+var closeModalBtn = document.querySelector(".close-modal");
+var contentDivider = document.querySelector(".content-divider");
 
+openModalBtn.onclick = function () {
+    modal.style.display = "block";
+    if (contentDivider) contentDivider.style.marginTop = "130px";
+};
 
-// search modal
- var modal = document.getElementById("search-modal");
- var openModalBtn = document.querySelector(".open-modal");
- var closeModalBtn = document.querySelector(".close-modal");
+closeModalBtn.onclick = function () {
+    modal.style.display = "none";
+    if (contentDivider) contentDivider.style.marginTop = "60px";
+};
 
- openModalBtn.onclick = function () {
-     modal.style.display = "block";
- };
+modal.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        if (contentDivider) contentDivider.style.marginTop = "60px";
+    }
+};
 
- closeModalBtn.onclick = function () {
-     modal.style.display = "none";
- };
+/** =====================================
+   view summery of section
+  ======================================= */
+const contentElements = document.querySelectorAll(".summary");
+for (let contentElement of contentElements) {
+    const length = contentElement.getAttribute("data-length");
+    let summary =
+        contentElement.previousElementSibling.innerText
+            .trim()
+            .substring(0, length) + "...";
 
- modal.onclick = function (event) {
-     if (event.target == modal) {
-         modal.style.display = "none";
-     }
- };
+    /** truncate part of word */
+    contentElement.innerHTML = summary.substring(0, summary.lastIndexOf(" "));
+}
+
+/** =====================================
+   search filter
+  ======================================= */
+function getUrl(filter) {
+    let preUrl = location.href;
+    let pos = preUrl.lastIndexOf("type=");
+    // console.log(pos)
+    let url = pos == -1 ? preUrl : preUrl.substring(0, pos - 1);
+    let operator = url.lastIndexOf("=") == -1 ? "?" : "&";
+    location = url + operator + "type=" + filter;
+}

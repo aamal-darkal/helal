@@ -15,11 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar', 100)->index();
             $table->string('title_en', 100)->index();
-            $table->foreignId('user_id')->nullable()->constrained();            
+            $table->string('url', 100)->default('');
+            $table->tinyInteger('order')->default(0);
+            $table->boolean('locked')->default(false);
+            $table->foreignId('menu_id')->nullable()->constrained();
+            $table->foreignId('section_id')->nullable();
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

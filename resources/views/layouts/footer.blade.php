@@ -19,16 +19,12 @@
               <div class="ps-5">
                   <h4>Follow Us</h4>
                   <ul class="d-flex gap-2 text-white p-0">
-                      <li><a href="https://www.facebook.com/SYRedCrescent"><i class="fab fa-facebook"></i></a></li>
-                      <li><a href="https://twitter.com/SYRedCrescent"><i class="fab fa-x-twitter"></i></a></li>
-                      <li><a href="https://www.instagram.com/syredcrescent/"><i class="fab fa-instagram"></i></a>
-                      </li>
-                      <li><a
-                              href="https://www.linkedin.com/company/5912976/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company_admin%3BFLUkbI1OQOmi0BGtfgXouQ%3D%3D&amp;licu=urn%3Ali%3Acontrol%3Ad_flagship3_company_admin-actor"><i
-                                  class="fab fa-linkedin"></i></a></li>
-                      <li><a href="https://www.youtube.com/channel/UCHN8M56Mfi5IjlGPBmAsV6g"><i
-                                  class="fab fa-youtube"></i></a></li>
-                      <li><a href="https://t.me/Syredcrescent"><i class="fab fa-telegram-plane"></i></a></li>
+                      <li><a href="{{ $components['facebook'] }}"><i class="fab fa-facebook"></i></a></li>
+                      <li><a href="{{ $components['X-twitter'] }}"><i class="fab fa-x-twitter"></i></a></li>
+                      <li><a href="{{ $components['instagram'] }}"><i class="fab fa-instagram"></i></a></li>
+                      <li><a href="{{ $components['linked-in'] }}"><i class="fab fa-linkedin"></i></a></li>
+                      <li><a href="{{ $components['youtube'] }}"><i class="fab fa-youtube"></i></a></li>
+                      <li><a href="{{ $components['telegram'] }}"><i class="fab fa-telegram-plane"></i></a></li>
                   </ul>
               </div>
           </div>

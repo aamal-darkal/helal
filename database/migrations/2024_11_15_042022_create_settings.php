@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->string('key_en' , 50)->primary();
-            $table->string('key_ar' ,50);
-            $table->string('value_en' , 7500)->nullable();
-            $table->string('value_ar' , 7500)->nullable();
+            $table->id();
+            $table->string('key_en', 50)->unique();
+            $table->string('key_ar', 50)->unique();
+            $table->string('value_en', 7500)->nullable();
+            $table->string('value_ar', 7500)->nullable();
             $table->boolean('isFile')->default(0);
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

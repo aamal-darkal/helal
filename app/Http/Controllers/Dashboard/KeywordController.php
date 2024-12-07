@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Keyword;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class KeywordController extends Controller
 {
@@ -40,13 +40,12 @@ class KeywordController extends Controller
             'word_ar' => 'required|string|max:30|unique:keywords',
             'word_en' => 'required|string|max:30|unique:keywords',
         ]);
+        $validated['created_by'] = Auth::user()->id;
         Keyword::create($validated);        
 
         return to_route('dashboard.keywords.index')->with('success', "تمت إضافة الكلمة المفتاحية $validated[word_ar]($validated[word_en]) بنجاح");
     }
-    
-
-    
+      
     /**
      * Remove the specified resource from storage.
      */

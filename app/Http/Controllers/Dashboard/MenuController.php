@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Section;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
@@ -56,6 +57,8 @@ class MenuController extends Controller
         ]);
         
         $validated['order'] = Menu::where('menu_id' , $validated['menu_id'])->max('order') + 1;
+        $validated['created_by'] = Auth::user()->id;
+
         $menu =Menu::create($validated);
         
         return to_route('dashboard.sections.create' , ['type' => 'page' , 'menu' => $menu->id]);
@@ -78,8 +81,8 @@ class MenuController extends Controller
         ]);
 
         $menu->update($validated);
-        // $section = Section::find($menu->section_id);
-        // return $section;
+        $validated['updated_by'] = Auth::user()->id;
+        
         return to_route('dashboard.sections.edit', ['section' => $menu->section_id  ,'type' => 'page', 'menu' => $menu->id]);
     }
 

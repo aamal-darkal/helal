@@ -17,15 +17,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($keywords as $branch)
+            @foreach ($keywords as $keyword)
                 <tr>
-                    <td> {{ $branch->id }}</td>
-                    <td> {{ $branch->word_ar }}</td>
-                    <td> {{ $branch->word_en }}</td>
+                    <td> {{ $keyword->id }}</td>
+                    <td> {{ $keyword->word_ar }}</td>
+                    <td> {{ $keyword->word_en }}</td>
 
                     <td class="text-nowrap">                        
-                        <form action="{{ route('dashboard.keywords.destroy', $branch) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $branch->name }}?' )">
+                        <form action="{{ route('dashboard.keywords.destroy', $keyword) }}" method="post" class="d-inline-block"
+                            onsubmit="return confirm('Are you sure you want to delete {{ $keyword->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Doing;
 use App\Models\Keyword;
 use App\Models\Menu;
-use App\Models\SubMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DoingController extends Controller
@@ -39,19 +39,20 @@ class DoingController extends Controller
             'icon' => 'nullable|string',
             'keywords' => 'nullable|array',
         ]);
+        $validated['created_by'] = Auth::user()->id;
 
         $doing = Doing::create($validated);
 
         if ($request->keywords)
             $doing->Keywords()->attach($validated['keywords']);
 
-        if ($request->menu) {
-            SubMenu::create([
-                'title_ar' =>  $validated['title_ar'],
-                'title_en' => $validated['title_en'],
-                'url' => "search?doing=$doing->id",
-            ]);
-        }
+        // if ($request->menu) {
+        //     Menu::create([
+        //         'title_ar' =>  $validated['title_ar'],
+        //         'title_en' => $validated['title_en'],
+        //         'url' => "search?doing=$doing->id",
+        //     ]);
+        // }
         return to_route('dashboard.doings.index')->with('success', "تم إضافة سجل أعمالنا بنجاح");
     }
 
@@ -75,6 +76,7 @@ class DoingController extends Controller
             'icon' => 'nullable|string',
             'keywords' => 'nullable|array',
         ]);
+        $validated['update_by'] = Auth::user()->id;
 
         $doing->update($validated);
 

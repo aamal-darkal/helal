@@ -117,10 +117,11 @@ for (let contentElement of contentElements) {
     let summary =
         contentElement.previousElementSibling.innerText
             .trim()
-            .substring(0, length) + "...";
+            .substring(0, length) ;
 
     /** truncate part of word */
-    contentElement.innerHTML = summary.substring(0, summary.lastIndexOf(" "));
+    contentElement.innerHTML =
+        summary.substring(0, summary.lastIndexOf(" ")) + "...";
 }
 
 /** =====================================

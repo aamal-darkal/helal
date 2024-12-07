@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProvinceController extends Controller
 
@@ -36,6 +37,7 @@ class ProvinceController extends Controller
             'location_en' => 'nullable|string|max:255',
             'phone' => 'nullable|digits:10'
         ]);
+        $validated['created_by'] = Auth::user()->id;
 
         Province::create($validated);
         return to_route('dashboard.provinces.index')->with('success', "تم إضافة المحافظة بنجاح");
@@ -60,7 +62,7 @@ class ProvinceController extends Controller
             'location_en' => 'nullable|string|max:255',
             'phone' => 'nullable|digits:10'
         ]);
-
+        $validated['updated_by'] = Auth::user()->id;
         $province->update($validated);
 
 

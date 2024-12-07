@@ -2,67 +2,59 @@
 return [
     /** General */
     'SARC' => 'Syrian Arabic Red Crescent',
-
     'lang' => 'العربية',
+
+    /** css */
     'font' => 'Montserrat',
     'dir' => 'ltr',
     'align' => 'left',
     'sign' => '+1',
+
+    /** intefaces */
     'readmore' => 'read more',
-
-    'organization' => 'organization',
-    'organization-news' => 'organization news',
-
-
-    'article' =>  'articles',
-    'compaign' => 'compaign',
-    'news' =>  'news',
-    'story' =>  'stories',
-    'section' =>  'section',
-    'vacancy' =>  'vacancies',
-    'page' =>  'pages',
-    'all' => 'All',
-
-
-
-
-    'contact' => 'Contact Us',
-
-    'about' => 'About Us',
-
-    'latest' => 'Latest News',
-    'Partnership' => 'Partnerships',
-    'martyr' => 'Martyrs',
-    'year' => 'years',
-    'volunteers'  => 'Volunteers',
-    'branch' => 'provinces',
-
-    'center' => ' Media Center',
-    'media' => 'News and Media',
-
-    'intro' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility,
-    and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence.',
-    'info' => 'It has a headquarters in Damascus and fourteen provinces in the fourteen governorates of Syria, and sub provinces.',
-
-    /** footer */
-    'about_sarc' => 'About The SARC',
-    'about_us' => 'About Us',
-    'follow' => 'Follow Us',
-
-    /** FORM */
     'back' => 'Back',
-
     'notFound' => 'No Elements',
 
 
-    /** section types */
+     /** ************* welcome ****************/    
+    'do' => 'What We Do?',
+    'martyer' => 'SARC Memorial',
+    'latest-news' => 'Latest News',
+    'human-stories' => 'human stories',
+    'curr-campaign' => 'Current campaign',
+    'choose-province' => 'Select Province and see the latest news',
+
+
+    /** statistic */
+    'years' => 'Years',
+    'volunteers'  => 'Volunteers',
+    'branches' => 'Branches',    
+
+    /** footer */
+    'about' => 'About Us',
+    'contact' => 'Contact Us',
+
+    'organization-news' => 'organization news',
+    
+    'choose-type' => 'Choose Category',
+
+    // 'about_sarc' => 'About The SARC',
+    // 'about_us' => 'About Us',
+    // 'follow' => 'Follow Us',
+    // 'Partnership' => 'Partnerships',
+    // 'center' => ' Media Center',
+    // 'media' => 'News and Media',
+
+
+        /** ================================================ */
+    /** for dashboard (in arabic only) section types */
     'section-types' => [
-        'article' => ['singular' => 'مقالة', 'plural' => 'المقالات'],
-        'compaign' => ['singular' => 'حملة', 'plural' => 'الحملات'],
-        'news' => ['singular' => 'خبر', 'plural' => 'الأخبار'],
-        'story' => ['singular' => 'قصة', 'plural' => 'القصص'],
-        'section' => ['singular' => 'فقرة', 'plural' => 'الفقرات'],
-        'vacancy' => ['singular' => 'وظيفة', 'plural' => 'وظائف'],
-        'page' => ['singular' => 'صفحة', 'plural' => 'صفحات'],
+        'article' => ['singular' => 'article', 'plural' => 'articles'],
+        'campaign' => ['singular' => 'campaign', 'plural' => 'campaigns'],
+        'news' => ['singular' => 'news', 'plural' => 'news'],
+        'story' => ['singular' => 'story', 'plural' => 'stories'],
+        'section' => ['singular' => 'article', 'plural' => 'articles'],
+        'vacancy' => ['singular' => 'vacancy', 'plural' => 'vacancies'],
+        'page' => ['singular' => 'page', 'plural' => 'pages'],
     ]
 ];

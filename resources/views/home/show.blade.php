@@ -9,6 +9,6 @@
         <div>
             {!! $section->content_ar !!}
         </div>
-            <div class="text-center mb-4"><a class="btn-salmon px-3 py-2" href="{{ url()->previous() }}">@lang('helal.Back')</a></div>
+            <div class="text-center mb-4"><a class="btn-salmon px-3 py-2" href="{{ url()->previous() }}">@lang('helal.back')</a></div>
     </div>
 @endsection

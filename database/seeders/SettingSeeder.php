@@ -43,14 +43,14 @@ class SettingSeeder extends Seeder
             [
                 'key_en' => 'target',
                 'key_ar' => 'الهدف',
-                'value_en' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility, and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence. It has a headquarters in Damascus and fourteen provinces in the fourteen governorates of Syria, and sub provinces.',
-                'value_ar' =>  'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمتع بالاستقلال المالي والإداري ذات شخصية اعتبارية لها مركز رئيسي و 14 فرعاً موزعين في جميع المحافظات، إضافة إلى شعب تابعة للفروع.',
+                'value_en' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility, and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence. ',
+                'value_ar' =>  'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمتع بالاستقلال المالي والإداري ذات شخصية اعتبارية .',
             ],
             [
                 'key_en' => 'about',
                 'key_ar' => 'حول المنظمة',
-                'value_en' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility, and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence. It has a headquarters in Damascus and fourteen provinces in the fourteen governorates of Syria, and sub provinces.',
-                'value_ar' =>  'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمتع بالاستقلال المالي والإداري ذات شخصية اعتبارية لها مركز رئيسي و 14 فرعاً موزعين في جميع المحافظات، إضافة إلى شعب تابعة للفروع.',
+                'value_en' => 'It has a headquarters in Damascus and fourteen provinces in the fourteen governorates of Syria, and sub provinces.',
+                'value_ar' =>  'لها مركز رئيسي في دمشق و 14 فرعاً موزعين في جميع المحافظات، إضافة إلى شعب تابعة للفروع.',
             ],
             [
                 'key_en' => 'telegram',
@@ -97,14 +97,32 @@ class SettingSeeder extends Seeder
             [
                 'key_en' => 'story-sammery-length',
                 'key_ar' => 'طول ملخص القصة',
-                'value_en' => 250,
-                'value_ar' =>  250,
+                'value_en' => 300,
+                'value_ar' =>  300,
             ],
             [
-                'key_en' => 'compaign-sammery-length',
+                'key_en' => 'campaign-sammery-length',
                 'key_ar' => 'طول ملخص الحملة',
                 'value_en' => 50,
                 'value_ar' =>  50,
+            ],            
+            [
+                'key_en' => 'volunteers',
+                'key_ar' => 'متطوع',
+                'value_en' => 12500,
+                'value_ar' =>  12500,
+            ],
+            [
+                'key_en' => 'branches',
+                'key_ar' => 'فرع',
+                'value_en' => 14,
+                'value_ar' =>  14,
+            ],
+            [
+                'key_en' => 'years',
+                'key_ar' => 'ميلاد المنظمة',
+                'value_en' => '1946',
+                'value_ar' =>  '1946',
             ],
         ];
         foreach ($components as $component)

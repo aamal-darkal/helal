@@ -6,9 +6,9 @@
         <div class="filter-box">
             <h2 class="text-salmon"> {{ $key }}</h2>
             <select name="type" class="form-select" onchange="getUrl(this.value);">
-                <option value="1">@lang('helal.all')</option>
+                <option value="" hidden>-- @lang('helal.choose-type')</option>
                 @foreach (config('app.section-type') as $option)
-                    <option value="{{ $option }}" @selected($option == $type)>{{ __('helal.' . $option) }}</option>
+                    <option value="{{ $option }}" @selected($option == $type)>{{ __("helal.section-types.$option.plural") }}</option>
                 @endforeach
             </select>
         </div>
@@ -17,6 +17,7 @@
                 <div class="topic-desc p-2">
                     <div class="topic-title">
                         <h2>{{ $result->title }}</h2>
+                        <p>{{ $result->type}}</p>
                     </div>
 
                     <div class="d-none"> {!! $result->content !!} </div>
@@ -27,6 +28,7 @@
                     </a>
                 </div>
                 <div class="img-wrapper">
+                    <div class="search-type">@lang("helal.section-types.$result->type.singular") </div>
                     <img src="{{ $result->image_id ? asset(getImgUrl($result->image_id)) : '' }}">
                 </div>
             </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Martyer;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class MartyerController extends Controller
 {
@@ -42,6 +42,8 @@ class MartyerController extends Controller
             'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
             'province_id' => 'exists:province,id',
         ]);
+        $validated['created_by'] = Auth::user()->id;
+
         Martyer::create($validated);        
 
         return to_route('dashboard.martyers.index')->with('success', "تمت إضافة بيانات الشهيد $validated[name_ar] بنجاح");
@@ -67,6 +69,7 @@ class MartyerController extends Controller
             'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
             'province_id' => 'exists:province,id',
         ]);
+        $validated['updated_by'] = Auth::user()->id;
         $martyer->update($validated);
 
         return to_route('dashboard.martyers.index')->with('success', "تم تعديل بيانات  $validated[name_ar] بنجاح");

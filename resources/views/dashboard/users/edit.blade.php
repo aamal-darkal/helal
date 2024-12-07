@@ -18,7 +18,7 @@
             <input class="form-check-input me-4 mb-3" name="type" type="radio" value="banned" id="banned" @checked($user->type == 'banned')>
             <label for="admin" class="text-danger"> banned </label>
         </div>
-        <x-select-edit name="province_id" :dbValue="$user->province_id" label="branch" :options=$provinces  />
+        <x-select-edit name="province_id" :dbValue="$user->province_id" label="المحافظة" :options=$provinces  />
 
 
         <button class="btn btn-secondary">تعديل حساب</button>

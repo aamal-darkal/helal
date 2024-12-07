@@ -8,8 +8,8 @@ use App\Models\Keyword;
 use App\Models\Menu;
 use App\Models\Province;
 use App\Models\Section;
-use App\Models\SubMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +18,7 @@ class SectionController extends Controller
     /** 
      * Display a listing of the resource.
      */
-    public $type;
+    // public $type;
     public function __construct(Request $request)
     {
         session()->flash('type', $request->type);
@@ -54,10 +54,10 @@ class SectionController extends Controller
     public function store(SectionRequest $request)
     {
         $validated = $request->validated();
-        // $validated['created_by'] = Auth::user()->id;
+        $validated['created_by'] = Auth::user()->id;
         if (
             ! $request->has('type') ||
-            !in_array($request->type, ['article', 'compaign', 'news', 'story', 'vacancy', 'page'])
+            !in_array($request->type, ['article', 'campaign', 'news', 'story', 'vacancy', 'page'])
         )
             return back()->with('error', 'يوجد خطأ في تحديد نوع المقطع المضاف');
         else $validated['type'] = $request->type;
@@ -109,7 +109,8 @@ class SectionController extends Controller
     public function update(SectionRequest $request, Section $section)
     {
         $validated = $request->validated();
-        // $validated['updated_by'] = Auth::user()->id;
+        $validated['updated_by'] = Auth::user()->id;
+
         $type = $section['type'];
 
         if ($request->hasFile('image_id')) {

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvinceSeeder::class);
         $this->call(DoingSeeder::class);// with keywords
         $this->call(MartyerSeeder::class);
+        $this->call(UserSeeder::class);
         
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -25,6 +26,7 @@ class SettingController extends Controller
             $setting->value_ar =  $request->value_ar;
             $setting->value_en =  $request->value_en;
         }
+        $setting->updated_by = Auth::user()->id;
         $setting->save();
 
         return back()->with(['success' => "تم تعديل $setting->key_ar بنجاح"]);

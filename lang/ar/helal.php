@@ -2,47 +2,70 @@
 return [
     /** General */
     'SARC' => 'الهلال الأحمر العربي السوري',
-
     'lang' => 'English',
-    'font'=> 'Tajawal',
+
+    /** css */
+    'font' => 'Tajawal',
     'dir' => 'rtl',
     'align' => 'right',
     'sign' => '-1',
+
+    /** intefaces */
     'readmore' => 'قراءة المزيد',
+    'back' => 'عودة',
+    'notFound' => 'لا يوجد عناصر ',
 
 
-    'organization' => 'المنظمة',
+    /** ************* welcome ****************/
+    'do' => 'ماذا نفعل?',
+    'martyer' => 'شهداء المنظمة',
+    'latest-news' => 'اخر الأخبار',
+    'human-stories' => 'قصص إنسانية',
+    'curr-campaign' => 'الحملات الحالية',
+    'choose-province' => 'اختر محافظة واطلّع على آخر أخبارها',
+
+    /** statistic */
+    'years' => 'سنة',
+    'volunteers'  => 'متطوع',
+    'branches' => 'فرع',
+
+
+    /** footer */
+    'about' => 'عن المنظمة',
+    'contact' => 'اتصل بنا',    
+        
     'organization-news' => 'أخبار المنظمة',
 
-    'article' =>  'مقالة',
-    'compaign' => 'حملات',
-    'news' =>  'أخبار',
-    'story' =>  'قصص',
-    'section' =>  'فقرات',
-    'vacancy' =>  'شواغر',
-    'page' =>  'صفحات',
-    'all' => 'الكل',
-    
-    'contact' => 'اتصل بنا',
+    'choose-type' => 'اختر تصنيف',
+
+    // 'Partnership' => 'الشركاء',
 
 
-    'about' => 'عن المنظمة',
+    // 'center' => ' Media Center',
+    // 'media' => 'News and Media',
 
-    'latest' => 'اخر الأخبار',
-    'Partnership' => 'الشركاء',
-    'martyr' => 'شهداء المنظمة',
-    'year' => 'سنة',
-    'volunteers'  => 'متطوعين',
-    'branch' => 'فرع',
+    // /** ================================================ */
+    // /** for section type to get it plural translation */
+    // 'article' =>  'مقالات',
+    // 'campaign' => 'حملات',
+    // 'news' =>  'أخبار',
+    // 'story' =>  'قصص',
+    // 'section' =>  'فقرات',
+    // 'vacancy' =>  'شواغر',
+    // 'page' =>  'صفحات',
 
-    'center' => ' Media Center',
-    'media' => 'News and Media',
-    
-    'intro' => 'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمتع بالاستقلال المالي والإداري ذات شخصية اعتبارية.',
-    'info' => 'لها مركز رئيسي و 14 فرعاً موزعين في جميع المحافظات، إضافة إلى شعب تابعة للفروع.',
+    /** ================================================ */
+    /** for dashboard (in arabic only) section types */
+    'section-types' => [
+        'article' => ['singular' => 'مقالة', 'plural' => 'مقالات'],
+        'campaign' => ['singular' => 'حملة', 'plural' => 'حملات'],
+        'news' => ['singular' => 'خبر', 'plural' => 'أخبار'],
+        'story' => ['singular' => 'قصة', 'plural' => 'قصص'],
+        'section' => ['singular' => 'فقرة', 'plural' => 'فقرات'],
+        'vacancy' => ['singular' => 'وظيفة', 'plural' => 'وظائف'],
+        'page' => ['singular' => 'صفحة', 'plural' => 'صفحات'],
+    ]
 
-    /** FORM */
-    'back' => 'عودة',
-
-    'notFound' => 'لا يوجد عناصر '
 ];
+
+    

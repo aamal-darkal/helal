@@ -11,7 +11,7 @@
         <x-input name="name_en" :dbValue="$martyer->name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
         <x-input name="DOB" :dbValue="$martyer->DOB" type="number" label="مواليد/عام" min="1901" max="2200" />
 
-        <x-select-edit name="province_id" :dbValue="$martyer->province_id" label="branch" :options=$provinces  />
+        <x-select-edit name="province_id" :dbValue="$martyer->province_id" label="المحافظة" :options=$provinces  />
             
         <button class="btn btn-secondary">حفظ بيانات الشهيد </button>
         <a href="{{ route('dashboard.martyers.index') }}" class="btn btn-outline-secondary">عودة</a>

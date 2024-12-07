@@ -15,7 +15,7 @@ class MenuSeeder extends Seeder
     public function run(): void
     {       
         $mainMenus = [
-            ['id' => 1 ,'title_en' => 'Home', 'title_ar' => 'الرئيسية', 'url' => url('/') , 'order' => 1 , 'locked' => true ],
+            ['id' => 1 ,'title_en' => 'Home', 'title_ar' => 'الرئيسية', 'url' => '/' , 'order' => 1 , 'locked' => true ],
             ['id' => 2 ,'title_en' => 'Who We Are?', 'title_ar' => 'من نحن؟', 'url' => '', 'order' => 2 , 'locked' => true],
             ['id' => 3 ,'title_en' => 'What We Do?', 'title_ar' => 'ماذا نفعل؟', 'url' => '', 'order' => 3 , 'locked' => true],
             ['id' => 4 ,'title_en' => 'Our News', 'title_ar' => 'أخبارنا', 'url' => '', 'order' => 4 , 'locked' => true],
@@ -78,7 +78,7 @@ class MenuSeeder extends Seeder
         $achievementsMenu = [
             ['title_en' => 'Annual Reports', 'title_ar' => 'التقارير السنوية', 'url' => '', 'order' => 1, 'menu_id' => 5],
             ['title_en' => 'Infographics', 'title_ar' => 'إنفوغراف', 'url' => '', 'order' => 2, 'menu_id' => 5],
-            ['title_en' => 'Infographics', 'title_ar' => 'الحملات', 'url' => 'search?type=compaign', 'order' => 3, 'menu_id' => 5],
+            ['title_en' => 'Infographics', 'title_ar' => 'الحملات', 'url' => 'search?type=campaign', 'order' => 3, 'menu_id' => 5],
         ];
         Menu::insert($achievementsMenu);
 

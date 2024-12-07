@@ -6,7 +6,7 @@
     @include('welcome.doing')
     @include('welcome.news')
     @include('welcome.stories')
-    @include('welcome.compaign')
-    @include('welcome.martyrs')
+    @include('welcome.campaign')
+    @include('welcome.martyers')
     @include('welcome.map')    
 @endsection

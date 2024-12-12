@@ -41,6 +41,13 @@ class HomeController extends Controller
      */
     function show(Section $section)
     {
+        $locale = app()->getLocale();
+
+        $title = "title_$locale";
+        $content = "content_$locale";
+        $section->title = $section->$title;
+        $section->content = $section->$content;
+        
         return view('home.show', compact('section'));
     }
 
@@ -55,10 +62,13 @@ class HomeController extends Controller
         $search = $request->search;
         $province = $request->province;
 
+        /** for doing with keyword */
+
+
+        /** get keywords of doings as ids [$keywordIds] to be compared with section's keywords
+         * & as string [$keywordWords] to be compared with section's titles  */
         $keywordIds = [];
         $keywordWords = "";
-
-        /** search By doings  */
         if ($doing) {            
             $doing = Doing::find($doing);
             if ($doing && $doing->Keywords()->count()) {
@@ -69,18 +79,26 @@ class HomeController extends Controller
                 $keywordWords = implode("|", $keywordWords);
                 $keywordWords = "('$keywordWords')";
             } else
-                $keywordIds = null;
+                $keywordWords = "('-')";
         }
 
         $results = Section::select( "id" ,"title_$locale as title",  "content_$locale as content" , "summary_length" , "image_id" , "type")
+        /** for certain province */
             ->when($province, function ($q) use ($province) {
                 return $q->Where('province_id', $province);
             })
+        /** for certain type */
             ->when($type, function ($q) use ($type) {
                 return $q->Where('type', $type);
+            })        
+            /** for free search */
+            ->when($search, function ($q) use ($search) {
+                return  $q->where('title_ar', 'like', "%$search%")
+                    ->orwhere('title_en', 'like', "%$search%");
             })
+            /** for certain doing */
             ->when(
-                $keywordIds,
+                $doing,
                 function ($q) use ($keywordIds, $keywordWords) {
                     $q->Wherehas(
                         'Keywords',
@@ -91,21 +109,17 @@ class HomeController extends Controller
                         ->orWhereRaw("title_ar REGEXP $keywordWords")
                         ->orwhereRaw("title_en REGEXP $keywordWords");
                 }
-            )
-            ->when($search, function ($q) use ($search) {
-                return  $q->where('title_ar', 'like', "%$search%")
-                    ->orwhere('title_en', 'like', "%$search%");
-            })            
+            )            
             ->orderBy('date' , 'desc')->paginate(5)->withQueryString();
             // return $results;
         $title = "title_$locale";
         $name = "name_$locale";
         
-        $key = $doing ? $doing->$title : 
-        ($search ? $search : 
-        ($type ?   __("helal.section-types.$type.plural") :
-        ($province ? __('helal.section-types.news.plural')  . " " .Province::find($province)->$name : 
-                     __('helal.organization-news')  )));
+        $key = $province ? __('helal.section-types.news.plural')  . " " . Province::find($province)->$name : 
+        ($type ?   __("helal.section-types.$type.plural") :         
+        ($search ? $search :         
+        ($doing ? $doing->$title : 
+        __('helal.organization-news')  )));
             // return $results;
         return view('home.search', compact('results', 'key' , 'type' ));
     }

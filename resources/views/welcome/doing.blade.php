@@ -4,7 +4,6 @@
         <div class="doing-list-wrapper row">
             @foreach ($doings as $doing )                
                 <div class="doing-list-item col-4">
-                {{-- <a href="{{ route('home.search' , ['search' => ['aamal' ,'happy'] ]) }}" data-aos="fade-up"> --}}
                 <a href="{{ route('home.search' , ['doing' => $doing ]) }}" data-aos="fade-up">
                     <div>{!! $doing->icon !!}</div>
                     <h3>{{ $doing->title }}</h3>

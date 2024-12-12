@@ -2,12 +2,12 @@
       <div class="container pb-3">
           <div class="row">
               <div class="col-md-6 footer-widget ps-5">
-                  <h4>About The SARC</h4>
-                  <p> @lang('helal.intro') </p>
-                  <p> @lang('helal.info') </p>
+                  <h4>@lang('helal.about-sarc')</h4>
+                  <p> {{ $components['target'] }}</p>
+                  <p> {{ $components['about'] }}</p>
               </div>
               <div class="col-md-6 footer-widget ps-5 about">
-                  <h4>About us</h4>
+                  <h4>@lang('helal.about')</h4>
                   <ul class="p-0">
                       <li><a href="#">@lang('helal.about')</a></li>
                       <li><a href="#">@lang('helal.contact')</a></li>
@@ -17,7 +17,7 @@
           </div>
           <div class="col-md-6 footer-widget mt-3">
               <div class="ps-5">
-                  <h4>Follow Us</h4>
+                  <h4>@lang('helal.follow') </h4>
                   <ul class="d-flex gap-2 text-white p-0">
                       <li><a href="{{ $components['facebook'] }}"><i class="fab fa-facebook"></i></a></li>
                       <li><a href="{{ $components['X-twitter'] }}"><i class="fab fa-x-twitter"></i></a></li>

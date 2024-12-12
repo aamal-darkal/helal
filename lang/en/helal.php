@@ -33,15 +33,16 @@ return [
     /** footer */
     'about' => 'About Us',
     'contact' => 'Contact Us',
+    'Partnership' => 'Partnerships',
+    
+    'about-sarc' => 'About The SARC',
+    'follow' => 'Follow Us',
 
     'organization-news' => 'organization news',
     
     'choose-type' => 'Choose Category',
 
-    // 'about_sarc' => 'About The SARC',
     // 'about_us' => 'About Us',
-    // 'follow' => 'Follow Us',
-    // 'Partnership' => 'Partnerships',
     // 'center' => ' Media Center',
     // 'media' => 'News and Media',
 

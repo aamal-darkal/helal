@@ -13,7 +13,7 @@
         <x-input name="title_en" label="العنوان بالانكليزي " required maxlength="100"/>
 
 
-        <button class="btn btn-secondary">إضافة البند</button>
+        <button class="btn btn-secondary">  إنشاء وعرض بيانات الصفحة </button>
         <a href="{{ route('dashboard.menus.index') }}" class="btn btn-outline-secondary">عودة</a>
     </form>
 @endsection

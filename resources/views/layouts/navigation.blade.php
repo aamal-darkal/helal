@@ -1,16 +1,9 @@
-<nav class="navbar navbar-expand-xl p-0">
-
-    <div class="container p-0">
-        <button class="navbar-toggler btn-salmon" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            {{-- <i class="fa-solid fa-square-caret-down"></i> --}}
-            <i class="fa-solid fa-caret-down"></i>
-            {{-- <i class="fa-solid fa-bars"></i> --}}
-        </button>
+<nav class="navbar navbar-expand-xl p-0" id="navbar-area">
+    <div class="container p-0">        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-lg-0 p-0">
-                @foreach ($menus as $menu)
+                @foreach ($menus as $menu) 
+                    {{-- main menu --}}
                     @if (!$menu->sub_menus_count)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url($menu->url) }}">
@@ -18,12 +11,13 @@
                             </a>
                         </li>
                     @else
-                        <li class="nav-item dropdown" aria-current="page">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle">
                                 {{ $menu->title }}
-                            </a>
-                            <ul class="dropdown-menu">
+                            </button>
+                            <ul class="dropdown-menu dropdown-hidden">
                                 @foreach ($menu->subMenus as $subMenu)
+                                    {{-- DROP DOWN MENU --}}
                                     @if (!$subMenu->sub_menus_count)
                                         <li>
                                             <a class="dropdown-item"
@@ -31,12 +25,11 @@
                                             </a>
                                         </li>
                                     @else
-                                        <li class="nav-item dropdown" aria-current="page">
-                                            <a class="nav-link dropdown-toggle dropdown-item" href="#" role="button"
-                                                data-bs-toggle="dropdown">
+                                        <li class="dropdown-item dropdown">
+                                            <button class="nav-link dropdown-toggle">
                                                 {{ $subMenu->title }}
-                                            </a>
-                                            <ul class="dropdown-menu">
+                                        </button>
+                                            <ul class="dropdown-menu dropdown-hidden">
                                                 @foreach ($subMenu->subMenus as $subSubMenu)
                                                     <li>
                                                         <a class="dropdown-item"

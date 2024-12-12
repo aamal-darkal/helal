@@ -5,7 +5,7 @@
                 <div class="swiper news-swipper">
                     <div class="swiper-wrapper">
                         @foreach ($news as $new)
-                            <div class = "swiper-slide">
+                            <div class = "swiper-slide ">
                                 <div class="single-news">
                                     <a href="{{ route('home.show', $new->id) }}">
                                         <div class="img-wrapper">

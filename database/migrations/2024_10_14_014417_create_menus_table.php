@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title_en', 100)->index();
             $table->string('url', 100)->default('');
             $table->tinyInteger('order')->default(0);
-            $table->boolean('locked')->default(false);
+            $table->enum('permit' , ['all' , 'update' , 'none'])->default('all');
             $table->foreignId('menu_id')->nullable()->constrained();
             $table->foreignId('section_id')->nullable();
             $table->foreignId('created_by')->nullable();

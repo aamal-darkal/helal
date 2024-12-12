@@ -37,17 +37,15 @@
     <style>
         :root {
             --align: @lang('helal.align');
-            --sign: @lang('helal.sign')
+            --sign: @lang('helal.sign');                        
         }
-    </style>
-    <!--====== aos custom ======-->
-    <link rel="stylesheet" href="{{ asset('assets/custom/custom.css') }}">
-
-    <style>
-        body {
+         body {
             font-family: @lang('helal.font')
         }              
     </style>
+    <!--====== aos custom ======-->
+    <link rel="stylesheet" href="{{ asset('assets/custom/custom.css') }}">
+   
     <title>  @lang("helal." . config('app.name', 'SARC')) | @yield('title')  </title>
 
 </head>

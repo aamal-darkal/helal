@@ -6,17 +6,14 @@
             </a>
         </div>
 
-        <div class="search-wrapper">
-            <a class="search open-modal"><i class="fas fa-search icon-search"></i></a>
-            <div id="search-modal" class="search-modal">
-                <div class="modal-content">
-                    <form action="{{ route('home.search') }}">
-                        <button type="button" class="btn btn-outline-secondary close-modal">&times;</button>
-                        <input type="search" name="search">
-                        <button class="btn btn-secondary">search</button>
-                    </form>
-                </div>
-            </div>
+        <div class="left-icons">
+            <button class="menu-togggle btn btn-salmon btn-sm ms-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                {{-- <i class="fa-solid fa-square-caret-down"></i> --}}
+                <i class="fa-solid fa-caret-down"></i>
+                {{-- <i class="fa-solid fa-bars"></i> --}}
+            </button>
             <form action="{{ route('language') }}" class="d-inline-block">
                 <button class="btn btn-salmon ms-2">@lang('helal.lang')</button>
             </form>

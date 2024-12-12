@@ -29,7 +29,7 @@ require __DIR__ . '/auth.php';
 Route::get('/language', LangController::class)->name('language');
 
 /** ------------------- dashboard ------------------ */
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified' , 'ar-lang'])->group(function () {
     
     Route::get('/dashboard', function () {
         return view('dashboard.home');

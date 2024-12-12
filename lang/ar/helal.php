@@ -33,27 +33,22 @@ return [
     /** footer */
     'about' => 'عن المنظمة',
     'contact' => 'اتصل بنا',    
-        
+    'Partnership' => 'شركائنا',
+
+    'about-sarc' => 'حول المنظمة',
+    'follow' => 'تابعونا',
+
+
     'organization-news' => 'أخبار المنظمة',
 
     'choose-type' => 'اختر تصنيف',
 
-    // 'Partnership' => 'الشركاء',
 
 
     // 'center' => ' Media Center',
     // 'media' => 'News and Media',
 
-    // /** ================================================ */
-    // /** for section type to get it plural translation */
-    // 'article' =>  'مقالات',
-    // 'campaign' => 'حملات',
-    // 'news' =>  'أخبار',
-    // 'story' =>  'قصص',
-    // 'section' =>  'فقرات',
-    // 'vacancy' =>  'شواغر',
-    // 'page' =>  'صفحات',
-
+    
     /** ================================================ */
     /** for dashboard (in arabic only) section types */
     'section-types' => [

@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Middleware\ArabicLanguage;
 use App\Http\Middleware\LangMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -11,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->appendToGroup('web', LangMiddleware::class);        
+        $middleware->appendToGroup('web', LangMiddleware::class);    
+        $middleware->alias(['ar-lang' => ArabicLanguage::class]) ;
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

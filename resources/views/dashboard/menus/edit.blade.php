@@ -12,7 +12,7 @@
 
     
 
-        <button class="btn btn-secondary">تعديل البند</button>
+        <button class="btn btn-secondary">حفظ وعرض بيانات الصفحة</button>
         <a href="{{ route('dashboard.menus.index') }}" class="btn btn-outline-secondary">عودة</a>
     </form>
 @endsection                

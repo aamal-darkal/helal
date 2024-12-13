@@ -27,8 +27,15 @@ class SectionController extends Controller
     public function index(Request $request)
     {
         $type = $request->type;
-        $sections = Section::where('type', $type)->paginate();
-        return view('dashboard.sections.index',   compact('sections', 'type'));
+        $search = $request->search;
+        $sections = Section::when($search , function($q) use ($search){
+            return $q->where(function($q) use ($search){
+                return $q->where('title_ar', 'like', "%$search%")
+                ->orWhere('title_en', 'like', "%$search%");
+            });            
+        })
+        ->where('type', $type)->paginate();
+        return view('dashboard.sections.index',   compact('sections', 'type' , 'search'));
     }
 
     /**

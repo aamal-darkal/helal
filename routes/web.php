@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\MartyerController;
 use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\userController;
+use App\Http\Controllers\HomeController as DashboardHomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Section;
 use Illuminate\Support\Facades\Artisan;
@@ -31,11 +32,10 @@ Route::get('/language', LangController::class)->name('language');
 /** ------------------- dashboard ------------------ */
 Route::middleware(['auth', 'verified' , 'ar-lang'])->group(function () {
     
-    Route::get('/dashboard', function () {
-        return view('dashboard.home');
-    })->name('dashboard');
+    
 
     Route::prefix('dashboard/')->name('dashboard.')->group(function () {
+        Route::get('', [DashboardHomeController::class , 'index'])->name('dashboard');
         Route::resource('settings', SettingController::class)->only('index', 'update');
         Route::resource('sections', SectionController::class);
         Route::resource('doings', DoingController::class);
@@ -43,7 +43,7 @@ Route::middleware(['auth', 'verified' , 'ar-lang'])->group(function () {
         Route::resource('martyers', MartyerController::class)->except('show');
         Route::resource('menus', MenuController::class);
         Route::resource('provinces', ProvinceController::class)->except('show');
-        Route::resource('users', userController::class)->except('show', 'destroy');
+        Route::resource('users', UserController::class)->except('show', 'destroy');
         Route::post('/users/change-password', [UserController::class, 'changePassword'])->name('dashboard.users.change-password');
     });
 });

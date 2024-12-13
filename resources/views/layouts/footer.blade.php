@@ -9,7 +9,7 @@
               <div class="col-md-6 footer-widget ps-5 about">
                   <h4>@lang('helal.about')</h4>
                   <ul class="p-0">
-                      <li><a href="#">@lang('helal.about')</a></li>
+                      <li><a href="show/1">@lang('helal.about')</a></li>
                       <li><a href="#">@lang('helal.contact')</a></li>
                       <li><a href="#">@lang('helal.Partnership')</a></li>
                   </ul>

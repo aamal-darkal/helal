@@ -11,19 +11,7 @@
                      <span class="align-middle">عناصر الصفحة الرئيسية</span>
                  </a>
              </li>           
-             
-             <li class="sidebar-item @if( session()->get('type') == 'article') active @endif">
-                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'article']) }}">
-                     <i class="align-middle" data-feather="book-open"></i>
-                     <span class="align-middle">@lang("helal.section-types.article.plural") </span>
-                 </a>
-             </li>
-             <li class="sidebar-item @if( session()->get('type') == 'campaign') active @endif">
-                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'campaign']) }}">
-                     <i class="align-middle" data-feather="navigation"></i>
-                     <span class="align-middle">@lang("helal.section-types.campaign.plural")</span>
-                 </a>
-             </li>
+                          
              <li class="sidebar-item @if( session()->get('type') == 'news') active @endif ">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'news']) }}">
                      <i class="align-middle" data-feather="file-text"></i>
@@ -36,17 +24,32 @@
                      <span class="align-middle"> @lang("helal.section-types.story.plural")</span>
                  </a>
              </li>
+             
+             <li class="sidebar-item @if( session()->get('type') == 'campaign') active @endif">
+                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'campaign']) }}">
+                     <i class="align-middle" data-feather="navigation"></i>
+                     <span class="align-middle">@lang("helal.section-types.campaign.plural")</span>
+                 </a>
+             </li>
+
              <li class="sidebar-item @if( session()->get('type') == 'vacancy') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'vacancy']) }}">
                      <i class="align-middle" data-feather="feather"></i>
                      <span class="align-middle"> @lang("helal.section-types.vacancy.plural")</span>
+                 </a>
+             </li>             
+            
+             <li class="sidebar-item @if( session()->get('type') == 'article') active @endif">
+                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'article']) }}">
+                     <i class="align-middle" data-feather="book-open"></i>
+                     <span class="align-middle">@lang("helal.section-types.article.plural") </span>
                  </a>
              </li>
              @if (Route::has('dashboard.martyers.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'martyers')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.martyers.index') }}">
                          <i class="align-middle" data-feather="flag"></i>
-                         <span class="align-middle">الشهداء</span>
+                         <span class="align-middle">شهداء</span>
                      </a>
                  </li>
              @endif             
@@ -55,7 +58,7 @@
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'provinces')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.provinces.index') }}">
                          <i class="align-middle" data-feather="grid"></i>
-                         <span class="align-middle">المحافظات</span>
+                         <span class="align-middle">محافظات</span>
                      </a>
                  </li>
              @endif             

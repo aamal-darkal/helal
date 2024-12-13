@@ -58,9 +58,16 @@
                 if (btn.getAttribute("data-state") == "modify") {
                     btn.setAttribute("data-state", "save")
                     btn.innerHTML = "حفظ"
+                    /** enable input */
                     for (let element of btn.parentNode.previousElementSibling.children[0].children)
                         element.disabled = false
-                    btn.nextElementSibling.classList.remove('invisible')
+                    
+                        /** إظهار زر الغاء */
+                     btn.nextElementSibling.classList.remove('invisible')
+
+                     remainButtons = document.querySelectorAll("[data-state='modify']")
+                     for (let remainButton of remainButtons)
+                        remainButton.disabled = true
                     return false;
                 } else return true;
             }

@@ -107,7 +107,24 @@ class MenuSeeder extends Seeder
             ['title_en' => 'Vacancies', 'title_ar' => 'وظائف شاغرة', 'url' => 'search?type=vacancy', 'order' => 1, 'menu_id' => 7, 'permit' => 'none' , 'section_id' => null],
             ['title_en' => 'Volunteer With Us', 'title_ar' => 'تطوع معنا', 'url' => 'show/9', 'order' => 2, 'permit' => 'update', 'menu_id' => 7 , 'section_id' => 9],
         ];
-        Menu::insert($joinMenu);       
+        Menu::insert($joinMenu);
+
+
+        // /** ******************************************************* 
+        //  * ********************* page for links *********************
+        //  *******************************************************/
+
+        // $pages = [
+        //     ['id' => 10, 'type' => 'page', 'title_ar' => 'عن المنظمة', 'title_en' => 'About Us', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => true, ],
+        //     ['id' => 11, 'type' => 'page', 'title_ar' => 'قصتنا', 'title_en' => 'Our Story', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => true,],
+        // ];
+        // $hiddenLinks = [
+        //     [ 'title_en' => 'contact us', 'title_ar' => 'اتصل بنا', 'url' => '/', 'order' => 1, 'permit' => 'update' , 'section_id' => 10 , 'menu'],
+        //     [ 'title_en' => 'partner', 'title_ar' => 'شركائنا', 'url' => '', 'order' => 2, 'permit' =>'update', 'section_id' => 11],           , 'menu'  
+        // ];
+
+        // Menu::insert($mainMenus);
+
 
     }
 }

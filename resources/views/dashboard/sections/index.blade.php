@@ -5,10 +5,13 @@
         <h4 class="title"> {{ __("helal.section-types.$type.plural") }} </h4>
         <a href="{{ route('dashboard.sections.create' , ['type' => $type]) }}" class="btn btn-secondary mb-2">إضافة {{ __("helal.section-types.$type.singular") }}</a>
     </div>
-    <form action="{{ route('dashboard.sections.index') }}" class="d-flex mb-2">
-        <a href="{{ route('dashboard.sections.index') }}" class="btn btn-secondary text-nowrap">كافة {{ __("helal.section-types.$type.plural") }}</a>
-        <input type="text" class="form-control" name="search">
+    <form action="{{ route('dashboard.sections.index' ) }}" class="d-flex mb-2">
         <button class="btn btn-secondary">بحث</button>
+        <input type="text" class="form-control" name="search" value="{{ $search }}">
+        <input type="hidden"  name="type" value="{{ $type }}">
+        @if($search)
+        <a href="{{ route('dashboard.sections.index' ,   ['type' => $type]) }}" class="btn btn-outline-secondary text-nowrap">كافة {{ __("helal.section-types.$type.plural") }}</a>
+        @endif
     </form>
     <table class="table table-bordered table-striped">
         <thead class="table-secondary">

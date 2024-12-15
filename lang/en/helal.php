@@ -17,11 +17,11 @@ return [
 
 
      /** ************* welcome ****************/    
-    'do' => 'What We Do?',
+    'do' => 'What We Do',
     'martyer' => 'SARC Memorial',
     'latest-news' => 'Latest News',
     'human-stories' => 'human stories',
-    'curr-campaign' => 'Current campaign',
+    'latest-campaign' => 'Latest campaign',    
     'choose-province' => 'Select Province and see the latest news',
 
 

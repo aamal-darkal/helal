@@ -1,11 +1,10 @@
 @if ($campaign)
     <section id="campaign-area">
         <div class="title-wrapper">
-            <h2 class="section-title">@lang('helal.campaign')</h2>
+            <h2 class="section-title">@lang('helal.latest-campaign')</h2>
         </div>
 
-
-        <div class="px-5 center-container campaign-content" style="background-image: url({{ getImgUrl($campaign->id) }})">
+        <div class="px-5 center-container campaign-content" style="background-image: url({{ getImgUrl($campaign->image_id) }})">
             <a href="{{ route('home.show', $campaign->id) }}">
                 <h2 class="text-white text-shadow-black mb-5"> {{ $campaign->title }} </h2>
                 <div class="d-none">

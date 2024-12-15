@@ -11,7 +11,7 @@ class HomeController extends Controller
         $sectionsCount = Section::count();
         $newsCount = Section::where('type' , 'news' )->count();
         $storiesCount = Section::where('type' , 'story' )->count();
-        $compaignCount = Section::where('type' , 'compaign' )->count();
-        return view('dashboard.home' , compact('sectionsCount' , 'newsCount' , 'storiesCount' , 'compaignCount'));
+        $campaignCount = Section::where('type' , 'campaign' )->count();
+        return view('dashboard.home' , compact('sectionsCount' , 'newsCount' , 'storiesCount' , 'campaignCount'));
     }
 }

@@ -9,7 +9,7 @@ use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\MartyerController;
 use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Dashboard\SectionController;
-use App\Http\Controllers\Dashboard\userController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\HomeController as DashboardHomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Section;
@@ -30,12 +30,9 @@ require __DIR__ . '/auth.php';
 Route::get('/language', LangController::class)->name('language');
 
 /** ------------------- dashboard ------------------ */
-Route::middleware(['auth', 'verified' , 'ar-lang'])->group(function () {
-    
-    
-
+Route::middleware(['auth', 'verified', 'ar-lang'])->group(function () {
+    Route::get('dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
     Route::prefix('dashboard/')->name('dashboard.')->group(function () {
-        Route::get('', [DashboardHomeController::class , 'index'])->name('dashboard');
         Route::resource('settings', SettingController::class)->only('index', 'update');
         Route::resource('sections', SectionController::class);
         Route::resource('doings', DoingController::class);

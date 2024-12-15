@@ -51,7 +51,7 @@
                     <div class="row align-items-center h6">
                         <div class="col-9 text-uppercase">
                             <div class="text-secondary"> عدد الحملات </div>
-                            <div class="h3">{{ $compaignCount }}</div>
+                            <div class="h3">{{ $campaignCount }}</div>
                         </div>
                         <div class="col-3 text-warning">
                             <i class="align-middle" data-feather="navigation"></i>

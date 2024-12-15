@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Martyer;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,8 @@ class MartyerController extends Controller
      */
     public function create()
     {
-        return view('dashboard.martyers.create');        
+        $provinces = Province::select('id', 'name_ar as name')->get();
+        return view('dashboard.martyers.create' , compact('provinces'));        
     }
 
     /**
@@ -55,7 +57,8 @@ class MartyerController extends Controller
      */
     public function edit(Martyer $martyer)
     {
-        return view('dashboard.martyers.edit' , compact('martyer'));                
+        $provinces = Province::select('id', 'name_ar as name')->get();
+        return view('dashboard.martyers.edit' , compact('martyer' , 'provinces'));                
     }
 
     /**

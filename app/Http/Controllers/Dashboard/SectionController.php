@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
+use App\Models\Image;
 use App\Models\Keyword;
 use App\Models\Menu;
 use App\Models\Province;
@@ -28,14 +29,14 @@ class SectionController extends Controller
     {
         $type = $request->type;
         $search = $request->search;
-        $sections = Section::when($search , function($q) use ($search){
-            return $q->where(function($q) use ($search){
+        $sections = Section::when($search, function ($q) use ($search) {
+            return $q->where(function ($q) use ($search) {
                 return $q->where('title_ar', 'like', "%$search%")
-                ->orWhere('title_en', 'like', "%$search%");
-            });            
+                    ->orWhere('title_en', 'like', "%$search%");
+            });
         })
-        ->where('type', $type)->paginate();
-        return view('dashboard.sections.index',   compact('sections', 'type' , 'search'));
+            ->where('type', $type)->paginate();
+        return view('dashboard.sections.index',   compact('sections', 'type', 'search'));
     }
 
     /**
@@ -79,9 +80,9 @@ class SectionController extends Controller
 
         $menu_id = $request->menu_id;
         if ($menu_id) {
-            $menu = Menu::find($menu_id);            
+            $menu = Menu::find($menu_id);
             $menu->update(['url' => "show/$section->id", 'section_id' => $section->id]);
-            return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم إضافة بند للقائمة  " . $menu->parentMenu->title_ar ." بنجاح");
+            return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم إضافة بند للقائمة  " . $menu->parentMenu->title_ar . " بنجاح");
         }
         return to_route('dashboard.sections.index', ['type' => $validated['type']])->with('success', "تم إضافة بيانات" . __("helal.section-types.$validated[type].singular")  .  "بنجاح");
     }
@@ -121,13 +122,16 @@ class SectionController extends Controller
         $type = $section['type'];
 
         if ($request->hasFile('image_id')) {
-            if ($section->image)
-                Storage::disk('public')->delete($section->image->name);
-
+            $image_id = $section->image_id;
             $validated['image_id'] = saveImg($type, $request->file('image_id'));
         }
-
+        
         $section->update($validated);
+
+        if ($request->hasFile('image_id') && $image_id) {
+            Storage::disk('public')->delete($section->image->name);
+            Image::find($image_id)->delete();
+        }
 
         if ($request->keywords) {
             $section->Keywords()->sync($validated['keywords']);
@@ -135,7 +139,7 @@ class SectionController extends Controller
 
         $menu_id = $request->menu_id;
         if ($menu_id) {
-            $menu = Menu::find($menu_id);                        
+            $menu = Menu::find($menu_id);
             return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تمت تعديل بند القائمة  $menu->title_ar بنجاح");
         }
         return to_route('dashboard.sections.index', ['type' => $type])->with('success', "تمت حفظ بيانات ال" .  __("helal.section-types.$type.singular") . " بنجاح");
@@ -146,12 +150,17 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        if ($section->image)
-            Storage::disk('public')->delete($section->image->name);
+        $image_id = $section->image_id;
 
         $title = $section->title_ar;
         $type = $section->type;
         $section->delete();
+
+        if ($image_id) {
+            Storage::disk('public')->delete($section->image->name);
+            Image::find($image_id)->delete();
+        }
+
         return back()->with('success', "تم محي $type ذات عنوان: $title بنجاح ");
     }
 }

@@ -20,7 +20,7 @@ return [
     'do' => 'What We Do',
     'martyer' => 'SARC Memorial',
     'latest-news' => 'Latest News',
-    'human-stories' => 'human stories',
+    'human-stories' => 'Humanitarian stories',
     'latest-campaign' => 'Latest campaign',    
     'choose-province' => 'Select Province and see the latest news',
 
@@ -42,11 +42,13 @@ return [
     
     'choose-type' => 'Choose Category',
 
+    'sarc-news' => 'SARC News',
+
     // 'about_us' => 'About Us',
     // 'center' => ' Media Center',
     // 'media' => 'News and Media',
-
-
+    'sarc-news' => 'SARC News',
+    
         /** ================================================ */
     /** for dashboard (in arabic only) section types */
     'section-types' => [

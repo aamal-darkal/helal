@@ -5,7 +5,7 @@
         <div class="view-cover">
             <img class="w-100" src="{{ asset(getImgUrl($section->image_id)) }}">
         </div>
-        <h1>{{ $section->title }}</h1>
+        <h2>{{ $section->title }}</h2>
         <div>
             {!! $section->content !!}
         </div>

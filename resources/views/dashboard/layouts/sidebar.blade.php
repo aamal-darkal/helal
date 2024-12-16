@@ -54,6 +54,15 @@
                  </li>
              @endif             
              
+             @if (Route::has('dashboard.fileUploads.index'))
+                 <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'fileUploads')) active @endif">
+                     <a class="sidebar-link" href="{{ route('dashboard.fileUploads.index') }}">
+                         <i class="align-middle" data-feather="file"></i>
+                         <span class="align-middle">تحميل الملفات</span>
+                     </a>
+                 </li>
+             @endif             
+             
              @if (Route::has('dashboard.provinces.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'provinces')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.provinces.index') }}">

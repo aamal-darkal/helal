@@ -18,22 +18,36 @@ class HomeController extends Controller
     /**
      * 
      */
+
+    private function getProvinces()
+    {
+        $locale =   app()->getLocale();
+
+        $provinces = Province::select("id", "name_en","name_$locale as name")->get();
+        foreach ($provinces as $province)
+            $cities[$province->name_en] = ['id' => $province['id'], 'name' => $province['name']];
+        return $cities;
+    }
+
     public function index(Request $request)
     {
         $locale = app()->getLocale();
-        
+
         $martyers = Martyer::select('DOB',  "name_$locale as name", 'province_id')
             ->with(['province' => function ($q) use ($locale) {
                 return $q->select('id', "name_$locale as name");
             }])->get();
-        
+
+        $provinces = $this->getProvinces();
         /** 400 can be replace from settings */
         $news = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'news')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
-        $stories = Section::select('id', 'date', 'image_id', 'summary_length',"title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'story')->where('hidden', 0)->orderBy('date' , 'desc')->limit(6)->get();
-        $campaign = Section::select( 'id', 'date', 'image_id', 'summary_length',"title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'campaign')->where('hidden', 0)->orderBy('date' , 'desc')->first();            
+        $stories = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'story')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
+        $campaign = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'campaign')->where('hidden', 0)->orderBy('date', 'desc')->first();
 
-        return view('home.index', 
-        compact('martyers',   'news', 'stories',  'campaign', ));
+        return view(
+            'home.index',
+            compact('martyers',   'news', 'stories',  'campaign', 'provinces')
+        );
     }
     /**
      * 
@@ -46,7 +60,7 @@ class HomeController extends Controller
         $content = "content_$locale";
         $section->title = $section->$title;
         $section->content = $section->$content;
-        
+
         return view('home.show', compact('section'));
     }
 
@@ -54,9 +68,9 @@ class HomeController extends Controller
     function search(Request $request)
     {
         $locale = app()->getLocale();
-        
+
         $type = $request->type;
-       
+
         $doing =  $request->doing;
         $search = $request->search;
         $province = $request->province;
@@ -68,7 +82,7 @@ class HomeController extends Controller
          * & as string [$keywordWords] to be compared with section's titles  */
         $keywordIds = [];
         $keywordWords = "";
-        if ($doing) {            
+        if ($doing) {
             $doing = Doing::find($doing);
             if ($doing && $doing->Keywords()->count()) {
                 /** get keyword Ids as array */
@@ -81,15 +95,15 @@ class HomeController extends Controller
                 $keywordWords = "('-')";
         }
 
-        $results = Section::select( "id" ,"title_$locale as title",  "content_$locale as content" , "summary_length" , "image_id" , "type")
-        /** for certain province */
+        $results = Section::select("id", "title_$locale as title",  "content_$locale as content", "summary_length", "image_id", "type")
+            /** for certain province */
             ->when($province, function ($q) use ($province) {
                 return $q->Where('province_id', $province);
             })
-        /** for certain type */
+            /** for certain type */
             ->when($type, function ($q) use ($type) {
                 return $q->Where('type', $type);
-            })        
+            })
             /** for free search */
             ->when($search, function ($q) use ($search) {
                 return  $q->where('title_ar', 'like', "%$search%")
@@ -108,19 +122,15 @@ class HomeController extends Controller
                         ->orWhereRaw("title_ar REGEXP $keywordWords")
                         ->orwhereRaw("title_en REGEXP $keywordWords");
                 }
-            )            
-            ->orderBy('date' , 'desc')->paginate(5)->withQueryString();
-            // return $results;
+            )
+            ->orderBy('date', 'desc')->paginate(5)->withQueryString();
+        // return $results;
         $title = "title_$locale";
         $name = "name_$locale";
-        
-        $key = $province ? __('helal.section-types.news.plural')  . " " . Province::find($province)->$name : 
-        ($type ?   __("helal.section-types.$type.plural") :         
-        ($search ? $search :         
-        ($doing ? $doing->$title : 
-        __('helal.organization-news')  )));
-            // return $results;
-        return view('home.search', compact('results', 'key' , 'type' ));
+
+        $key = $province ? __('helal.section-types.news.plural')  . " " . Province::find($province)->$name : ($type ?   __("helal.section-types.$type.plural") : ($search ? $search : ($doing ? $doing->$title :
+                        __('helal.organization-news'))));
+        // return $results;
+        return view('home.search', compact('results', 'key', 'type'));
     }
-   
 }

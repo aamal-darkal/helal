@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;    
+use App\Models\Menu;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,6 @@ class ProvinceController extends Controller
      */
     public function create()
     {
-
         return view('dashboard.provinces.create');
     }
 
@@ -39,14 +39,24 @@ class ProvinceController extends Controller
         ]);
         $validated['created_by'] = Auth::user()->id;
 
-        Province::create($validated);
+        $province = Province::create($validated);
+
+        $menu = Menu::create([
+            'title_ar' =>  $validated['name_ar'],
+            'title_en' => $validated['name_en'],
+            'url' => "search?province=$province->id",
+            'order' => menu::where('menu_id', env('MENU_PROVINCE'))->max('order') + 1,
+            'permit' => 'none',            
+            'menu_id' => env('MENU_PROVINCE'),
+            'created_by' => $validated['created_by'],
+        ]);
+        $province->menu_id = $menu->id;
+        $province->save();
         return to_route('dashboard.provinces.index')->with('success', "تم إضافة المحافظة بنجاح");
     }
 
-
     public function edit(Province $province)
     {
-
         return view('dashboard.provinces.edit',  compact('province'));
     }
 
@@ -63,8 +73,14 @@ class ProvinceController extends Controller
             'phone' => 'nullable|digits:10'
         ]);
         $validated['updated_by'] = Auth::user()->id;
+    
         $province->update($validated);
-
+        
+        $province->menu()->update([
+            'title_ar' =>  $validated['name_ar'],
+            'title_en' => $validated['name_en'],
+            'updated_by' => $validated['updated_by'],
+        ]);
 
         return to_route('dashboard.provinces.index')->with('success', "تم تعديل المحافظة بنجاح");
     }
@@ -81,8 +97,10 @@ class ProvinceController extends Controller
         $sectionsCount = $province->sections->count();
         if ($sectionsCount)
             return back()->with('error', " لا يمكن محي المحافظة لوجود $sectionsCount عنصر مرتبطة به");
-        $name = $province->name_ar; 
+        $name = $province->name_ar;
+        $menu_id = $province->menu_id;
         $province->delete();
+        Menu::find($menu_id)->delete();
         
         return back()->with('success', " تم محي المحافظة $name بنجاح");
     }

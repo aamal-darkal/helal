@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name_en' ,30)->nullable();
             $table->string('location_ar')->nullable();
             $table->string('location_en')->nullable();
-            $table->char('phone' ,10);
+            $table->char('phone' ,10)->nullable();
             $table->foreignId('menu_id')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();

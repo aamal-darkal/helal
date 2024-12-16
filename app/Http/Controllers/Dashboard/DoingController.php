@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DoingController extends Controller
-
-{
+{    
     public function index(Request $request)
     {
         $doings = Doing::get();
@@ -46,13 +45,18 @@ class DoingController extends Controller
         if ($request->keywords)
             $doing->Keywords()->attach($validated['keywords']);
 
-        // if ($request->menu) {
-        //     Menu::create([
-        //         'title_ar' =>  $validated['title_ar'],
-        //         'title_en' => $validated['title_en'],
-        //         'url' => "search?doing=$doing->id",
-        //     ]);
-        // }
+        $menu = Menu::create([
+            'title_ar' =>  $validated['title_ar'],
+            'title_en' => $validated['title_en'],
+            'url' => "search?doing=$doing->id",
+            'order' => menu::where('menu_id' , env('MENU_DOING'))->max('order') + 1,
+            'permit' => 'none',
+            'menu_id' => env('MENU_DOING') ,
+            'created_by' => $validated['created_by'],
+        ]);
+        $doing->menu_id = $menu->id;
+        $doing->save();
+
         return to_route('dashboard.doings.index')->with('success', "تم إضافة سجل أعمالنا بنجاح");
     }
 
@@ -76,9 +80,16 @@ class DoingController extends Controller
             'icon' => 'nullable|string',
             'keywords' => 'nullable|array',
         ]);
-        $validated['update_by'] = Auth::user()->id;
+        $validated['updated_by'] = Auth::user()->id;
 
         $doing->update($validated);
+
+
+        $doing->menu()->update([
+            'title_ar' =>  $validated['title_ar'],
+            'title_en' => $validated['title_en'],
+            'updated_by' => $validated['updated_by'],
+        ]);
 
         if ($request->keywords)
             $doing->Keywords()->sync($validated['keywords']);
@@ -92,7 +103,9 @@ class DoingController extends Controller
     {
 
         $title = $doing->title;
+        $menu_id = $doing->menu_id;
         $doing->delete();
+        Menu::find($menu_id)->delete();
 
         return back()->with('success', " تم محي سجل أعمالنا: $title بنجاح");
     }

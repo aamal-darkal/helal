@@ -14,4 +14,8 @@ class Doing extends Model
     {
         return $this->belongsToMany(Keyword::class);
     }
+
+    function menu(){
+        return $this->belongsTo(Menu::class);
+    }
 }

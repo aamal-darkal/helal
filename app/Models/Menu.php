@@ -18,4 +18,11 @@ class Menu extends Model
         return $this->belongsTo(Menu::class , 'menu_id' );
     }
 
+    function doing(){
+        return $this->hasOne(Doing::class);
+    }
+    function province(){
+        return $this->hasOne(Province::class);
+    }
+
 }

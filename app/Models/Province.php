@@ -14,8 +14,13 @@ class Province extends Model
     function sections(){
         return $this->hasMany(Section::class);
     }
+    
     function users(){
         return $this->hasMany(User::class);
     }
-
+    
+    function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
 }

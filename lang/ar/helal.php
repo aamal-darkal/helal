@@ -43,7 +43,7 @@ return [
 
     'choose-type' => 'اختر تصنيف',
 
-
+    'sarc-news' => 'أخبار المنظمة',
 
     // 'center' => ' Media Center',
     // 'media' => 'News and Media',

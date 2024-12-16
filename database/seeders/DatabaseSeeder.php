@@ -16,10 +16,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SettingSeeder::class);
         $this->call(MenuSeeder::class);
-        $this->call(ProvinceSeeder::class);
         $this->call(DoingSeeder::class);// with keywords
+       
+        /** province & doing related to menu */
+        $this->call(ProvinceSeeder::class);
         $this->call(MartyerSeeder::class);
-        $this->call(UserSeeder::class);
-        
+       
+        $this->call(UserSeeder::class);    
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
+use App\Models\Doing;
 use App\Models\Image;
 use App\Models\Keyword;
 use App\Models\Menu;
@@ -48,11 +49,11 @@ class SectionController extends Controller
         $menu = $request->menu;
         if ($menu) $menu = Menu::find($menu);
         $provinces = Province::select('id', 'name_ar as name')->get();
-        $keywords = Keyword::select('id', DB::raw("concat(word_en , ' - ' , word_ar) as name"))->get();
+        $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
 
         return view(
             'dashboard.sections.create',
-            compact('type', 'provinces', 'keywords', 'menu')
+            compact('type', 'provinces', 'doings', 'menu')
         );
     }
 
@@ -75,8 +76,8 @@ class SectionController extends Controller
         }
 
         $section = Section::create($validated);
-        if ($request->keywords)
-            $section->Keywords()->attach($validated['keywords']);
+        if ($request->doings)
+            $section->doings()->attach($validated['doings']);
 
         $menu_id = $request->menu_id;
         if ($menu_id) {
@@ -105,10 +106,10 @@ class SectionController extends Controller
             $menu = Menu::find($menu);
         $type = $section->type;
         $provinces = Province::select('id', 'name_ar as name')->get();
-        $keywords = Keyword::select('id', DB::raw("concat(word_en , ' - ' , word_ar) as name"))->get();
-        $currKeywords = $section->keywords->modelKeys();
+        $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
+        $currDoings = $section->doings->modelKeys();
 
-        return view('dashboard.sections.edit', compact('type', 'provinces', 'keywords', 'currKeywords', 'section', 'menu'));
+        return view('dashboard.sections.edit', compact('type', 'provinces', 'doings', 'currDoings', 'section', 'menu'));
     }
 
     /**
@@ -127,14 +128,15 @@ class SectionController extends Controller
         }
         
         $section->update($validated);
-
+        
+        /** delete image record from images table with relted file */
         if ($request->hasFile('image_id') && $image_id) {
             Storage::disk('public')->delete($section->image->name);
             Image::find($image_id)->delete();
         }
 
-        if ($request->keywords) {
-            $section->Keywords()->sync($validated['keywords']);
+        if ($request->doings) {
+            $section->doings()->sync($validated['doings']);
         }
 
         $menu_id = $request->menu_id;

@@ -16,7 +16,7 @@
                 <th> # </th>
                 <th>  الاسم بالعربي</th>
                 <th> الاسم بالإنكليزي</th>
-                <th> تاريخ الولادة </th>
+                <th> تاريخ الاستشهاد </th>
                 <th> المحافظة بالعربي </th>
                 <th> المحافظة بالإنكليزي </th>
                 <th> أوامر </th>
@@ -28,7 +28,7 @@
                     <td> {{ $martyer->id }}</td>
                     <td> {{ $martyer->name_ar }}</td>
                     <td> {{ $martyer->name_en }}</td>
-                    <td> {{ $martyer->DOB }}</td>
+                    <td> {{ $martyer->DOD }}</td>
                     <td> {{ $martyer->city_ar }}</td>
                     <td> {{ $martyer->city_en }}</td>
 

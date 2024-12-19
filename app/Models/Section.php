@@ -15,8 +15,8 @@ class Section extends Model
         return $this->belongsTo(Image::class);
     }
     
-    function Keywords(){
-        return $this->belongsToMany(Keyword::class);
+    function doings(){
+        return $this->belongsToMany(Doing::class);
     }
 
     function province(){

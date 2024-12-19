@@ -393,13 +393,15 @@ class DoingSeeder extends Seeder
 			['id' => 3, 'word_en' => 'emergency', 'word_ar' => 'طارئ'],
 			['id' => 4, 'word_en' => 'community', 'word_ar' => 'مجتمعي'],
 			['id' => 5, 'word_en' => 'Protection', 'word_ar' => 'حماية'],
-			['id' => 6, 'word_en' => 'water and rehabilitation', 'word_ar' => ' مياه وإعادة تأهيل'],
-			['id' => 7, 'word_en' => 'cash', 'word_ar' => 'نقدي'],
-			['id' => 8, 'word_en' => 'vouchers', 'word_ar' => 'قسائم'],
-			['id' => 9, 'word_en' => 'livelihoods', 'word_ar' => 'معيشي'],
-			['id' => 10, 'word_en' => 'risk', 'word_ar' => 'مخاطر'],
-			['id' => 11, 'word_en' => 'awareness', 'word_ar' => 'توعية'],
-			['id' => 12, 'word_en' => 'humanitarian support', 'word_ar' => 'دعم إنساني'],
+			['id' => 6, 'word_en' => 'water', 'word_ar' => 'مياه'],
+			['id' => 7, 'word_en' => 'rehabilitation', 'word_ar' => 'إعادة تأهيل'],
+			['id' => 8, 'word_en' => 'cash', 'word_ar' => 'نقدي'],
+			['id' => 9, 'word_en' => 'vouchers', 'word_ar' => 'قسائم'],
+			['id' => 10, 'word_en' => 'livelihoods', 'word_ar' => 'معيشي'],
+			['id' => 11, 'word_en' => 'risk', 'word_ar' => 'مخاطر'],
+			['id' => 12, 'word_en' => 'awareness', 'word_ar' => 'توعية'],
+			['id' => 13, 'word_en' => 'support', 'word_ar' => 'دعم'],
+			['id' => 14, 'word_en' => 'humanitarian', 'word_ar' => 'إنساني'],
 		];
 
 		foreach ($doMenus as $key => $doMenu) {
@@ -414,10 +416,10 @@ class DoingSeeder extends Seeder
 		Doing::find(2)->keywords()->attach(2);
 		Doing::find(3)->keywords()->attach(3);
 		Doing::find(4)->keywords()->attach([4,5]);
-		Doing::find(5)->keywords()->attach(6);
-		Doing::find(6)->keywords()->attach([7,8]);
-		Doing::find(7)->keywords()->attach(9);
-		Doing::find(8)->keywords()->attach([10,11]);
-		Doing::find(9)->keywords()->attach(12);		
+		Doing::find(5)->keywords()->attach([6,7]);
+		Doing::find(6)->keywords()->attach([8 , 9]);
+		Doing::find(7)->keywords()->attach(10);
+		Doing::find(8)->keywords()->attach([11,12]);
+		Doing::find(9)->keywords()->attach([13 , 14]);		
     }
 }

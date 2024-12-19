@@ -8,7 +8,7 @@
 
         <x-input name="name_ar" label="الاسم بالعربي" required maxlength="50"  />
         <x-input name="name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
-        <x-input name="DOB" type="number" label="مواليد/عام" min="1901" max="2200" />
+        <x-input name="DOD" type="number" label="سنة الاستشهاد" min="1901" max="2200" />
 
         <x-select-create name="province_id" label="المحافظة"  :options=$provinces />
 

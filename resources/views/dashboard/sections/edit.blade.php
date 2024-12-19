@@ -52,8 +52,8 @@
             <img class="border border-secondary" id="img-review" src="{{ getImgUrl($section->image_id) }}" width="300">
         </div>
 
-        <x-select-edit-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords
-            :currKeywords=$currKeywords />
+        <x-select-edit-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings
+            :currKeywords=$currDoings />
 
         <x-select-edit name="province_id" label="المحافظة" :dbValue="$section->province_id" :options=$provinces />
 
@@ -92,7 +92,7 @@
         var editor_ar = new RichTextEditor("#content_ar");
 
         $(document).ready(function() {
-            $("#keywords").chosen();
+            $("#doings").chosen();
             fillRich();
         })
 
@@ -107,5 +107,5 @@
         }
     </script>
 
-    @include('dashboard.js-components.showfile')
+    @include('dashboard.js-components.showUploadedfile')
 @endpush

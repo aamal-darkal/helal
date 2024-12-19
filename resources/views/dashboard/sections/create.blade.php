@@ -51,7 +51,7 @@
             <img class="border border-secondary" id="img-review" src="{{ asset('storage/no-image.png') }}" width="300">
         </div>
 
-        <x-select-create-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords />
+        <x-select-create-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings />
 
         <x-select-create name="province_id" label="المحافظة" :options=$provinces />
 
@@ -90,7 +90,7 @@
         var editor_ar = new RichTextEditor("#content_ar");
 
         $(document).ready(function() {
-            $("#keywords").chosen();
+            $("#doings").chosen();
             fillRich();
         })
 
@@ -105,5 +105,5 @@
         }
     </script>
 
-    @include('dashboard.js-components.showfile')
+    @include('dashboard.js-components.showUploadedfile')
 @endpush

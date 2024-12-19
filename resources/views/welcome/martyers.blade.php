@@ -9,7 +9,7 @@
                     <div class="swiper-slide">
                         <div class="single-martyr">
                             <h4>{{ $martyer->name }}</h4>
-                            <h5>{{ $martyer->DOB }}</h5>
+                            <h5>{{ $martyer->DOD }}</h5>
                             <p>{{ $martyer->province->name }}</p>
                         </div>
                     </div>

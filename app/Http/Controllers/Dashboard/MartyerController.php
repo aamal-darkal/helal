@@ -41,7 +41,7 @@ class MartyerController extends Controller
         $validated = $request->validate([
             'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',            
-            'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
+            'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
             'province_id' => 'exists:province,id',
         ]);
         $validated['created_by'] = Auth::user()->id;
@@ -69,7 +69,7 @@ class MartyerController extends Controller
         $validated = $request->validate([
             'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',
-            'DOB' => 'nullable|digits:4|integer|min:1901|max:2200',
+            'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
             'province_id' => 'exists:province,id',
         ]);
         $validated['updated_by'] = Auth::user()->id;

@@ -6,7 +6,7 @@
                 <div class="doing-list-item col-4">
                 <a href="{{ route('home.search' , ['doing' => $doing ]) }}" data-aos="fade-up">
                     <div>{!! $doing->icon !!}</div>
-                    <h3>{{ $doing->title }}</h3>
+                    <h4>{{ $doing->title }}</h4>
                 </a>
             </div>    
             @endforeach

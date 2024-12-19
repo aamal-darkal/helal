@@ -35,5 +35,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $keywords->links() }}
 
 @endsection

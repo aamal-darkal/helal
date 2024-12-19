@@ -10,7 +10,8 @@ class Keyword extends Model
     use HasFactory;
     public $fillable = ['word_ar' , 'word_en' , 'created_by'];
 
-    function sections(){
-        return $this->belongsToMany(section::class);
+    function doings()
+    {
+        return $this->belongsToMany(Doing::class);
     }
 }

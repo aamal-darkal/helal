@@ -28,7 +28,7 @@ class KeywordController extends Controller
      */
     public function create()
     {
-        return view('dashboard.Keywords.create');        
+        return view('dashboard.keywords.create');        
     }
 
     /**

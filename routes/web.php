@@ -12,6 +12,8 @@ use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\HomeController as DashboardHomeController;
+use App\Models\Doing;
+use App\Models\Keyword;
 use App\Models\Section;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +50,6 @@ Route::get('/search', [HomeController::class,  'search'])->name('home.search');
 Route::get('artisan/{cmd}', function ($cmd) {
     Artisan::call($cmd);
 });
-Route::get('sub', function () {
-    return
-        Section::select('id', 'date', 'image_id', 'summary_length', "title_en as title", DB::raw("substr(REGEXP_REPLACE(content_en, '<[^>]*>+', '') , 1 ,200) as content"))->where('type', 'news')->where('hidden', 0)->orderBy('date', 'desc')->get();
+Route::get('test', function () {
+    return Keyword::find(14)->doings()->with('sections')->get();        
 });

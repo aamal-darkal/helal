@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($components as $setting)
+                    @foreach ($components as $k => $setting)
                         <tr>
                             <td>{{ $setting->key_ar }}</td>
                             <form action="{{ route('dashboard.settings.update', $setting) }}" method="POST"
@@ -25,8 +25,8 @@
                                     @if ($setting->isFile)
                                         <div class="border border-secondary p-2">
                                             <input type="file" name="value_en" accept="image/*" disabled
-                                                onchange="reviewImg(this)" required>
-                                            <img id="imgPreview" src="{{ getImgUrl($setting->value_en) }}" alt=""
+                                                onchange="showFile(this , 'img-review-{{ $k }}')" required>
+                                            <img id="img-review-{{ $k }}" src="{{ getImgUrl($setting->value_en) }}" alt=""
                                                 width="100%">
                                         </div>
                                     @else
@@ -50,6 +50,8 @@
 
         </div>
         <br>
+    @endsection
+    @push('js')
         <script>
             function openEdit(btn) {
                 btn.classList.toggle('btn-secondary')
@@ -84,20 +86,9 @@
                 btn.classList.add('invisible')
                 for (let element of btn.parentNode.previousElementSibling.children[0].children)
                     element.disabled = true
-                
+
                 btn.previousElementSibling.innerHTML = "تعديل"
             }
-
-            function reviewImg(inp) {
-                const file = inp.files[0];
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function(event) {
-                        inp.nextElementSibling.src = event.target.result;
-                    }
-                    reader.readAsDataURL(file);
-                }
-            }
         </script>
-        {{-- @endpush --}}
-    @endsection
+        @include('dashboard.js-components.showUploadedfile')
+    @endpush

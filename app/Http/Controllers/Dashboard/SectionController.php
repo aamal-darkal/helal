@@ -66,7 +66,7 @@ class SectionController extends Controller
         $validated['created_by'] = Auth::user()->id;
         if (
             ! $request->has('type') ||
-            !in_array($request->type, ['article', 'campaign', 'news', 'story', 'vacancy', 'page'])
+            !in_array($request->type, (config('app.section-type')))
         )
             return back()->with('error', 'يوجد خطأ في تحديد نوع المقطع المضاف');
         else $validated['type'] = $request->type;
@@ -85,7 +85,7 @@ class SectionController extends Controller
             $menu->update(['url' => "show/$section->id", 'section_id' => $section->id]);
             return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم إضافة بند للقائمة  " . $menu->parentMenu->title_ar . " بنجاح");
         }
-        return to_route('dashboard.sections.index', ['type' => $validated['type']])->with('success', "تم إضافة بيانات" . __("helal.section-types.$validated[type].singular")  .  "بنجاح");
+        return to_route('dashboard.sections.index', ['type' => $validated['type']])->with('success', "تم إضافة بيانات ال" . __("helal.section-types.$validated[type].singular")  .  " بنجاح");
     }
 
     /**
@@ -123,16 +123,16 @@ class SectionController extends Controller
         $type = $section['type'];
 
         if ($request->hasFile('image_id')) {
-            $image_id = $section->image_id;
-            $validated['image_id'] = saveImg($type, $request->file('image_id'));
+            $oldImage = Image::find($section->image_id);
+            $validated['image_id'] = saveImg($type, $request->file('image_id'));            
         }
         
         $section->update($validated);
         
-        /** delete image record from images table with relted file */
-        if ($request->hasFile('image_id') && $image_id) {
-            Storage::disk('public')->delete($section->image->name);
-            Image::find($image_id)->delete();
+        /** delete image record from images table with related file */
+        if ($oldImage) {
+            Storage::disk('public')->delete($oldImage->name);
+            $oldImage->delete();
         }
 
         if ($request->doings) {
@@ -152,17 +152,16 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        $image_id = $section->image_id;
-
+        $oldImage = Image::find($section->image_id);
         $title = $section->title_ar;
         $type = $section->type;
         $section->delete();
 
-        if ($image_id) {
-            Storage::disk('public')->delete($section->image->name);
-            Image::find($image_id)->delete();
+        if ($oldImage) {
+            Storage::disk('public')->delete($oldImage->name);
+            $oldImage->delete();
         }
 
-        return back()->with('success', "تم محي $type ذات عنوان: $title بنجاح ");
+        return back()->with('success', "تم محي $type ذات العنوان: $title بنجاح ");
     }
 }

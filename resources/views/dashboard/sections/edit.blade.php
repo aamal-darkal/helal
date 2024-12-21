@@ -48,7 +48,7 @@
         <x-checkbox name="hidden" label="مخفي" :dbValue="$section->hidden" />
 
         <div class="mb-3">
-            <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
+            <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" accept="image/*" onchange="showFile(this , 'img-review')" />
             <img class="border border-secondary" id="img-review" src="{{ getImgUrl($section->image_id) }}" width="300">
         </div>
 

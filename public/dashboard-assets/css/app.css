@@ -4,7 +4,11 @@
  * Copyright 2021 AdminKit
  * Licensed under MIT (https://github.com/adminkit/adminkit/blob/master/LICENSE)
  */
-:root {
+* {
+    direction: rtl;
+    font-family: Calibri;
+}
+ :root {
     --bs-blue: #3b7ddd;
     --bs-indigo: #0a0a0a;
     --bs-purple: #6f42c1;
@@ -15243,10 +15247,6 @@ body {
     line-height: 1;
 }
 
-* {
-    direction: rtl;
-    font-family: Calibri;
-}
 
 
 .table > :not(caption)>*>* {
@@ -15281,4 +15281,16 @@ body {
 
 .h-200px {
     height: 400px !important;
+}
+footer {
+    text-transform: capitalize;
+}
+.wrap-word{
+    word-break: break-all;
+    width: 200px;
+    direction:ltr;
+}
+
+rte-codebox > textarea{
+    direction: ltr !important;
 }

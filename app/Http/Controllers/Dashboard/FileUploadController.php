@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enum\FileType;
 use App\Http\Controllers\Controller;
 use App\Models\FileUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class FileUploadController extends Controller
 {
     public function index(Request $request)
     {
-        $fileUploads = FileUpload::get();
+        $fileUploads = FileUpload::with('createdBy:id,name')->get();
+        // return $fileUploads;
         return view('dashboard.fileUploads.index', compact('fileUploads'));
     }
 
@@ -20,10 +23,8 @@ class FileUploadController extends Controller
      */
     public function create()
     {
-        $fileTypes = [
-            ['id' => 1, 'name' => 'image'],
-            ['id' => 2, 'name' => 'pdf'],
-        ];
+        $fileTypes = FileType::getFileTypes();
+        
         return view('dashboard.fileUploads.create', compact('fileTypes'));
     }
 
@@ -33,27 +34,25 @@ class FileUploadController extends Controller
     public function store(Request $request)
     {
         $validated =  $request->validate([
-            'type' => 'required|string|in:image,pdf',
-            'description' => 'required|string|max:150',
-            'image_id' => 'required|file|max:2000',
+            'name' => 'required|string|max:50',
+            'type' => ['required' , 'string' , Rule::in(FileType::cases()) ],
+            'description' => 'required|string|max:200',
+            'file' => 'required|file|max:2000',
         ]);
         $validated['created_by'] = Auth::user()->id;
-
-        $validated['image_id'] = saveImg($request->type, $request->file('image_id'));
-
-        $fileUpload = FileUpload::create($validated);
-
-        $fileUpload->save();
-
-        return to_route('dashboard.fileUploads.index')->with('success', "تم إضافة سجل أعمالنا بنجاح");
+        $file = $request->file('file');
+        $validated['name'] .= "-" . time() . "." . $file->extension();
+        $file->storeAs("files/$validated[type]" , $validated['name']  , 'public');
+        FileUpload::create($validated);
+        $url = asset("storage/files/$validated[type]/$validated[name]");
+        return to_route('dashboard.fileUploads.index')->with('success', "تم تحميل الملف بنجاح على الرابط $url");
     }
 
 
     public function edit(FileUpload $fileUpload)
     {
-        // $currKeywords = $fileUpload->keywords->modelKeys();
-
-        // return view('dashboard.fileUploads.edit',  compact('fileUpload', 'keywords', 'currKeywords'));
+        $fileTypes = FileType::getFileTypes();
+        return view('dashboard.fileUploads.edit',  compact('fileUpload' , 'fileTypes'));
     }
 
     /**
@@ -61,26 +60,19 @@ class FileUploadController extends Controller
      */
     public function update(Request $request, FileUpload $fileUpload)
     {
-        // $validated =  $request->validate([
-        //     'title_ar' => "required|string|max:50|unique:fileUploads,title_ar,$fileUpload->id",
-        //     'title_en' => "nullable|string|max:50|unique:fileUploads,title_en,$fileUpload->id",
-        //     'icon' => 'nullable|string',
-        //     'keywords' => 'nullable|array',
-        // ]);
-        // $validated['updated_by'] = Auth::user()->id;
+        $validated =  $request->validate([
+            'name' => 'required|string|max:50',
+            'type' => ['required', 'string', Rule::in(FileType::getFileTypes())],
+            'description' => 'required|string|max:200',
+            'file' => 'required|file|max:2000',
+        ]);
+        $validated['updated_by'] = Auth::user()->id;
 
-        // $fileUpload->update($validated);
-
-
-        // $fileUpload->menu()->update([
-        //     'title_ar' =>  $validated['title_ar'],
-        //     'title_en' => $validated['title_en'],
-        //     'updated_by' => $validated['updated_by'],
-        // ]);
-
-        // if ($request->keywords)
-        //     $fileUpload->Keywords()->sync($validated['keywords']);
-        // return to_route('dashboard.fileUploads.index')->with('success', "تم تعديل سجل أعمالنا بنجاح");
+        $file = $request->file('file');
+        $validated['name'] .= "." . $file->extension();
+        $file->storeAs('files/$type', $validated['name'], 'public');
+        
+        $fileUpload->update($validated);
     }
 
     /**
@@ -89,11 +81,9 @@ class FileUploadController extends Controller
     public function destroy(FileUpload $fileUpload)
     {
 
-        // $title = $fileUpload->title;
-        // $menu_id = $fileUpload->menu_id;
-        // $fileUpload->delete();
-        // Menu::find($menu_id)->delete();
+        $name = $fileUpload->name;
+        $fileUpload->delete();
 
-        // return back()->with('success', " تم محي سجل أعمالنا: $title بنجاح");
+        return back()->with('success', " تم محي سجل أعمالنا: $name بنجاح");
     }
 }

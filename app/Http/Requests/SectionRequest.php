@@ -27,6 +27,7 @@ class SectionRequest extends FormRequest
             'content_ar' => 'required',
             'content_en' => 'required',
             'summary-length' => 'nullable|int',
+            'date' =>'nullable|date',
             'hidden' => "nullable|in:1,0",
             'image_id' => 'nullable|file|max:5000',
             'province_id' => 'nullable|exists:provinces,id',

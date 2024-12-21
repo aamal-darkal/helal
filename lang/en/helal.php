@@ -16,7 +16,8 @@ return [
     'notFound' => 'No Elements',
 
 
-     /** ************* welcome ****************/    
+    /** ************* welcome ****************/
+    'home' => 'Home',
     'do' => 'What We Do',
     'martyer' => 'SARC Memorial',
     'latest-news' => 'Latest News',

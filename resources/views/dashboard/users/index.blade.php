@@ -14,7 +14,7 @@
                 <th> الاسم </th>
                 <th> البريد الالكتروني </th>
                 <th> المحافظة </th>
-                <th> نوع الحساب </th>
+                <th> حالة الحساب </th>
                 <th> أوامر </th>
             </tr>
         </thead>
@@ -33,15 +33,15 @@
                         @else
                             <span class="text-success"><i data-feather="user-check"></i></span>
                         @endif
-                        <form action="{{ route('dashboard.users.index', ['state' => 'change-password']) }}"></form>
                     </td>
 
                     <td class="text-nowrap">
+
                         <a href="{{ route('dashboard.users.edit', $user) }}" class="btn btn-sm btn-outline-primary">
                             <i data-feather="edit"></i>
                         </a>
-                        <a href="{{ route('dashboard.users.index', ['state' => 'change-password']) }}">
-
+                        <a href="{{ route('dashboard.users.reset-password') }}">
+                            تصفير كلمة السر
                         </a>
 
                         {{-- <button type="button" class="btn btn btn-sm btn-outline-danger" data-bs-toggle="modal"

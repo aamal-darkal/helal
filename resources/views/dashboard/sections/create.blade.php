@@ -31,7 +31,7 @@
 
             <br>
             <label for="content_en" class="form-label"> بالانكليزي </label>
-            <div id="content_en" class="dir-ltr"></div>
+            <div id="content_en"></div>
             <textarea name="content_en" class="d-none">{{ old('content_en') }}</textarea>
             @error('content_en')
                 <div class="text-danger">
@@ -46,7 +46,7 @@
         <x-checkbox name="hidden" label="مخفي" />
         
         <div class="mb-3">
-            <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" onchange="showFile(this)" />
+            <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" accept="image/*" onchange="showFile(this , 'img-review')" />
 
             <img class="border border-secondary" id="img-review" src="{{ asset('storage/no-image.png') }}" width="300">
         </div>

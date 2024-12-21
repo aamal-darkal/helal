@@ -8,8 +8,8 @@
         @method('put')
 
         
-        <x-input name="name_ar" label="الاسم بالعربي" required maxlength="30"  :dbValue="$province->name_ar"/>
-        <x-input name="name_en" label="الاسم بالانكليزي " required maxlength="30" :dbValue="$province->name_en"/>
+        <x-input name="name_ar" label="الاسم بالعربي" required maxlength="30"  :dbValue="$province->name_ar" disabled/>
+        <x-input name="name_en" label="الاسم بالانكليزي " required maxlength="30" :dbValue="$province->name_en" disabled/>
         <x-input name="location_ar" label="العنوان بالعربي" maxlength="255"  :dbValue="$province->location_ar" />
         <x-input name="location_en" label="العنوان بالانكليزي" maxlength="255" :dbValue="$province->location_en"/>
         <x-input name="phone"  label="الهاتف" :dbValue="$province->phone" maxlength="10" minlength="10" pattern="[0-9]{10}" title="10 digits"/>        

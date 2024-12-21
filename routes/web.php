@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified', 'ar-lang'])
         Route::resource('keywords', KeywordController::class)->except('show', 'edit', 'update');
         Route::resource('martyers', MartyerController::class)->except('show');
         Route::resource('menus', MenuController::class);
-        Route::resource('provinces', ProvinceController::class)->except('show');
+        Route::resource('provinces', ProvinceController::class)->only('index' ,'edit' , 'update');
         Route::resource('users', UserController::class)->except('show', 'destroy');
         Route::post('users/reset-password', [UserController::class, 'changePassword'])->name('users.reset-password');
     });

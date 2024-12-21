@@ -7,7 +7,7 @@
         @csrf
         @method('put')
 
-        <x-input name="name_ar" :dbValue="$martyer->name" label="الاسم بالعربي" required maxlength="50"  />
+        <x-input name="name_ar" :dbValue="$martyer->name_ar" label="الاسم بالعربي" required maxlength="50"  />
         <x-input name="name_en" :dbValue="$martyer->name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
         <x-input name="DOD" :dbValue="$martyer->DOD" type="number" label="سنة الاستشهاد" min="1901" max="2200" />
 

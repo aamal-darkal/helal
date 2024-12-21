@@ -15,8 +15,8 @@ class ProvinceSeeder extends Seeder
     public function run(): void
     {
         /** create menu of province and its record */
-        $sarcNewsMenu =   ['title_en' => 'SARC News', 'title_ar' => 'أخبار المنظمة', 'url' => 'search?province=1', 'order' => 1,  'permit' => 'none', 'menu_id' => 4, 'section_id' => null];
-        $sarcNewsprovince =   ['name_en' => 'SARC News', 'name_ar' => 'المنظمة', 'location_ar' => '', 'location_en' => '', 'phone' => '', 'menu_id' => 22];
+        $sarcNewsMenu =   ['title_en' => 'sarc-new', 'title_ar' => 'أخبار المنظمة', 'url' => 'search?province=1', 'order' => 1,  'permit' => 'none', 'menu_id' => 4, 'section_id' => null];
+        $sarcNewsprovince =   ['name_en' => 'sarc-new', 'name_ar' => 'المنظمة', 'location_ar' => '', 'location_en' => '', 'phone' => '', 'menu_id' => 22];
 
         Menu::create($sarcNewsMenu)->province()->create($sarcNewsprovince);
 

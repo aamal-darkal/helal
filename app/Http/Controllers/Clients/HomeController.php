@@ -39,6 +39,7 @@ class HomeController extends Controller
             }])->get();
 
         $provinces = $this->getProvinces();
+        // return $provinces;
         /** 400 can be replace from settings */
         $news = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'news')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
         $stories = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'story')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();

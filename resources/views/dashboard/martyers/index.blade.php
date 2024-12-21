@@ -10,15 +10,14 @@
         <input type="text" class="form-control" name="search">
         <button class="btn btn-secondary">بحث</button>
     </form>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped text-center">
         <thead class="table-secondary">
             <tr>
                 <th> # </th>
                 <th>  الاسم بالعربي</th>
                 <th> الاسم بالإنكليزي</th>
                 <th> تاريخ الاستشهاد </th>
-                <th> المحافظة بالعربي </th>
-                <th> المحافظة بالإنكليزي </th>
+                <th> المحافظة  </th>                
                 <th> أوامر </th>
             </tr>
         </thead>
@@ -29,8 +28,7 @@
                     <td> {{ $martyer->name_ar }}</td>
                     <td> {{ $martyer->name_en }}</td>
                     <td> {{ $martyer->DOD }}</td>
-                    <td> {{ $martyer->city_ar }}</td>
-                    <td> {{ $martyer->city_en }}</td>
+                    <td> {{ $martyer->province->name_ar }}</td>
 
                     <td class="text-nowrap">
                         <a href="{{ route('dashboard.martyers.edit', $martyer) }}" class="btn btn-outline-primary">

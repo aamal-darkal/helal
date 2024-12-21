@@ -16,7 +16,8 @@ class MartyerController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $martyers = Martyer::when($search, function ($q) use ($search) {
+        $martyers = Martyer::with('province')
+        ->when($search, function ($q) use ($search) {
                 return $q->where('title',  'like', "%$search%");
             })
             ->paginate(7);
@@ -42,7 +43,7 @@ class MartyerController extends Controller
             'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',            
             'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
-            'province_id' => 'exists:province,id',
+            'province_id' => 'exists:provinces,id',
         ]);
         $validated['created_by'] = Auth::user()->id;
 
@@ -70,7 +71,7 @@ class MartyerController extends Controller
             'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',
             'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
-            'province_id' => 'exists:province,id',
+            'province_id' => 'exists:provinces,id',
         ]);
         $validated['updated_by'] = Auth::user()->id;
         $martyer->update($validated);

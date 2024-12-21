@@ -9,7 +9,8 @@ class Martyer extends Model
 {
     /** @use HasFactory<\Database\Factories\MartyerFactory> */
     use HasFactory;
-    public $fillable = ['name_ar','name_en','DOD','city_ar' , 'city_en'];
+    
+    public $fillable = ['name_ar','name_en','DOD' , 'province_id'];
 
     function province(){
         return $this->belongsTo(Province::class);

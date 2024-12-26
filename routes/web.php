@@ -10,7 +10,7 @@ use App\Http\Controllers\Dashboard\KeywordController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\MartyerController;
 use App\Http\Controllers\Dashboard\MenuController;
-use App\Http\Controllers\dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\HomeController as DashboardHomeController;

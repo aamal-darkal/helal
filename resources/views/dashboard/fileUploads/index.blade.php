@@ -25,20 +25,19 @@
                     <td> {{ $fileUpload->id }}</td>
                     <td> {{ $fileUpload->name }}</td>
                     <td> {{ $fileUpload->type }}</td>
-                    <td class="wrap-word"> {{ asset("storage/files/$fileUpload->type/$fileUpload->name") }}</td>
+                    <td class="wrap-word"> {{ asset($fileUpload->url) }}</td>
                     <td> {{ $fileUpload->description }}</td>
-                    <td> {{ $fileUpload->createdBy->name }}</td>
                     <td>
-                        <embed src="{{ asset("storage/files/$fileUpload->type/$fileUpload->name") }}" frameborder="1"
+                        <embed src="{{ asset($fileUpload->url) }}" frameborder="1"
                             width="300" height="180">
                     </td>
                     <td class="text-nowrap">
-                        <a href="{{ route('dashboard.fileUploads.edit', $fileUpload) }}" class="btn btn-outline-primary">
+                        {{-- <a href="{{ route('dashboard.fileUploads.edit', $fileUpload) }}" class="btn btn-outline-primary">
                             <i data-feather="edit"></i>
-                        </a>
+                        </a> --}}
                         <form action="{{ route('dashboard.fileUploads.destroy', $fileUpload) }}" method="post"
                             class="d-inline-block"
-                            onsubmit="return confirm('سيتم محي   {{ $fileUpload->title }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $fileUpload->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

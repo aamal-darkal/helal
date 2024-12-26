@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
-@section('title', 'إضافة ملف')
+@section('title', 'تعديل ملف')
 @section('content')
-    <h4 class="title"> إضافة ملف</h4>
+    <h4 class="title"> تعديل ملف</h4>
     
     <form action="{{ route('dashboard.fileUploads.update' ,  $fileUpload) }}" method="post" enctype="multipart/form-data" >
         @csrf
@@ -11,7 +11,7 @@
         <x-input name="description" label="وصف الملف" required maxlength="200"  :dbValue="$fileUpload->description"/>
                
         <div class="mb-3">
-            <x-input name="file" label="الملف" type="file" onchange="showFile(this , 'file-review')" />
+            <x-input name="file" label="الملف" type="file" onchange="showFile(this , 'file-review')"/>
              <embed class="border border-secondary" id="file-review" src="{{ asset("storage/files/$fileUpload->type/$fileUpload->name") }}"
                 width="300">
         </div>

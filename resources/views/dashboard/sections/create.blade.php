@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة ' . __("helal.section-types.$type.singular"))
 @section('content')
     <h4 class="title"> إضافة {{ __("helal.section-types.$type.singular") }}
@@ -51,9 +51,9 @@
             <img class="border border-secondary" id="img-review" src="{{ asset('storage/no-image.png') }}" width="300">
         </div>
 
-        <x-select-create-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings />
+        <x-select-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings />
 
-        <x-select-create name="province_id" label="المحافظة" :options=$provinces />
+        <x-select name="province_id" label="المحافظة" :options=$provinces />
 
         <div class="mb-3">
             <label for="summary_length" class="form-label">عدد محارف الجزء المعروض في الصفحة الرئيسية</label>

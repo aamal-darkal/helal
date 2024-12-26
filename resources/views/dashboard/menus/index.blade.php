@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'القائمة الرئيسية')
 
 @section('content')
@@ -45,7 +45,7 @@
                             <i data-feather="edit"></i>
                         </button>
                         <form action="{{ route('dashboard.menus.destroy', $menu) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $menu->name }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $menu->name }}?' )">
                             @csrf
                             @method('delete')
                             <button @disabled($menu->permit != 'all')

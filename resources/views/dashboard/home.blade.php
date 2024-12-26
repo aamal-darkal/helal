@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إدارة')
 @section('content')
     <div class="card-wrapper container-fluid">

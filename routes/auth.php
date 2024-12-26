@@ -3,9 +3,13 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {    
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::middleware(['guest' , 'ar-lang'])->group(function () {    
+    Route::get('email-check', [AuthenticatedSessionController::class, 'emailCheckcreate'])->name('login');
+    Route::post('email-check', [AuthenticatedSessionController::class, 'emailCheckstore'])->name('emailCheck.store');
+    Route::get('login/{email}', [AuthenticatedSessionController::class, 'loginCreate'])->name('login.create');
+    Route::post('login', [AuthenticatedSessionController::class, 'loginStore'])->name('login.store');
+    Route::get('reset-password/{email}', [AuthenticatedSessionController::class, 'resetPasswordCreate'])->name('resetPassword.create');
+    Route::post('reset-password', [AuthenticatedSessionController::class, 'resetPasswordStore'])->name('resetPassword.store');
 });
 
 Route::middleware('auth')->group(function () {    

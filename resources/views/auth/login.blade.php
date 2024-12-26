@@ -1,44 +1,42 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div>
-        <img class="mx-auto"  src="{{ asset('assets/images/logo/logo.png') }}" alt="" width="200">
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+@include('dashboard.layouts.head')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<body dir="rtl">
+    <main>
+        <div class="form-container d-flex justify-content-center align-items-center">
+            <!-- Session Status -->
+            {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
+            
+            <div class="bg-white col-sm-10 col-md-8 col-lg-6 mx-auto border border-1 border-danger m-2 p-3">
+                <h4 class="text-center login-title">
+                    تسجيل دخول <br> إلى لوحة التحكم الخاصة
+                    بإدارة موقع <br> <span class="text-salmon"> الهلال الأحمر العربي السوري </span>
+                </h4>
+                <div class="m-sm-1">
+                    <div class="text-center">
+                        <img class="mx-auto" src="{{ asset('assets/images/logo/logo.png') }}" alt=""
+                            width="150">
+                    </div>                    
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <form method="POST" action="{{ route('login.store') }}">
+                        @csrf
+                        <p class="text-secondary pt-2">أدخل كلمة المرور الخاصة بالحساب {{ $email }}</p>
+                        <input class="email-display" type="hidden" name="email" value="{{ $email }}">
+                        <x-input autofocus type="password" name="password" label="كلمة المرور"  />
+                        <x-checkbox name="remember" type="checkbox" label="تذكرني" />
+
+                        <div class="text-center">                            
+                            <button class="btn btn-danger"> تسجيل دخول</button>
+                            <a class="btn btn-outline-danger" href="{{ route("login" , ['email' => $email]) }}">عودة</a>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
         </div>
+    </main>
+ 
+</body>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-grey-600 shadow-sm focus:ring-grey-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">           
-            <x-primary-button class="ms-3 bg-red-600" >
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

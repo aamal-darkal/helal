@@ -43,7 +43,7 @@ class KeywordController extends Controller
         $validated['created_by'] = Auth::user()->id;
         Keyword::create($validated);        
 
-        return to_route('dashboard.keywords.index')->with('success', "تمت إضافة الكلمة المفتاحية $validated[word_ar]($validated[word_en]) بنجاح");
+        return to_route('dashboard.keywords.index')->with('success', "تم إضافة الكلمة المفتاحية $validated[word_ar]($validated[word_en]) بنجاح");
     }
       
     /**

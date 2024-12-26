@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'ماذا نفعل')
 
 @section('content')
@@ -30,7 +30,7 @@
                             <i data-feather="edit"></i>
                         </a>
                         <form action="{{ route('dashboard.doings.destroy', $doing) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $doing->name }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $doing->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة ماذا نفعل')
 @section('content')
     <h4 class="title"> إضافة بند ماذا نفعل</h4>
@@ -9,7 +9,7 @@
         <x-input name="title_ar" label="العنوان بالعربي" required maxlength="50"  />
         <x-input name="title_en" label="العنوان بالانكليزي " required maxlength="50"/>
         <x-input name="icon"  label="الصورة" />
-        <x-select-create-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords />
+        <x-select-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords />
 
 
         <button class="btn btn-secondary">إضافة البند</button>

@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'تعديل ماذا نفعل')
 @section('content')
     <h4 class="title"> تعديل بند ماذا نفعل</h4>
@@ -11,7 +11,7 @@
         <x-input name="title_en" label="العنوان بالانكليزي " :dbValue="$doing->title_en" required maxlength="50"/>
         <x-input name="icon"  label="الصورة"  :dbValue="$doing->icon"/>
 
-        <x-select-edit-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords :currKeywords=$currKeywords />        
+        <x-select-multiple element_id="keywords" name="keywords[]" label="الكلمات المفتاحية" :options=$keywords :dbValues=$currKeywords />        
 
         <button class="btn btn-secondary">تعديل البند</button>
         <a href="{{ route('dashboard.doings.index') }}" class="btn btn-outline-secondary">عودة</a>

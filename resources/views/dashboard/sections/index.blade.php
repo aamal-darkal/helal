@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', __("helal.section-types.$type.plural"))
 @section('content')
     <div class="d-flex justify-content-between">
@@ -42,7 +42,7 @@
                         </a>
                         <form action="{{ route('dashboard.sections.destroy', $section) }}" method="post"
                             class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $section->title }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $section->title }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

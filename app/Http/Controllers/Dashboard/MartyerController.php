@@ -49,7 +49,7 @@ class MartyerController extends Controller
 
         Martyer::create($validated);        
 
-        return to_route('dashboard.martyers.index')->with('success', "تمت إضافة بيانات الشهيد $validated[name_ar] بنجاح");
+        return to_route('dashboard.martyers.index')->with('success', "تم إضافة بيانات الشهيد $validated[name_ar] بنجاح");
     }
     
 

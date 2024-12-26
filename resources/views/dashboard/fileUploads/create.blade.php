@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة ملف')
 @section('content')
     <h4 class="title"> إضافة ملف</h4>
@@ -6,7 +6,7 @@
     <form action="{{ route('dashboard.fileUploads.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <x-input name="name" label="اسم الملف" required maxlength="50" />
-        <x-select-create name="type" label="النوع" :options=$fileTypes />
+        <x-select name="type" label="النوع" :options=$fileTypes />
         <x-input name="description" label="وصف الملف" required maxlength="200" />
 
         <div class="mb-3">

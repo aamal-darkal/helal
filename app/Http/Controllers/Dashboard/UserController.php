@@ -14,10 +14,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $state = '';
-        if($request->has('state') && $request->state == 'change-password')
+        if ($request->has('state') && $request->state == 'change-password')
             $state = 'change-password';
         $users = User::with('province')->get();
-        return view('dashboard.users.index', compact('users' , 'state'));
+        return view('dashboard.users.index', compact('users', 'state'));
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $provinces = Province::select('id' , 'name_ar as name')->get();
+        $provinces = Province::select('id', 'name_ar as name')->get();
         return view('dashboard.users.create', compact('provinces'));
     }
 
@@ -37,10 +37,10 @@ class UserController extends Controller
         $validated =  $request->validate([
             'name' => 'required|string|max:50',
             'email' => 'required|string|max:50|unique:users',
-            'type' => 'required|in:admin,user,banned',
+            'type' => 'required|in:admin,user',
+            'status' => 'new',
             'province_id' => 'required|exists:provinces,id',
         ]);
-
         User::create($validated);
         return to_route('dashboard.users.index')->with('success', "تم إضافة الحساب بنجاح");
     }
@@ -61,7 +61,7 @@ class UserController extends Controller
         $validated =  $request->validate([
             'name' => 'required|string|max:50',
             'email' => "required|string|max:50|unique:users,email,$user->id",
-            'type' => 'required|in:admin,user,banned',
+            'type' => 'required|in:admin,user',
             'province_id' => 'required|exists:provinces,id',
         ]);
         $user->update($validated);
@@ -70,10 +70,19 @@ class UserController extends Controller
         return to_route('dashboard.users.index')->with('success', "تم تعديل الحساب بنجاح");
     }
     /** reset password */
-    function changePassword(User $user , Request $request){
-        $password = $request->password;
-        $user->password = Hash::make($password);
-        $user->save();
-        return back()->with('success', "تم تعديل كلمة المرور لحساب $user->name بنجاح");
+    function resetPassword(User $user)
+    {
+            $user->state = 'reset';
+            $user->save();
+        
+        return back()->with('success', "تم تصفير كلمة المرور لحساب $user->name بنجاح");
+    }
+    /** lock account */
+    function lock(User $user)
+    {
+            $user->state = 'banned';
+            $user->save();
+        
+        return back()->with('success', "تم قفل حساب $user->name بنجاح");
     }
 }

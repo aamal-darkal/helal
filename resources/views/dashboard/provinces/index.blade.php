@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'المحافظات')
 
 @section('content')
@@ -34,7 +34,7 @@
                             <i data-feather="edit"></i>
                         </a>
                         {{-- <form action="{{ route('dashboard.provinces.destroy', $province) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $province->name }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $province->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

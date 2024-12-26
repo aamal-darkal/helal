@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'الكلمات المفتاحية')
 
 @section('content')
@@ -25,7 +25,7 @@
 
                     <td class="text-nowrap">                        
                         <form action="{{ route('dashboard.keywords.destroy', $keyword) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $keyword->name }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $keyword->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

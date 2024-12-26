@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('content')
     <div class="padding">
         <div class="box-header text-primary d-flex justify-component-between">

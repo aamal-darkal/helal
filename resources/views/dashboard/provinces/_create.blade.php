@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة محافظة')
 @section('content')
     <h4 class="title"> إضافة محافظة</h4>

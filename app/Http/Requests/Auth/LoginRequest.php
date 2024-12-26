@@ -5,9 +5,12 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rules;
+
 
 class LoginRequest extends FormRequest
 {
@@ -29,16 +32,22 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'password_confirmation' => ['sometimes', Rules\Password::defaults(),'same:password'],
         ];
     }
-
+    public function messages(){
+        return [
+            'password_confirmation.same' => 'كلمتا المرور غير متطابقتين'
+        ];
+    }
+    
     /**
      * Attempt to authenticate the request's credentials.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function authenticate(): void
-    {
+    {        
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {

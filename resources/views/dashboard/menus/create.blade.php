@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة بند قائمة')
 @section('content')
 {{-- order + url --}}

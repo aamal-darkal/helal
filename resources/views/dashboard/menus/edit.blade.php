@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'تعديل ماذا نفعل')
 @section('content')
     <h4 class="title"> تعديل بند ماذا نفعل</h4>

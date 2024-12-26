@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'الشهداء')
 @section('content')
     <div class="d-flex justify-content-between">
@@ -35,7 +35,7 @@
                             <i data-feather="edit"></i>
                         </a>
                         <form action="{{ route('dashboard.martyers.destroy', $martyer) }}" method="post" class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $martyer->name }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $martyer->name }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

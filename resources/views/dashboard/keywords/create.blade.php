@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة كلمة مفتاحية')
 @section('content')
     <h4 class="title"> إضافة كلمة مفتاحية</h4>

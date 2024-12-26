@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'الملفات')
 
 @section('content')
@@ -38,7 +38,7 @@
                         </a>
                         <form action="{{ route('dashboard.fileUploads.destroy', $fileUpload) }}" method="post"
                             class="d-inline-block"
-                            onsubmit="return confirm('Are you sure you want to delete {{ $fileUpload->title }}?' )">
+                            onsubmit="return confirm('سيتم محي   {{ $fileUpload->title }}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

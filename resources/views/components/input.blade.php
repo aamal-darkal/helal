@@ -10,7 +10,7 @@
      {{ $attributes->merge( ['class'=> "form-control " . ($errors->has($name)? 'is-invalid':'')])}}>
     
         @error($name )
-        <div class="text-danger">
+        <div class="text-danger pt-1">
             {{ $message }}
         </div>
     @enderror

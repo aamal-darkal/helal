@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'تعديل ' . __("helal.section-types.$type.singular"))
 @section('content')
 
@@ -52,10 +52,10 @@
             <img class="border border-secondary" id="img-review" src="{{ getImgUrl($section->image_id) }}" width="300">
         </div>
 
-        <x-select-edit-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings
-            :currKeywords=$currDoings />
+        <x-select-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings
+            :dbValues="$currDoings" />
 
-        <x-select-edit name="province_id" label="المحافظة" :dbValue="$section->province_id" :options=$provinces />
+        <x-select name="province_id" label="المحافظة" :dbValue="$section->province_id" :options=$provinces />
 
 
         <div class="mb-3">

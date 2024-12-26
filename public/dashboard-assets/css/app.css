@@ -9,6 +9,7 @@
     font-family: Calibri;
 }
  :root {
+	--color-salmon-5: #df1f2c;
     --bs-blue: #3b7ddd;
     --bs-indigo: #0a0a0a;
     --bs-purple: #6f42c1;
@@ -15293,4 +15294,26 @@ footer {
 
 rte-codebox > textarea{
     direction: ltr !important;
+}
+
+.text-salmon {
+    color: var(--color-salmon-5);
+}
+.login-title{
+    line-height: 1.5;
+}
+.form-container{
+    min-height: 100vh;
+}
+
+#message{
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 600;
+    padding: .2em ;
+    /* width: 80%; */
+    margin: 10px auto;
+}
+.email-display{
+    
 }

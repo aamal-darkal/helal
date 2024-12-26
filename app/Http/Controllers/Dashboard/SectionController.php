@@ -121,7 +121,7 @@ class SectionController extends Controller
         $validated['updated_by'] = Auth::user()->id;
 
         $type = $section['type'];
-
+        $oldImage = null;
         if ($request->hasFile('image_id')) {
             $oldImage = Image::find($section->image_id);
             $validated['image_id'] = saveImg($type, $request->file('image_id'));            
@@ -142,9 +142,9 @@ class SectionController extends Controller
         $menu_id = $request->menu_id;
         if ($menu_id) {
             $menu = Menu::find($menu_id);
-            return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تمت تعديل بند القائمة  $menu->title_ar بنجاح");
+            return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
         }
-        return to_route('dashboard.sections.index', ['type' => $type])->with('success', "تمت حفظ بيانات ال" .  __("helal.section-types.$type.singular") . " بنجاح");
+        return to_route('dashboard.sections.index', ['type' => $type])->with('success', "تم حفظ بيانات ال" .  __("helal.section-types.$type.singular") . " بنجاح");
     }
 
     /**

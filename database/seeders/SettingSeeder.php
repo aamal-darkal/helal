@@ -44,7 +44,7 @@ class SettingSeeder extends Seeder
                 'key_en' => 'target',
                 'key_ar' => 'الهدف',
                 'value_en' => 'The Syrian Arab Red Crescent is an independent humanitarian organization of public utility, and it\'s permanent and continuous, and it has a legal entity and enjoys financial and administrative independence. ',
-                'value_ar' =>  'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمتع بالاستقلال المالي والإداري ذات شخصية اعتبارية .',
+                'value_ar' =>  'منظمة الهلال الأحمر العربي السوري هي منظمة إنسانية تتمع بالاستقلال المالي والإداري ذات شخصية اعتبارية .',
             ],
             [
                 'key_en' => 'about',

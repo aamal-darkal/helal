@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة حساب')
 @section('content')
     <h4 class="title"> تعديل حساب</h4>
@@ -14,11 +14,9 @@
             <input class="form-check-input" name="type" type="radio" value="user" id="user" @checked($user->type == 'user')>
             <label for="user"> user </label>
             <input class="form-check-input me-4 mb-3" name="type" type="radio" value="admin" id="admin" @checked($user->type == 'admin')>
-            <label for="banned"> admin </label>
-            <input class="form-check-input me-4 mb-3" name="type" type="radio" value="banned" id="banned" @checked($user->type == 'banned')>
-            <label for="admin" class="text-danger"> banned </label>
+            <label for="banned"> admin </label>            
         </div>
-        <x-select-edit name="province_id" :dbValue="$user->province_id" label="المحافظة" :options=$provinces  />
+        <x-select name="province_id" :dbValue="$user->province_id" label="المحافظة" :options=$provinces  />
 
 
         <button class="btn btn-secondary">تعديل حساب</button>

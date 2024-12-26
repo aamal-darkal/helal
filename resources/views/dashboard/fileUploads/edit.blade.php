@@ -1,12 +1,13 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.app')
 @section('title', 'إضافة ملف')
 @section('content')
     <h4 class="title"> إضافة ملف</h4>
     
     <form action="{{ route('dashboard.fileUploads.update' ,  $fileUpload) }}" method="post" enctype="multipart/form-data" >
         @csrf
+        @method('put')
         <x-input name="name" label="اسم الملف" required maxlength="50" :dbValue="$fileUpload->name" />
-        <x-select-edit name="type" label="النوع"  :options=$fileTypes :dbValue="$fileUpload->type"/>
+        <x-select name="type" label="النوع"  :options=$fileTypes :dbValue="$fileUpload->type"/>
         <x-input name="description" label="وصف الملف" required maxlength="200"  :dbValue="$fileUpload->description"/>
                
         <div class="mb-3">

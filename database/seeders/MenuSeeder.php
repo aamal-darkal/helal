@@ -28,6 +28,7 @@ class MenuSeeder extends Seeder
             ['id' => 7,'type' => 'page', 'title_ar' => 'التقارير السنوية', 'title_en' => 'Annual Reports', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
             ['id' => 8,'type' => 'page', 'title_ar' => 'إنفوغراف', 'title_en' => 'Infographics', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
             ['id' => 9,'type' => 'page', 'title_ar' => 'تطوع معنا', 'title_en' => 'Volunteer With Us', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 10,'type' => 'page', 'title_ar' => 'توعية وإرشادات', 'title_en' => 'Awareness and Guidance', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
         ];
         Section::insert($pages);
 
@@ -35,13 +36,13 @@ class MenuSeeder extends Seeder
          * ********************* Menues *********************
          *******************************************************/
         $mainMenus = [
-            ['id' => 1, 'title_en' => 'Home', 'title_ar' => 'الرئيسية', 'url' => '/', 'order' => 1, 'permit' => 'none'],
-            ['id' => 2, 'title_en' => 'Who We Are?', 'title_ar' => 'من نحن؟', 'url' => '', 'order' => 2, 'permit' => 'none'],
-            ['id' => env('MENU_DOING'), 'title_en' => 'What We Do?', 'title_ar' => 'ماذا نفعل؟', 'url' => '', 'order' => 3, 'permit' => 'none'],
-            ['id' => 4, 'title_en' => 'Our News', 'title_ar' => 'أخبارنا', 'url' => '', 'order' => 4, 'permit' => 'none'],
-            ['id' => 5, 'title_en' => 'Our Achievements', 'title_ar' => 'إنجازاتنا', 'url' => '', 'order' => 5, 'permit' => 'none'],
-            ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => '', 'order' => 6, 'permit' => 'none'],
-            ['id' => 7, 'title_en' => 'Join Us', 'title_ar' => 'انضم إلينا', 'url' => '', 'order' => 7, 'permit' => 'none'],
+            ['id' => 1, 'title_en' => 'Home', 'title_ar' => 'الرئيسية', 'url' => '/', 'order' => 1, 'permit' => 'none', 'section_id' => null],
+            ['id' => 2, 'title_en' => 'Who We Are?', 'title_ar' => 'من نحن؟', 'url' => '', 'order' => 2, 'permit' => 'none', 'section_id' => null],
+            ['id' => env('MENU_DOING'), 'title_en' => 'What We Do?', 'title_ar' => 'ماذا نفعل؟', 'url' => '', 'order' => 3, 'permit' => 'none' , 'section_id' => null],
+            ['id' => 4, 'title_en' => 'Our News', 'title_ar' => 'أخبارنا', 'url' => '', 'order' => 4, 'permit' => 'none' , 'section_id' => null],
+            ['id' => 5, 'title_en' => 'Our Achievements', 'title_ar' => 'إنجازاتنا', 'url' => '', 'order' => 5, 'permit' => 'none' , 'section_id' => null],
+            ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => 'show/10', 'order' => 6, 'permit' => 'update', 'section_id' => 10],
+            ['id' => 7, 'title_en' => 'Join Us', 'title_ar' => 'انضم إلينا', 'url' => '', 'order' => 7, 'permit' => 'none' , 'section_id' => null],
         ];
         Menu::insert($mainMenus);
 

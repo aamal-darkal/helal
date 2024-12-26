@@ -142,7 +142,11 @@ class SectionController extends Controller
         $menu_id = $request->menu_id;
         if ($menu_id) {
             $menu = Menu::find($menu_id);
-            return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
+            if ($menu->menu_id)
+                return to_route('dashboard.menus.show', $menu->menu_id)->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
+            else
+                return to_route('dashboard.menus.index')->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
+
         }
         return to_route('dashboard.sections.index', ['type' => $type])->with('success', "تم حفظ بيانات ال" .  __("helal.section-types.$type.singular") . " بنجاح");
     }

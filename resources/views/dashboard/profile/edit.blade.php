@@ -8,9 +8,9 @@
         @method('patch')
         
         <x-input name="current_password" label="كلمة المرور القديمة" type="password" required maxlength="30" />
-        <x-input name="password" label="كلمة المرور الجديدة" type="password" required maxlength="30" minlength="10"/>
-        <x-input name="password_confirmation"  label="تأكيد كلمة المرور" type="password" required  minlength="10" />        
-        <div id="msg" class="text-danger d-none">كلمتا السر غير متطابقتين</div>
+        <x-input name="password" label="كلمة المرور الجديدة" type="password" required maxlength="30" minlength="8"/>
+        <x-input name="password_confirmation"  label="تأكيد كلمة المرور" type="password" required  minlength="8" />        
+        <div id="msg" class="text-danger d-none py-2">كلمتا السر غير متطابقتين</div>
         <button class="btn btn-secondary">حفظ كلمة المرور  </button>
         <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">عودة</a>
     </form>

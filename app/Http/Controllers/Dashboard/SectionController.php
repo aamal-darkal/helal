@@ -35,8 +35,9 @@ class SectionController extends Controller
                 return $q->where('title_ar', 'like', "%$search%")
                     ->orWhere('title_en', 'like', "%$search%");
             });
-        })
-            ->where('type', $type)->paginate();
+        })->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('province_id', Auth::user()->province_id);            
+        })->where('type', $type)->paginate();
         return view('dashboard.sections.index',   compact('sections', 'type', 'search'));
     }
 
@@ -109,7 +110,12 @@ class SectionController extends Controller
         if ($menu)
             $menu = Menu::find($menu);
         $type = $section->type;
-        $provinces = Province::select('id', 'name_ar as name')->get();
+        
+        $provinces = Province::select('id', 'name_ar as name')
+        ->when(Auth::user()->type == 'user', function ($q) {
+            return $q->where('id', Auth::user()->province_id);
+        })->get();
+
         $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
         $currDoings = $section->doings->modelKeys();
 

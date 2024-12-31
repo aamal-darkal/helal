@@ -17,12 +17,13 @@ class MartyerController extends Controller
     {
         $search = $request->search;
         $martyers = Martyer::with('province')
-        ->when($search, function ($q) use ($search) {
+            ->when($search, function ($q) use ($search) {
                 return $q->where('title',  'like', "%$search%");
-            })
-            ->paginate(7);
-        
-        return view('dashboard.martyers.index' , compact('martyers'));
+            })->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('province_id', Auth::user()->province_id);
+            })->paginate(7);
+
+        return view('dashboard.martyers.index', compact('martyers'));
     }
 
     /**
@@ -30,8 +31,11 @@ class MartyerController extends Controller
      */
     public function create()
     {
-        $provinces = Province::select('id', 'name_ar as name')->get();
-        return view('dashboard.martyers.create' , compact('provinces'));        
+        $provinces = Province::select('id', 'name_ar as name')
+            ->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('id', Auth::user()->province_id);
+            })->get();
+        return view('dashboard.martyers.create', compact('provinces'));
     }
 
     /**
@@ -41,25 +45,29 @@ class MartyerController extends Controller
     {
         $validated = $request->validate([
             'name_ar' => 'required|string|max:50',
-            'name_en' => 'required|string|max:50',            
+            'name_en' => 'required|string|max:50',
             'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
             'province_id' => 'exists:provinces,id',
         ]);
         $validated['created_by'] = Auth::user()->id;
 
-        Martyer::create($validated);        
+        Martyer::create($validated);
 
         return to_route('dashboard.martyers.index')->with('success', "تم إضافة بيانات الشهيد $validated[name_ar] بنجاح");
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Martyer $martyer)
     {
-        $provinces = Province::select('id', 'name_ar as name')->get();
-        return view('dashboard.martyers.edit' , compact('martyer' , 'provinces'));                
+        $provinces = Province::select('id', 'name_ar as name')
+            ->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('id', Auth::user()->province_id);
+            })->get();
+
+        return view('dashboard.martyers.edit', compact('martyer', 'provinces'));
     }
 
     /**

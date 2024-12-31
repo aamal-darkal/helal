@@ -25,6 +25,8 @@ class VacancyController extends Controller
                 return $q->where('title', 'like', "%$search%")
                     ->orWhere('title', 'like', "%$search%");
             });
+        })->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('province_id', Auth::user()->province_id);            
         })->paginate();
         return view('dashboard.vacancies.index',   compact('vacancies', 'search'));
     }
@@ -34,7 +36,10 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        $provinces = Province::select('id', 'name_ar as name')->get();
+        $provinces = Province::select('id', 'name_ar as name')
+        ->when(Auth::user()->type == 'user', function ($q) {
+            return $q->where('id', Auth::user()->province_id);
+        })->get();
 
         return view(
             'dashboard.vacancies.create',
@@ -72,7 +77,10 @@ class VacancyController extends Controller
      */
     public function edit(Vacancy $vacancy)
     {
-        $provinces = Province::select('id', 'name_ar as name')->get();
+        $provinces = Province::select('id', 'name_ar as name')
+        ->when(Auth::user()->type == 'user', function ($q) {
+            return $q->where('id', Auth::user()->province_id);
+        })->get();
         return view('dashboard.vacancies.edit', compact('provinces',  'vacancy',));
     }
 

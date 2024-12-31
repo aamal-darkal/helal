@@ -33,7 +33,9 @@ return [
 
     /** footer */
     'about' => 'About Us',
+    'interact' => 'Interact',
     'contact' => 'Contact Us',
+    'mailus' => 'mail us',    
     'Partnership' => 'Partnerships',
     
     'about-sarc' => 'About The SARC',

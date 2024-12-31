@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,13 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doings', function (Blueprint $table) {
+        Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->string('title_ar', 50);
-            $table->string('title_en', 50);
-            $table->text('icon')->nullable();
+            $table->string('title', 100)->index();
+            $table->text('content');
+            $table->date('date')->default(DB::raw('CURDATE()'))->index();
             $table->boolean('hidden')->default(false);
-            $table->foreignId('menu_id')->nullable()->constrained();
+            $table->foreignId('image_id')->nullable()->constrained();
+            $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('doings');
+        Schema::dropIfExists('vacancies');
     }
 };

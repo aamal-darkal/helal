@@ -9,6 +9,7 @@ use App\Models\Doing;
 use App\Models\Martyer;
 use App\Models\Province;
 use App\Models\Section;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,6 +56,7 @@ class HomeController extends Controller
      */
     function show(Section $section)
     {
+        
         $locale = app()->getLocale();
 
         $title = "title_$locale";
@@ -64,13 +66,26 @@ class HomeController extends Controller
 
         return view('home.show', compact('section'));
     }
+    function showVacancy(Vacancy $vacancy)
+    {
+        $section = $vacancy;
+        return view('home.show', compact('section'));
+    }
 
 
     function search(Request $request)
     {
+        $type = $request->type;
+
+        if ($type == 'vacancy') {
+            $results = Vacancy::select('id',   "title", "content" , DB::raw("'100' as  summary_length") ,  'image_id' , DB::raw("'vacancy' as type") , 'date')
+            ->orderBy('date', 'desc')->paginate(5)->withQueryString();
+            $key =  "vacancies";
+            return view('home.search', compact('results', 'key', 'type'));            
+        }
+
         $locale = app()->getLocale();
 
-        $type = $request->type;
 
         $doing =  $request->doing;
         $search = $request->search;
@@ -78,7 +93,7 @@ class HomeController extends Controller
 
         /** for doing with keyword */
 
-        $results = Section::select("id", "title_$locale as title",  "content_$locale as content", "summary_length", "image_id", "type")
+        $results = Section::select("id", "title_$locale as title",  "content_$locale as content", "summary_length", "image_id", "type" , "date")
             /** for certain province */
             ->when($province, function ($q) use ($province) {
                 return $q->Where('province_id', $province);
@@ -104,6 +119,7 @@ class HomeController extends Controller
                     );
                 }
             )
+            ->where('hidden' , false )
             ->orderBy('date', 'desc')->paginate(5)->withQueryString();
         // return $results;
         $title = "title_$locale";

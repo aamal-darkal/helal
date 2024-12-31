@@ -30,14 +30,7 @@
                      <i class="align-middle" data-feather="navigation"></i>
                      <span class="align-middle">@lang("helal.section-types.campaign.plural")</span>
                  </a>
-             </li>
-
-             <li class="sidebar-item @if( session()->get('type') == 'vacancy') active @endif">
-                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'vacancy']) }}">
-                     <i class="align-middle" data-feather="feather"></i>
-                     <span class="align-middle"> @lang("helal.section-types.vacancy.plural")</span>
-                 </a>
-             </li>             
+             </li>                         
             
              <li class="sidebar-item @if( session()->get('type') == 'article') active @endif">
                  <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'article']) }}">
@@ -45,6 +38,14 @@
                      <span class="align-middle">@lang("helal.section-types.article.plural") </span>
                  </a>
              </li>
+             @if (Route::has('dashboard.vacancies.index'))
+                 <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'vacancies')) active @endif">
+                     <a class="sidebar-link" href="{{ route('dashboard.vacancies.index') }}">
+                         <i class="align-middle" data-feather="flag"></i>
+                         <span class="align-middle">شواغر</span>
+                     </a>
+                 </li>
+             @endif             
              @if (Route::has('dashboard.martyers.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'martyers')) active @endif">
                      <a class="sidebar-link" href="{{ route('dashboard.martyers.index') }}">

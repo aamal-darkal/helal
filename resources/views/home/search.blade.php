@@ -5,27 +5,37 @@
         <hr class="content-divider">
         <div class="filter-box">
             <h2 class="text-salmon"> {{ $key }}</h2>
-            <select name="type" class="form-select" onchange="getUrl(this.value);">
-                <option value="" hidden>-- @lang('helal.choose-type')</option>
-                @foreach (config('app.section-type') as $option)
-                    <option value="{{ $option }}" @selected($option == $type)>{{ __("helal.section-types.$option.plural") }}</option>
-                @endforeach
-            </select>
+            @if ($type)
+                <select name="type" class="form-select" onchange="getUrl(this.value);">
+                    <option value="" hidden>-- @lang('helal.choose-type')</option>
+                    @foreach (config('app.section-type') as $option)
+                        <option value="{{ $option }}" @selected($option == $type)>
+                            {{ __("helal.section-types.$option.plural") }}</option>
+                    @endforeach
+                    <option value="vacancy">@lang('helal.section-types.vacancy.plural')</option>
+                </select>
+            @endif
         </div>
         @foreach ($results as $result)
             <div class="topic">
                 <div class="topic-desc p-2">
                     <div class="topic-title">
                         <h2>{{ $result->title }}</h2>
-                        <p>{{ $result->type}}</p>
+                        <p> @lang("helal.section-types.$result->type.singular") - {{ $result->date }}</p>
                     </div>
 
                     <div class="d-none"> {!! $result->content !!} </div>
-                    <div class="summary" data-length="{{ $result->summary_length }}"></div>
+                    <div class="summary" data-length="{{ $result->summary_length }}"></div>                    
 
-                    <a href="{{ route('home.show', $result) }}"
-                        class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
-                    </a>
+                    @if ($type)
+                        <a href="{{ route('home.show', $result) }}"
+                            class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
+                        </a>
+                    @else
+                        <a href="{{ route('home.showVacancy', $result) }}"
+                            class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
+                        </a>
+                    @endif
                 </div>
                 <div class="img-wrapper">
                     <div class="search-type">@lang("helal.section-types.$result->type.singular") </div>
@@ -38,7 +48,7 @@
             <div class="border-top pt-2 pagination-1">
                 {{ $results->links() }}.
             </div>
-            @else
+        @else
             <p> @lang('helal.notFound') </p>
         @endif
     </div>

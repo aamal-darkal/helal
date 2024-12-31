@@ -409,7 +409,8 @@ class DoingSeeder extends Seeder
 			$doing = $menu->doing()->create($doings[$key]);
 			$menu->url = "search?doing=$doing->id";
             $menu->save();
-		}		
+		}
+            		
 		Keyword::insert($keywords);			
 
 		Doing::find(1)->keywords()->attach(1);
@@ -420,6 +421,14 @@ class DoingSeeder extends Seeder
 		Doing::find(6)->keywords()->attach([8 , 9]);
 		Doing::find(7)->keywords()->attach(10);
 		Doing::find(8)->keywords()->attach([11,12]);
-		Doing::find(9)->keywords()->attach([13 , 14]);		
+		Doing::find(9)->keywords()->attach([13 , 14]);
+
+
+		$doingGuidance = ['id' => env('DOING_GUIDANCE '), 'title_ar' => 'إرشادات وتوعية', 'title_en' => 'ِAwaerness an Guidance', 'hidden' => true];
+		$menuGuidance =    ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => "", 'order' => 6, 'permit' => 'none'];
+		$menu = Menu::create($menuGuidance);
+		$doing = $menu->doing()->create($doingGuidance);
+		$menu->url = "search?" . env('DOING_GUIDANCE ');
+		$menu->save();		
     }
 }

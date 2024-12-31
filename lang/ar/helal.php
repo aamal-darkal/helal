@@ -32,8 +32,10 @@ return [
 
 
     /** footer */
-    'about' => 'عن المنظمة',
-    'contact' => 'اتصل بنا',    
+    'about' => 'عن المنظمة',    
+    'interact' => 'للتواصل',
+    'contact' => 'اتصل بنا',
+    'mailus' => 'راسلنا',    
     'Partnership' => 'شركائنا',
 
     'about-sarc' => 'حول المنظمة',

@@ -10,8 +10,9 @@
                   <h4>@lang('helal.about')</h4>
                   <ul class="p-0">
                       <li><a href="show/1">@lang('helal.about')</a></li>
-                      <li><a href="#">@lang('helal.contact')</a></li>
-                      <li><a href="#">@lang('helal.Partnership')</a></li>
+                      <li><a href="tel: {{ $components['phone'] }}">@lang('helal.contact')</a></li>
+                      <li><a href="mailto: {{ $components['mail'] }}">@lang('helal.mailus')</a> </li>
+                      {{-- <li><a href="#">@lang('helal.Partnership')</a></li> --}}
                   </ul>
               </div>
           </div>

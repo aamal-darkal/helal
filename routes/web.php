@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\MenuController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\VacancyController;
 use App\Http\Controllers\HomeController as DashboardHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified', 'ar-lang'])
     ->prefix('dashboard/')->name('dashboard.')->group(function () {
         Route::resource('settings', SettingController::class)->only('index', 'update');
         Route::resource('sections', SectionController::class);
+        Route::resource('vacancies', VacancyController::class);
         Route::resource('fileUploads', FileUploadController::class)->except('show', 'edit', 'update');
         Route::resource('doings', DoingController::class);
         Route::resource('keywords', KeywordController::class)->except('show', 'edit', 'update');
@@ -49,6 +51,7 @@ Route::get('users/email-check', [AuthenticatedSessionController::class, 'emailCh
 /** client */
 Route::get('/', [HomeController::class,  'index'])->name('home.index');
 Route::get('/show/{section}', [HomeController::class,  'show'])->name('home.show');
+Route::get('/showVacancy/{vacancy}', [HomeController::class,  'showVacancy'])->name('home.showVacancy');
 Route::get('/search', [HomeController::class,  'search'])->name('home.search');
 
 // ****************** startup ********************/

@@ -81,12 +81,24 @@ class SettingSeeder extends Seeder
                 'key_ar' => 'رابط اكس',
                 'value_en' => "https://twitter.com/SYRedCrescent",
                 'value_ar' =>  "https://twitter.com/SYRedCrescent",
-            ],
+            ],            
             [
                 'key_en' => 'facebook',
                 'key_ar' => 'رابط فيسبوك',
                 'value_en' => "https://www.facebook.com/SYRedCrescent",
                 'value_ar' =>  "https://www.facebook.com/SYRedCrescent",
+            ],
+            [
+                'key_en' => 'phone',
+                'key_ar' => 'رقم رابط الاتصال',
+                'value_en' => "00963114041",
+                'value_ar' =>  "00963114041",
+            ],
+            [
+                'key_en' => 'mail',
+                'key_ar' => 'بريد رابط الارسال ',
+                'value_en' => "sarchq@sarc-sy.org",
+                'value_ar' => "sarchq@sarc-sy.org",
             ],
             [
                 'key_en' => 'news-sammery-length',

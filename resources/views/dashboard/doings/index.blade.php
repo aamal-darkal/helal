@@ -33,7 +33,7 @@
                             onsubmit="return confirm('سيتم محي   {{ $doing->name }}?' )">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-outline-danger"><i data-feather="trash" @disabled($doing->hidden)></i></button>
+                            <button  @disabled($doing->hidden) class="btn btn-outline-danger"><i data-feather="trash" ></i></button>
                         </form>
                     </td>
                 </tr>

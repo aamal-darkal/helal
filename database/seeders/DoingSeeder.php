@@ -428,7 +428,7 @@ class DoingSeeder extends Seeder
 		$menuGuidance =    ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => "", 'order' => 6, 'permit' => 'none'];
 		$menu = Menu::create($menuGuidance);
 		$doing = $menu->doing()->create($doingGuidance);
-		$menu->url = "search?" . env('DOING_GUIDANCE ');
+		$menu->url = "search?doing=10";
 		$menu->save();		
     }
 }

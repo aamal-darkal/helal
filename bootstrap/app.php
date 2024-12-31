@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ArabicLanguage;
 use App\Http\Middleware\LangMiddleware;
 use Illuminate\Foundation\Application;
@@ -13,8 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->appendToGroup('web', LangMiddleware::class);    
-        $middleware->alias(['ar-lang' => ArabicLanguage::class]) ;
+        $middleware->appendToGroup('web', LangMiddleware::class);
+    $middleware->alias(['ar-lang' => ArabicLanguage::class ,
+                        'admin' => AdminMiddleware::class]) ;
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

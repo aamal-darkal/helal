@@ -48,7 +48,11 @@ class SectionController extends Controller
         $type = $request->type;
         $menu = $request->menu;
         if ($menu) $menu = Menu::find($menu);
-        $provinces = Province::select('id', 'name_ar as name')->get();
+
+        $provinces = Province::select('id', 'name_ar as name')
+        ->when(Auth::user()->type == 'user' , function($q){
+            return $q->where('id' , Auth::user()->province_id );
+        })->get();
         $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
 
         return view(

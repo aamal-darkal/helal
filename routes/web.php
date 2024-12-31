@@ -31,20 +31,22 @@ Route::middleware(['auth', 'verified', 'ar-lang'])
 
 Route::middleware(['auth', 'verified', 'ar-lang'])
     ->prefix('dashboard/')->name('dashboard.')->group(function () {
-        Route::resource('settings', SettingController::class)->only('index', 'update');
         Route::resource('sections', SectionController::class);
         Route::resource('vacancies', VacancyController::class);
         Route::resource('fileUploads', FileUploadController::class)->except('show', 'edit', 'update');
-        Route::resource('doings', DoingController::class);
-        Route::resource('keywords', KeywordController::class)->except('show', 'edit', 'update');
         Route::resource('martyers', MartyerController::class)->except('show');
-        Route::resource('menus', MenuController::class);
-        Route::resource('provinces', ProvinceController::class)->only('index', 'edit', 'update');
-        Route::resource('users', UserController::class)->except('show', 'destroy');
-        Route::post('users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('users.reset-password');
-        Route::post('users/lock/{user}', [UserController::class, 'lock'])->name('users.lock');
         Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::middleware('admin')->group(function () {
+            Route::resource('settings', SettingController::class)->only('index', 'update');
+            Route::resource('doings', DoingController::class);
+            Route::resource('keywords', KeywordController::class)->except('show', 'edit', 'update');
+            Route::resource('menus', MenuController::class);
+            Route::resource('provinces', ProvinceController::class)->only('index', 'edit', 'update');
+            Route::resource('users', UserController::class)->except('show', 'destroy');
+            Route::post('users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('users.reset-password');
+            Route::post('users/lock/{user}', [UserController::class, 'lock'])->name('users.lock');
+        });
     });
 Route::get('users/email-check', [AuthenticatedSessionController::class, 'emailCheck'])->name('users.emailCheck');
 

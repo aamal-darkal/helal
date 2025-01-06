@@ -16,6 +16,8 @@
                 <th> العنوان بالعربي   </th>
                 <th> العنوان بالانكليزي </th>
                 <th> رقم الهاتف </th>
+                <th> المعدل </th>
+                <th> تاريخ التعديل </th>
                 <th> أوامر </th>
             </tr>
         </thead>
@@ -28,6 +30,8 @@
                     <td> {{ $province->location_ar }}</td>
                     <td> {{ $province->location_en }}</td>
                     <td> {{ $province->phone }}</td>
+                    <td> {{ $province->updated_by  ? $province->updated_by->name : '' }} </td>
+                    <td> {{ $province->updated_at ? $province->updated_at->format('Y-m-d'):'' }}</td>
 
                     <td class="text-nowrap">
                         <a href="{{ route('dashboard.provinces.edit', $province) }}" class="btn btn-outline-primary">

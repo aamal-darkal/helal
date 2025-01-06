@@ -1,7 +1,8 @@
  <nav id="sidebar" class="sidebar js-sidebar">
      <div class="sidebar-content js-simplebar text-left">
          <a class="sidebar-brand" href="/dashboard">
-             <span class="align-middle">لوحة التحكم</span>
+             <span class="align-middle"> 
+                لوحة تحكم الهلال</span>
          </a>
 
          <ul class="sidebar-nav pe-0">
@@ -24,15 +25,14 @@
                      <span class="align-middle">@lang('helal.section-types.article.plural') </span>
                  </a>
              </li>
-
-             @if (Route::has('dashboard.vacancies.index'))
-                 <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'vacancies')) active @endif">
-                     <a class="sidebar-link" href="{{ route('dashboard.vacancies.index') }}">
-                         <i class="align-middle" data-feather="flag"></i>
-                         <span class="align-middle">شواغر</span>
-                     </a>
-                 </li>
-             @endif
+             
+             <li class="sidebar-item @if (session()->get('type') == 'vacancy') active @endif">
+                 <a class="sidebar-link" href="{{ route('dashboard.sections.index', ['type' => 'vacancy']) }}">
+                     <i class="align-middle" data-feather="credit-card"></i>
+                     <span class="align-middle">@lang('helal.section-types.vacancy.plural') </span>
+                 </a>
+             </li>
+             
 
              @if (Route::has('dashboard.martyers.index'))
                  <li class="sidebar-item @if (str_contains(Route::currentRouteName(), 'martyers')) active @endif">

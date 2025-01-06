@@ -12,7 +12,6 @@
                         <option value="{{ $option }}" @selected($option == $type)>
                             {{ __("helal.section-types.$option.plural") }}</option>
                     @endforeach
-                    <option value="vacancy">@lang('helal.section-types.vacancy.plural')</option>
                 </select>
             @endif
         </div>
@@ -20,22 +19,16 @@
             <div class="topic">
                 <div class="topic-desc p-2">
                     <div class="topic-title">
-                        <h2>{{ $result->title }}</h2>
+                        <h2>{{ $result->$detail->title }}</h2>
                         <p> @lang("helal.section-types.$result->type.singular") - {{ $result->date }}</p>
                     </div>
 
-                    <div class="d-none"> {!! $result->content !!} </div>
-                    <div class="summary" data-length="{{ $result->summary_length }}"></div>                    
+                    <div class="d-none"> {!! $result->$detail->content !!} </div>
+                    <div class="summary" data-length="{{ $result->summary_length }}"></div>
 
-                    @if ($type)
-                        <a href="{{ route('home.show', $result) }}"
-                            class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
-                        </a>
-                    @else
-                        <a href="{{ route('home.showVacancy', $result) }}"
-                            class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
-                        </a>
-                    @endif
+                    <a href="{{ route('home.show', $result) }}"
+                        class="btn btn-sm btn-outline-secondary mt-3">@lang('helal.readmore')
+                    </a>
                 </div>
                 <div class="img-wrapper">
                     <div class="search-type">@lang("helal.section-types.$result->type.singular") </div>
@@ -52,8 +45,10 @@
             <p> @lang('helal.notFound') </p>
         @endif
     </div>
-    <div class="text-center mb-4"><a class="btn btn-salmon mt-3" href="{{ url()->previous() }}">@lang('helal.back')</a>
+    <div class="text-center"><a class="btn btn-salmon mt-3" href="{{ url()->previous() }}">@lang('helal.back')</a>
+        <br>
+        <br>
+        
 
 
-    </div>
 @endsection

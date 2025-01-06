@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SectionRequest;
 use App\Models\Doing;
 use App\Models\Image;
-use App\Models\Keyword;
 use App\Models\Menu;
 use App\Models\Province;
 use App\Models\Section;
@@ -30,14 +29,19 @@ class SectionController extends Controller
     {
         $type = $request->type;
         $search = $request->search;
-        $sections = Section::when($search, function ($q) use ($search) {
-            return $q->where(function ($q) use ($search) {
-                return $q->where('title_ar', 'like', "%$search%")
-                    ->orWhere('title_en', 'like', "%$search%");
-            });
-        })->when(Auth::user()->type == 'user', function ($q) {
-                return $q->where('province_id', Auth::user()->province_id);            
-        })->where('type', $type)->paginate();
+        $sections = Section::select('id','hidden', 'image_id', 'created_at', 'created_by', 'updated_at', 'updated_by')
+            ->when($search, function ($q) use ($search) {
+                return $q->where(function ($q) use ($search) {
+                    return $q->where('title_ar', 'like', "%$search%")
+                        ->orWhere('title_en', 'like', "%$search%");
+                });
+            })->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('province_id', Auth::user()->province_id);
+            })->where('type', $type)
+            ->with(['province:id','sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
+            ->latest()
+            ->paginate();
+            // return $sections;
         return view('dashboard.sections.index',   compact('sections', 'type', 'search'));
     }
 
@@ -51,9 +55,9 @@ class SectionController extends Controller
         if ($menu) $menu = Menu::find($menu);
 
         $provinces = Province::select('id', 'name_ar as name')
-        ->when(Auth::user()->type == 'user' , function($q){
-            return $q->where('id' , Auth::user()->province_id );
-        })->get();
+            ->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('id', Auth::user()->province_id);
+            })->get();
         $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
 
         return view(
@@ -67,30 +71,41 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        $validated = $request->validated();
-        $validated['created_by'] = Auth::user()->id;
-        if (
-            ! $request->has('type') ||
-            !in_array($request->type, (config('app.section-type')))
-        )
-            return back()->with('error', 'يوجد خطأ في تحديد نوع المقطع المضاف');
-        else $validated['type'] = $request->type;
-
+        /** save image if exists */
+        $image_id = null;
         if ($request->hasFile('image_id')) {
-            $validated['image_id'] = saveImg($request->type, $request->file('image_id'));
+            $image_id = saveImg($request->type, $request->file('image_id'));
         }
 
-        $section = Section::create($validated);
-        if ($request->doings)
-            $section->doings()->attach($validated['doings']);
+        /** saving section */
+        $section = Section::create([
+            'type' => $request->type,
+            'summary-length' => $request->input('summary-length'),
+            'date' => $request->date,
+            'hidden' => $request->hidden,
+            'image_id' => $image_id,
+            'province_id' => $request->province_id,
+            'created_by' => Auth::user()->id,
+        ]);
 
+        /** saving section_details */
+        if ($request->arabic)
+            $section->sectionDetails()->create(['title' => $request->title_ar,  'content' => $request->content_ar, 'lang' => 'ar']);
+        if ($request->english)
+            $section->sectionDetails()->create(['title' => $request->title_en,  'content' => $request->content_en, 'lang' => 'en']);
+
+        /** saving relation to doings if exists*/
+        if ($request->doings)
+            $section->doings()->attach($request['doings']);
+
+        /** saving related menu if exists */
         $menu_id = $request->menu_id;
         if ($menu_id) {
             $menu = Menu::find($menu_id);
             $menu->update(['url' => "show/$section->id", 'section_id' => $section->id]);
             return to_route('dashboard.menus.show', [$menu->menu_id])->with('success', "تم إضافة بند للقائمة  " . $menu->parentMenu->title_ar . " بنجاح");
         }
-        return to_route('dashboard.sections.index', ['type' => $validated['type']])->with('success', "تم إضافة بيانات ال" . __("helal.section-types.$validated[type].singular")  .  " بنجاح");
+        return to_route('dashboard.sections.index', ['type' => $request->type])->with('success', "تم إضافة بيانات ال" . __("helal.section-types.$request->type.singular")  .  " بنجاح");
     }
 
     /**
@@ -109,15 +124,19 @@ class SectionController extends Controller
         $menu = $request->menu;
         if ($menu)
             $menu = Menu::find($menu);
+
         $type = $section->type;
-        
+
         $provinces = Province::select('id', 'name_ar as name')
-        ->when(Auth::user()->type == 'user', function ($q) {
-            return $q->where('id', Auth::user()->province_id);
-        })->get();
+            ->when(Auth::user()->type == 'user', function ($q) {
+                return $q->where('id', Auth::user()->province_id);
+            })->get();
 
         $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
         $currDoings = $section->doings->modelKeys();
+
+        $section->arabic  = (bool) $section->sectionDetail_ar;
+        $section->english = (bool) $section->sectionDetail_en;
 
         return view('dashboard.sections.edit', compact('type', 'provinces', 'doings', 'currDoings', 'section', 'menu'));
     }
@@ -131,14 +150,35 @@ class SectionController extends Controller
         $validated['updated_by'] = Auth::user()->id;
 
         $type = $section['type'];
+
         $oldImage = null;
         if ($request->hasFile('image_id')) {
             $oldImage = Image::find($section->image_id);
-            $validated['image_id'] = saveImg($type, $request->file('image_id'));            
+            $validated['image_id'] = saveImg($type, $request->file('image_id'));
         }
-        
+
         $section->update($validated);
-        
+
+        /** saving section_details */
+        if ($request->arabic){
+            if($section->sectionDetail_ar)
+                $section->sectionDetail_ar()->update(['title' => $request->title_ar,  'content' => $request->content_ar]);
+            else
+                $section->sectionDetails()->create(['title' => $request->title_ar,  'content' => $request->content_ar , 'lang' => 'ar' ]);
+        } else {
+            if($section->sectionDetail_ar)
+                $section->sectionDetail_ar()->delete();
+        }
+        if ($request->english){
+            if($section->sectionDetail_en)
+                $section->sectionDetail_en()->update(['title' => $request->title_en,  'content' => $request->content_en]);
+            else
+                $section->sectionDetails()->create(['title' => $request->title_en,  'content' => $request->content_en , 'lang' => 'en']);
+        } else {
+            if($section->sectionDetail_en)
+                $section->sectionDetail_en->delete();
+        }        
+
         /** delete image record from images table with related file */
         if ($oldImage) {
             Storage::disk('public')->delete($oldImage->name);
@@ -156,7 +196,6 @@ class SectionController extends Controller
                 return to_route('dashboard.menus.show', $menu->menu_id)->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
             else
                 return to_route('dashboard.menus.index')->with('success', "تم تعديل بند القائمة  $menu->title_ar بنجاح");
-
         }
         return to_route('dashboard.sections.index', ['type' => $type])->with('success', "تم حفظ بيانات ال" .  __("helal.section-types.$type.singular") . " بنجاح");
     }
@@ -167,8 +206,9 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         $oldImage = Image::find($section->image_id);
-        $title = $section->title_ar;
+        $title = $section->sectionDetail_ar->title;
         $type = $section->type;
+        $section->sectionDetails()->delete();
         $section->delete();
 
         if ($oldImage) {

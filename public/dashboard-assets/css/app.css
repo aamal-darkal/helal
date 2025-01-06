@@ -15260,14 +15260,6 @@ body {
     margin-bottom: 2em;
 }
 
-.group-title{
-    position: relative;
-    bottom: .8em;
-    background-color: rgb(245, 247, 251);
-    display: inline-block;
-    padding: 5px;
-}
-
 
 .table-input  td{
     padding: 10px ;
@@ -15314,3 +15306,11 @@ rte-codebox > textarea{
     /* width: 80%; */
     margin: 10px auto;
 }
+
+.rte-modern.rte-desktop.rte-toolbar-default{
+    min-width: initial !important;
+}
+rte-dropdown-panel{
+    left: 10px !important;
+}
+

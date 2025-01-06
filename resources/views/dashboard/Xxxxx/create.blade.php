@@ -3,8 +3,8 @@
 @section('content')
     <h4 class="title"> إضافة شاغر </h4>
 
-    <form action="{{ route('dashboard.vacancies.store') }}" method="post" enctype="multipart/form-data" onsubmit="readRich()"
-        name="vacancyForm">
+    <form action="{{ route('dashboard.xxxxxes.store') }}" method="post" enctype="multipart/form-data" onsubmit="readRich()"
+        name="xxxxxForm">
         @csrf
 
         <x-input name="title" label="العنوان" />
@@ -18,7 +18,9 @@
             </div>
         @enderror
             <br>
-        <x-input type="date" name="date" label='تاريخ الشاغر' />
+            
+        
+        <x-input type="date" name="date" label='تاريخ الشاغر' dbValue="{{ today()->toDateString()}}" />
 
         <x-checkbox name="hidden" label="مخفي" />
 
@@ -29,11 +31,11 @@
             <img class="border border-secondary" id="img-review" src="{{ asset('storage/no-image.png') }}" width="300">
         </div>
 
-        <x-select name="province_id" label="المحافظة" :options=$provinces />
+        <x-select name="province_id" label="المحافظة" :options=$provinces required/>
 
 
         <button class="btn btn-secondary">إضافة شاغر </button>
-        <a href="{{ route('dashboard.vacancies.index') }}" class="btn btn-outline-secondary">عودة</a>
+        <a href="{{ route('dashboard.xxxxxes.index') }}" class="btn btn-outline-secondary">عودة</a>
 
     </form>
 @endsection
@@ -51,11 +53,11 @@
         var editor = new RichTextEditor("#content");
        
         function fillRich() {
-            editor.setHTMLCode(vacancyForm.content.value);
+            editor.setHTMLCode(xxxxxForm.content.value);
         }
 
         function readRich() {
-            vacancyForm.content.value = editor.getHTMLCode();
+            xxxxxForm.content.value = editor.getHTMLCode();
         }
     </script>
 

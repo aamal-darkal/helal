@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;    
+use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -13,7 +13,9 @@ class ProvinceController extends Controller
 {
     public function index(Request $request)
     {
-        $provinces = Province::get();
+        $provinces = Province::orderBy('name_ar')
+            ->with(['updatedBy:id,name'])
+            ->get();
         return view('dashboard.provinces.index', compact('provinces'));
     }
 
@@ -73,9 +75,9 @@ class ProvinceController extends Controller
             'phone' => 'nullable|digits:10'
         ]);
         $validated['updated_by'] = Auth::user()->id;
-    
+
         $province->update($validated);
-        
+
         // $province->menu()->update([
         //     'title_ar' =>  $validated['name_ar'],
         //     'title_en' => $validated['name_en'],
@@ -101,7 +103,7 @@ class ProvinceController extends Controller
     //     $menu_id = $province->menu_id;
     //     $province->delete();
     //     Menu::find($menu_id)->delete();
-        
+
     //     return back()->with('success', " تم محي المحافظة $name بنجاح");
     // }
 }

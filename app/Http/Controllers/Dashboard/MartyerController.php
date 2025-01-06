@@ -21,7 +21,9 @@ class MartyerController extends Controller
                 return $q->where('title',  'like', "%$search%");
             })->when(Auth::user()->type == 'user', function ($q) {
                 return $q->where('province_id', Auth::user()->province_id);
-            })->paginate(7);
+            })
+            ->with(['province:id,name_ar', 'createdBy:id,name', 'updatedBy:id,name'])
+            ->latest()->paginate(7);
 
         return view('dashboard.martyers.index', compact('martyers'));
     }
@@ -79,7 +81,7 @@ class MartyerController extends Controller
             'name_ar' => 'required|string|max:50',
             'name_en' => 'required|string|max:50',
             'DOD' => 'nullable|digits:4|integer|min:1901|max:2200',
-            'province_id' => 'exists:provinces,id',
+            'province_id' => 'required|exists:provinces,id',
         ]);
         $validated['updated_by'] = Auth::user()->id;
         $martyer->update($validated);

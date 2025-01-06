@@ -14,7 +14,9 @@ class DoingController extends Controller
 {    
     public function index(Request $request)
     {
-        $doings = Doing::get();
+        $doings = Doing::orderBy('title_ar')
+            ->with([ 'createdBy:id,name', 'updatedBy:id,name'])
+            ->orderBy('title_ar')->get();
         return view('dashboard.doings.index', compact('doings'));
     }
 
@@ -82,6 +84,7 @@ class DoingController extends Controller
         ]);
         $validated['updated_by'] = Auth::user()->id;
 
+        // return $validated;
         $doing->update($validated);
 
 

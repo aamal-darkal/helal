@@ -15,10 +15,6 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->enum('type', config('app.section-type'))->index();
-            $table->string('title_ar', 100)->index();
-            $table->string('title_en', 100)->index();
-            $table->text('content_ar');
-            $table->text('content_en');
             $table->integer('summary_length')->default(100);
             $table->date('date')->default(DB::raw('CURDATE()'))->index();
             $table->boolean('hidden')->default(false);

@@ -16,7 +16,7 @@ class UserController extends Controller
         $state = '';
         if ($request->has('state') && $request->state == 'change-password')
             $state = 'change-password';
-        $users = User::with('province')->get();
+        $users = User::with('province')->orderBy('name')->get();
         return view('dashboard.users.index', compact('users', 'state'));
     }
 

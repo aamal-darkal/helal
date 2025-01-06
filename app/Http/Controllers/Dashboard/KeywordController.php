@@ -18,6 +18,7 @@ class KeywordController extends Controller
         $keywords = Keyword::when($search, function ($q) use ($search) {
                 return $q->where('value',  'like', "%$search%");
             })
+            ->with(['createdBy:id,name'])
             ->paginate(7);
         
         return view('dashboard.keywords.index' , compact('keywords'));

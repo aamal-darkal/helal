@@ -6,16 +6,16 @@
                     <div class="swiper-wrapper">
                         @foreach ($news as $new)
                             <div class = "swiper-slide ">
-                                <div class="single-news">
-                                    <a href="{{ route('home.show', $new->id) }}">
+                                <div class="single-news" >                                    
+                                    <a href="{{ route('home.show', $new->id) }}" style="direction:@if( $new->$detail->lang == 'en') ltr @else rtl @endif">
                                         <div class="img-wrapper">
                                             <img src="{{ asset(getImgUrl($new->image_id)) }}">
                                         </div>
 
-                                        <h4 class="sub-title">{{ $new->title }}</h4>
+                                        <h4 class="sub-title">{{ $new->$detail->title }}</h4>
                                         <div class="news-content px-2">
                                             <div class="d-none">
-                                                {!! $new->content !!}
+                                                {!! $new->$detail->content !!}
                                             </div>
                                             <div class="summary" data-length="{{ $new->summary_length }}"></div>
                                         </div>

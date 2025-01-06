@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VacancyRequest;
+use App\Http\Requests\XxxxxRequest;
 use App\Models\Image;
 use App\Models\Province;
-use App\Models\Vacancy;
+use App\Models\Xxxxx;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class VacancyController extends Controller
+class XxxxxController extends Controller
 {
     /** 
      * Display a listing of the resource.
@@ -20,15 +20,17 @@ class VacancyController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $vacancies = Vacancy::when($search, function ($q) use ($search) {
+        $xxxxxes = Xxxxx::when($search, function ($q) use ($search) {
             return $q->where(function ($q) use ($search) {
                 return $q->where('title', 'like', "%$search%")
                     ->orWhere('title', 'like', "%$search%");
             });
         })->when(Auth::user()->type == 'user', function ($q) {
                 return $q->where('province_id', Auth::user()->province_id);            
-        })->paginate();
-        return view('dashboard.vacancies.index',   compact('vacancies', 'search'));
+        })
+            ->with(['createdBy:id,name', 'updatedBy:id,name'])
+            ->paginate();
+        return view('dashboard.xxxxxes.index',   compact('xxxxxes', 'search'));
     }
 
     /**
@@ -42,7 +44,7 @@ class VacancyController extends Controller
         })->get();
 
         return view(
-            'dashboard.vacancies.create',
+            'dashboard.xxxxxes.create',
             compact('provinces')
         );
     }
@@ -50,55 +52,55 @@ class VacancyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(VacancyRequest $request)
+    public function store(XxxxxRequest $request)
     {
         $validated = $request->validated();
         $validated['created_by'] = Auth::user()->id;
 
         if ($request->hasFile('image_id')) {
-            $validated['image_id'] = saveImg('vacancy', $request->file('image_id'));
+            $validated['image_id'] = saveImg('xxxxx', $request->file('image_id'));
         }
 
-        Vacancy::create($validated);
+        Xxxxx::create($validated);
 
-        return to_route('dashboard.vacancies.index')->with('success', "تم إضافة بيانات الشاغر بنجاح");
+        return to_route('dashboard.xxxxxes.index')->with('success', "تم إضافة بيانات الشاغر بنجاح");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Vacancy $vacancy)
+    public function show(Xxxxx $xxxxx)
     {
-        return redirect()->route("home.showVacancy", ['vacancy' => $vacancy]);
+        return redirect()->route("home.showXxxxx", ['xxxxx' => $xxxxx]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vacancy $vacancy)
+    public function edit(Xxxxx $xxxxx)
     {
         $provinces = Province::select('id', 'name_ar as name')
         ->when(Auth::user()->type == 'user', function ($q) {
             return $q->where('id', Auth::user()->province_id);
         })->get();
-        return view('dashboard.vacancies.edit', compact('provinces',  'vacancy',));
+        return view('dashboard.xxxxxes.edit', compact('provinces',  'xxxxx',));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(VacancyRequest $request, Vacancy $vacancy)
+    public function update(XxxxxRequest $request, Xxxxx $xxxxx)
     {
         $validated = $request->validated();
         $validated['updated_by'] = Auth::user()->id;
 
         $oldImage = null;
         if ($request->hasFile('image_id')) {
-            $oldImage = Image::find($vacancy->image_id);
-            $validated['image_id'] = saveImg('vacancy', $request->file('image_id'));
+            $oldImage = Image::find($xxxxx->image_id);
+            $validated['image_id'] = saveImg('xxxxx', $request->file('image_id'));
         }
 
-        $vacancy->update($validated);
+        $xxxxx->update($validated);
 
         /** delete image record from images table with related file */
         if ($oldImage) {
@@ -106,17 +108,17 @@ class VacancyController extends Controller
             $oldImage->delete();
         }
 
-        return to_route('dashboard.vacancies.index')->with('success', "تم حفظ بيانات الشاغر بنجاح");
+        return to_route('dashboard.xxxxxes.index')->with('success', "تم حفظ بيانات الشاغر بنجاح");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vacancy $vacancy)
+    public function destroy(Xxxxx $xxxxx)
     {
-        $oldImage = Image::find($vacancy->image_id);
-        $title = $vacancy->title;
-        $vacancy->delete();
+        $oldImage = Image::find($xxxxx->image_id);
+        $title = $xxxxx->title;
+        $xxxxx->delete();
 
         if ($oldImage) {
             Storage::disk('public')->delete($oldImage->name);

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SectionRequest extends FormRequest
 {
@@ -21,17 +22,27 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [            
-            'title_ar' => 'required:string|max:100',
-            'title_en' => 'required:string|max:100',
-            'content_ar' => 'required',
-            'content_en' => 'required',
+        return [ 
+            'type' => ["required" , Rule::in(config('app.section-type'))  ] ,
+            // 'type' => ["required"   ] ,
+            'arabic' => 'nullable',
+            'english' => 'nullable',
+            'title_ar' => 'required_if:arabic,1|max:100',
+            'title_en' => 'required_if:english,1|max:100',
+            'content_ar' => 'required_if:arabic,1',
+            'content_en' => 'required_if:english,1',
             'summary-length' => 'nullable|int',
             'date' =>'nullable|date',
             'hidden' => "nullable|in:1,0",
             'image_id' => 'nullable|file|max:5000',
-            'province_id' => 'nullable|exists:provinces,id',
+            'province_id' => 'required|exists:provinces,id',
             'doings' => 'nullable|array',
+        ];
+    }
+    function messages()
+    {
+        return [
+            'type.in' =>  'يوجد خطأ في تحديد نوع المقطع المضاف'
         ];
     }
 }

@@ -19,15 +19,35 @@ class MenuSeeder extends Seeder
          * ********************* page seeder*********************
          *******************************************************/
         $pages = [
-            ['id' => 1,'type' => 'page', 'title_ar' => 'عن المنظمة', 'title_en' => 'About Us', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 2,'type' => 'page', 'title_ar' => 'قصتنا', 'title_en' => 'Our Story', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 3,'type' => 'page', 'title_ar' => 'مبادئنا', 'title_en' => 'Our Principles?', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 4,'type' => 'page', 'title_ar' => 'أين نعمل؟', 'title_en' => 'Where We Work?', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 5,'type' => 'page', 'title_ar' => 'عن الحركة الدولية للصليب الأحمر والهلال الأحمر', 'title_en' => 'About the International Red Cross and Red Crescent Movement', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 6,'type' => 'page', 'title_ar' => 'البيانات الصحفية', 'title_en' => 'Press Releases', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 7,'type' => 'page', 'title_ar' => 'التقارير السنوية', 'title_en' => 'Annual Reports', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 8,'type' => 'page', 'title_ar' => 'إنفوغراف', 'title_en' => 'Infographics', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
-            ['id' => 9,'type' => 'page', 'title_ar' => 'تطوع معنا', 'title_en' => 'Volunteer With Us', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 1,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 2,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 3,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 4,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 5,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 6,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 7,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 8,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+            ['id' => 9,'type' => 'page', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => false, ],
+        ];
+        $pageDetails = [
+            ['id' => 1, 'title' => 'عن المنظمة',  'content' => '',  'lang' => 'ar','section_id' => 1 ],
+            ['id' => 2, 'title' => 'About Us',  'content' => '', 'lang' => 'en','section_id' => 1 ],
+            ['id' => 3, 'title' => 'قصتنا',  'content' => '',  'lang' => 'ar','section_id' => 2 ],
+            ['id' => 4, 'title' => 'Our Story', 'content' => '', 'lang' => 'en','section_id' => 2 ],
+            ['id' => 5, 'title' => 'مبادئنا',  'content' => '',  'lang' => 'ar','section_id' => 3 ],
+            ['id' => 6,  'title' => 'Our Principles?', 'content' => '', 'lang' => 'en','section_id' => 3 ],
+            ['id' => 7, 'title' => 'أين نعمل؟', 'content' => '', 'lang' => 'ar','section_id' => 4 ],
+            ['id' => 8,  'title' => 'Where We Work?',  'content' => '', 'lang' => 'en','section_id' => 4 ],
+            ['id' => 9, 'title' => 'عن الحركة الدولية للصليب الأحمر والهلال الأحمر',  'content' => '',  'lang' => 'ar','section_id' => 5 ],
+            ['id' => 10, 'title' => 'About the International Red Cross and Red Crescent Movement',  'content' => '', 'lang' => 'en','section_id' => 5 ],
+            ['id' => 11, 'title' => 'البيانات الصحفية', 'content' => '',  'lang' => 'ar','section_id' => 6 ],
+            ['id' => 12,  'title' => 'Press Releases',  'content' => '', 'lang' => 'en','section_id' => 6 ],
+            ['id' => 13, 'title' => 'التقارير السنوية',  'content' => '', 'lang' => 'ar','section_id' => 7 ],
+            ['id' => 14,  'title' => 'Annual Reports',  'content' => '', 'lang' => 'en','section_id' => 7 ],
+            ['id' => 15, 'title' => 'إنفوغراف',  'content' => '',  'lang' => 'ar','section_id' => 8 ],
+            ['id' => 16,  'title' => 'Infographics', 'content' => '', 'lang' => 'en','section_id' => 8 ],
+            ['id' => 17, 'title' => 'تطوع معنا',  'content' => '',  'lang' => 'ar','section_id' => 9 ],
+            ['id' => 18,  'title' => 'Volunteer With Us',  'content' => '', 'lang' => 'en','section_id' => 9 ],
         ];
         Section::insert($pages);
 
@@ -84,7 +104,7 @@ class MenuSeeder extends Seeder
         //  *******************************************************/
 
         // $pages = [
-        //     ['id' => 10, 'type' => 'page', 'title_ar' => 'عن المنظمة', 'title_en' => 'About Us', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => true, ],
+        //     ['id' => 10, 'type' => 'page', 'title_ar' => 'عن المنظمة', 'title_en' => 'About Us', 'content' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => true, ],
         //     ['id' => 11, 'type' => 'page', 'title_ar' => 'قصتنا', 'title_en' => 'Our Story', 'content_ar' => '', 'content_en' => '', 'summary_length' => 100, 'date' => '2025-01-01', 'hidden' => true,],
         // ];
         // $hiddenLinks = [

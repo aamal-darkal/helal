@@ -23,4 +23,8 @@ class Province extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+    function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

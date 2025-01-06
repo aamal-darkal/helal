@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doing extends Model
 {
     use HasFactory;
-    public $fillable = ['title_ar', 'title_en', 'icon'];
+    public $fillable = ['title_ar', 'title_en', 'icon' , 'updated_by' ];
 
     function Keywords()
     {
@@ -23,4 +23,14 @@ class Doing extends Model
     function menu(){
         return $this->belongsTo(Menu::class);
     }
+
+    function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
+

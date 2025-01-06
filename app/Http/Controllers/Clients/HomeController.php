@@ -9,7 +9,7 @@ use App\Models\Doing;
 use App\Models\Martyer;
 use App\Models\Province;
 use App\Models\Section;
-use App\Models\Vacancy;
+use App\Models\Xxxxx;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,15 +40,34 @@ class HomeController extends Controller
             }])->get();
 
         $provinces = $this->getProvinces();
-        // return $provinces;
-        /** 400 can be replace from settings */
-        $news = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'news')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
-        $stories = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'story')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
-        $campaign = Section::select('id', 'date', 'image_id', 'summary_length', "title_$locale as title", DB::raw("substr(REGEXP_REPLACE(content_$locale, '<[^>]*>+', '') , 1 ,400) as content"))->where('type', 'campaign')->where('hidden', 0)->orderBy('date', 'desc')->first();
+        
+        /** 400 content length can be replace from settings */        
+        $news = Section::select('id', 'date', 'image_id', 'summary_length')
+            ->with("sectionDetail_$locale", function ($q) {
+                return $q->select("section_id", "title","lang", DB::raw("substr(REGEXP_REPLACE(content, '<[^>]*>+', '') , 1 ,400) as content"));
+            })
+            ->wherehas("sectionDetail_$locale")
+            ->where('type', 'news')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
 
+        $stories = Section::select('id', 'date', 'image_id', 'summary_length')
+            ->with("sectionDetail_$locale", function ($q) {
+                return $q->select("section_id", "title","lang", DB::raw("substr(REGEXP_REPLACE(content, '<[^>]*>+', '') , 1 ,400) as content"));
+            })
+            ->wherehas("sectionDetail_$locale")
+            ->where('type', 'story')->where('hidden', 0)->orderBy('date', 'desc')->limit(6)->get();
+
+
+        $campaign = Section::select('id', 'date', 'image_id', 'summary_length')
+            ->with("sectionDetail_$locale", function ($q) {
+                return $q->select("section_id", "title" ,"lang", DB::raw("substr(REGEXP_REPLACE(content, '<[^>]*>+', '') , 1 ,400) as content"));
+            })
+            ->wherehas("sectionDetail_$locale")
+            ->where('type', 'campaign')->where('hidden', 0)->orderBy('date', 'desc')->first();
+
+            $detail = "sectionDetail_$locale";
         return view(
             'home.index',
-            compact('martyers',   'news', 'stories',  'campaign', 'provinces')
+            compact('martyers',   'news', 'stories',  'campaign', 'provinces' , 'detail')
         );
     }
     /**
@@ -56,19 +75,15 @@ class HomeController extends Controller
      */
     function show(Section $section)
     {
-        
+
         $locale = app()->getLocale();
 
-        $title = "title_$locale";
-        $content = "content_$locale";
-        $section->title = $section->$title;
-        $section->content = $section->$content;
+        $detail = "sectionDetail_$locale";
 
-        return view('home.show', compact('section'));
-    }
-    function showVacancy(Vacancy $vacancy)
-    {
-        $section = $vacancy;
+        $section->title = $section->$detail->title;
+        $section->content = $section->$detail->content;
+        $section->lang = $section->$detail->lang;
+
         return view('home.show', compact('section'));
     }
 
@@ -76,13 +91,6 @@ class HomeController extends Controller
     function search(Request $request)
     {
         $type = $request->type;
-
-        if ($type == 'vacancy') {
-            $results = Vacancy::select('id',   "title", "content" , DB::raw("'100' as  summary_length") ,  'image_id' , DB::raw("'vacancy' as type") , 'date')
-            ->orderBy('date', 'desc')->paginate(5)->withQueryString();
-            $key =  "vacancies";
-            return view('home.search', compact('results', 'key', 'type'));            
-        }
 
         $locale = app()->getLocale();
 
@@ -93,7 +101,11 @@ class HomeController extends Controller
 
         /** for doing with keyword */
 
-        $results = Section::select("id", "title_$locale as title",  "content_$locale as content", "summary_length", "image_id", "type" , "date")
+        $results = Section::select("id", "summary_length", "image_id", "type", "date")
+            /** has content for our locale */
+            ->wherehas("sectionDetail_$locale")
+            ->with("sectionDetail_$locale")
+            
             /** for certain province */
             ->when($province, function ($q) use ($province) {
                 return $q->Where('province_id', $province);
@@ -119,16 +131,18 @@ class HomeController extends Controller
                     );
                 }
             )
-            ->where('hidden' , false )
+            ->where('hidden', false)
             ->orderBy('date', 'desc')->paginate(5)->withQueryString();
         // return $results;
         $title = "title_$locale";
         $name = "name_$locale";
 
-        $key = $province ? __('helal.section-types.news.plural')  . " " . Province::find($province)->$name : ($type ?   __("helal.section-types.$type.plural") : ($search ? $search : 
-        ($doing ? Doing::find($doing)->$title :
+        $detail = "sectionDetail_$locale";
+
+        $key = $province ? __('helal.section-types.news.plural')  . " " . Province::find($province)->$name : ($type ?   __("helal.section-types.$type.plural") : ($search ? $search : ($doing ? Doing::find($doing)->$title :
             __('helal.organization-news'))));
+            
         // return $results;
-        return view('home.search', compact('results', 'key', 'type'));
+        return view('home.search', compact('results', 'key', 'type', 'detail'));
     }
 }

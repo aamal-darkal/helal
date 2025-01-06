@@ -15,15 +15,20 @@
                 class="btn btn-outline-secondary text-nowrap">كافة {{ __("helal.section-types.$type.plural") }}</a>
         @endif
     </form>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped text-center">
         <thead class="table-secondary">
 
             <tr>
                 <th> # </th>
                 <th> العنوان بالعربي </th>
                 <th> العنوان بالانكليزي</th>
+                <th> المحافظة</th>
                 <th> مخفي</th>
                 <th> الصورة </th>
+                <th> المدخل </th>
+                <th> تاريخ الإدخال </th>
+                <th> المعدل </th>
+                <th> تاريخ التعديل </th>
                 <th> أوامر </th>
             </tr>
         </thead>
@@ -31,18 +36,21 @@
             @foreach ($sections as $section)
                 <tr>
                     <td> {{ $section->id }}</td>
-                    <td> {{ $section->title_ar }}</td>
-                    <td> {{ $section->title_en }}</td>
-                    <td> <input type="checkbox" @checked($section->visible) disabled></td>
+                    <td> {{ $section->sectionDetail_ar ? $section->sectionDetail_ar->title : '' }}</td>
+                    <td> {{ $section->sectionDetail_en ? $section->sectionDetail_en->title : '' }}</td>
+                    <td> {{ $section->province->name_ar }}</td>                    
+                    <td> <input type="checkbox" @checked($section->hidden) disabled></td>
                     <td><img src="{{ getImgUrl($section->image_id) }}" width="75"></td>
-
+                    <td> {{ $section->created_by ? $section->createdBy->name : '' }} </td>
+                    <td> {{ $section->created_at ? $section->created_at->format('Y-m-d'): '' }}</td>
+                    <td> {{ $section->updatedBy  ? $section->updatedBy->name : '' }} </td>
+                    <td> {{ $section->updated_at ? $section->updated_at->format('Y-m-d'):'' }}</td>
                     <td class="text-nowrap">
                         <a href="{{ route('dashboard.sections.edit', $section) }}" class="btn btn-outline-primary">
                             <i data-feather="edit"></i>
                         </a>
                         <form action="{{ route('dashboard.sections.destroy', $section) }}" method="post"
-                            class="d-inline-block"
-                            onsubmit="return confirm('سيتم محي   {{ $section->title }}?' )">
+                            class="d-inline-block" onsubmit="return confirm('سيتم محي   {{ $section->sectionDetail_ar?$section->sectionDetail_ar->title: ($section->sectionDetail_en?$section->sectionDetail_en->title:'')}}?' )">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger"><i data-feather="trash"></i></button>

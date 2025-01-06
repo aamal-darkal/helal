@@ -14,5 +14,14 @@ class Martyer extends Model
 
     function province(){
         return $this->belongsTo(Province::class);
+    }    
+
+    function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

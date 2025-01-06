@@ -4,14 +4,14 @@
 
     <h4 class="title"> تعديل شاغر </h4>
 
-    <form action="{{ route('dashboard.vacancies.update', $vacancy) }}" method="post" enctype="multipart/form-data"
-        onsubmit="readRich()" name="vacancyForm">
+    <form action="{{ route('dashboard.xxxxxes.update', $xxxxx) }}" method="post" enctype="multipart/form-data"
+        onsubmit="readRich()" name="xxxxxForm">
         @csrf
         @method('put')
-        <x-input name="title" :dbValue="$vacancy->title" label="العنوان" />
+        <x-input name="title" :dbValue="$xxxxx->title" label="العنوان" />
         <label for="content" class="form-label"> المحتوى</label>
         <div id="content"></div>
-        <textarea name="content" class="d-none">{!! old('content', $vacancy->content) !!}</textarea>
+        <textarea name="content" class="d-none">{!! old('content', $xxxxx->content) !!}</textarea>
         @error('content')
             <div class="text-danger">
                 {{ $message }}
@@ -19,20 +19,20 @@
         @enderror
         
         <br>
-        <x-input type="date" :dbValue="$vacancy->date" name="date" label='تاريخ الشاغر' />
+        <x-input type="date" :dbValue="$xxxxx->date" name="date" label='تاريخ الشاغر' />
 
-        <x-checkbox name="hidden" label="مخفي" :dbValue="$vacancy->hidden" />
+        <x-checkbox name="hidden" label="مخفي" :dbValue="$xxxxx->hidden" />
 
         <div class="mb-3">
             <x-input name="image_id" label="الصورة الأساسية 1400* 700" type="file" accept="image/*"
                 onchange="showFile(this , 'img-review')" />
-            <img class="border border-secondary" id="img-review" src="{{ getImgUrl($vacancy->image_id) }}" width="300">
+            <img class="border border-secondary" id="img-review" src="{{ getImgUrl($xxxxx->image_id) }}" width="300">
         </div>
 
-        <x-select name="province_id" label="المحافظة" :dbValue="$vacancy->province_id" :options=$provinces />
+        <x-select name="province_id" label="المحافظة" :dbValue="$xxxxx->province_id" :options=$provinces />
 
         <button class="btn btn-secondary">حفظ الشاغر</button>
-        <a href="{{ route('dashboard.vacancies.index') }}" class="btn btn-outline-secondary">عودة</a>
+        <a href="{{ route('dashboard.xxxxxes.index') }}" class="btn btn-outline-secondary">عودة</a>
     </form>
 @endsection
 
@@ -52,11 +52,11 @@
         var editor = new RichTextEditor("#content");
 
         function fillRich() {
-            editor.setHTMLCode(vacancyForm.content.value);
+            editor.setHTMLCode(xxxxxForm.content.value);
         }
 
         function readRich() {
-            vacancyForm.content.value = editor.getHTMLCode();
+            xxxxxForm.content.value = editor.getHTMLCode();
         }
     </script>
 

@@ -5,17 +5,17 @@
             <div class="swiper stories-swiper">
                 <div class="swiper-wrapper">
                     @foreach ($stories as $story)
-                        <div class="swiper-slide container" data-aos="fade-up">
-                            <a href="{{ route('home.show', $story->id) }}" class=" d-block row">
+                        <div class="swiper-slide container" data-aos="fade-up" >
+                            <a href="{{ route('home.show', $story->id) }}" class=" d-block row" style="direction:@if( $story->$detail->lang == 'en') ltr @else rtl @endif">
                                 <div class="row">
                                     <div class="col-md-6 story-img">
                                         <img src="{{ getImgUrl($story->image_id) }}" alt="">
                                     </div>
                                     <div class="col-md-6 mb-5">
                                         <div class="story-content bg-white p-3 shadow">
-                                            <h3 class="text-salmon">{{ $story->title }}</h3>
+                                            <h3 class="text-salmon">{{ $story->$detail->title }}</h3>
                                             <div class="d-none">
-                                                {!! $story->content !!}
+                                                {!! $story->$detail->content !!}
                                             </div>
                                             <div class="summary mb-3" data-length="{{ $story->summary_length }}"></div>
                                         </div>

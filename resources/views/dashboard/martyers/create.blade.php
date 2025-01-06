@@ -10,7 +10,7 @@
         <x-input name="name_en" label="الاسم بالإنكليزي" required maxlength="50"/>
         <x-input name="DOD" type="number" label="سنة الاستشهاد" min="1901" max="2200" />
 
-        <x-select name="province_id" label="المحافظة"  :options=$provinces />
+        <x-select name="province_id" label="المحافظة"  :options=$provinces required/>
 
         <button class="btn btn-secondary">إضافة شهيد</button>
         <a href="{{ route('dashboard.martyers.index') }}" class="btn btn-outline-secondary">عودة</a>

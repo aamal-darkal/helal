@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VacancyRequest extends FormRequest
+class XxxxxRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class VacancyRequest extends FormRequest
             'date' =>'nullable|date',
             'hidden' => "nullable|in:1,0",
             'image_id' => 'nullable|file|max:5000',
-            'province_id' => 'nullable|exists:provinces,id',
+            'province_id' => 'required|exists:provinces,id',
         ];
     }
 }

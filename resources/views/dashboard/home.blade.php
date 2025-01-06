@@ -62,6 +62,9 @@
 
 
         </div>
+        <div class="text-center">
+            <img src="{{ asset('assets/images/logo/logo-cover.png') }}" alt="">
+        </div>
 
 
     </div>

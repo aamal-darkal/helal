@@ -16,7 +16,8 @@ class FileUploadController extends Controller
     public function index(Request $request)
     {
         $fileUploads = FileUpload::with('createdBy:id,name')
-        ->select('id' , DB::raw("concat('storage/files/', type , '/', name ) as url") , "name" ,"type" , "description")->get();
+            ->select('id', DB::raw("concat('storage/files/', type , '/', name ) as url"), "name", "type", "description" , "created_at")
+            ->latest()->get();
         // return $fileUploads;
         return view('dashboard.fileUploads.index', compact('fileUploads'));
     }
@@ -42,12 +43,12 @@ class FileUploadController extends Controller
             'description' => 'required|string|max:200',
             'file' => 'required|file|max:2000',
         ]);
-        
+
         /** save file */
         $file = $request->file('file');
         $validated['name'] .= "-" . time() . "." . $file->extension();
-        $file->storeAs("files/$validated[type]",   $validated['name'] , 'public');
-        
+        $file->storeAs("files/$validated[type]",   $validated['name'], 'public');
+
         $validated['created_by'] = Auth::user()->id;
         FileUpload::create($validated);
         $url = asset("storage/files/$validated[type]/$validated[name]");
@@ -80,11 +81,11 @@ class FileUploadController extends Controller
     //         $type = $fileUpload->type;
     //         $extension = $fileUpload->extension;
     //         Storage::disk('public')->delete("storage/files/$type/$name.$extension");
-            
+
     //         /** save new file */
     //         $file = $request->file('file');
     //         $validated['name'] 
-            
+
     //         .= "-" . time() . "." . $file->extension();
     //         $file->storeAs("files/$validated[type]", $validated['name'], 'public');
     //     }

@@ -14,4 +14,9 @@ class Keyword extends Model
     {
         return $this->belongsToMany(Doing::class);
     }
+
+    function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

@@ -16,6 +16,7 @@
                 <th> url </th>
                 <th> الوصف </th>
                 <th> الحساب </th>
+                <th>تاريخ الإنشاء</th>
                 <th> معاينة </th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                     <td> {{ $fileUpload->id }}</td>
                     <td> {{ $fileUpload->name }}</td>
                     <td> {{ $fileUpload->type }}</td>
+                    <td> {{ $fileUpload->created_at }}</td>                    
                     <td class="wrap-word"> {{ asset($fileUpload->url) }}</td>
                     <td> {{ $fileUpload->description }}</td>
                     <td>

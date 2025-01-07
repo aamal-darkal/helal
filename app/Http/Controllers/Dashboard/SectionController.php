@@ -206,7 +206,8 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         $oldImage = Image::find($section->image_id);
-        $title = $section->sectionDetail_ar->title;
+        $title = $section->sectionDetail_ar?$section->sectionDetail_ar->title:
+        ($section->sectionDetail_en? $section-> sectionDetail_en->title:'');
         $type = $section->type;
         $section->sectionDetails()->delete();
         $section->delete();

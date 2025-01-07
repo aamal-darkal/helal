@@ -29,7 +29,7 @@ class SectionController extends Controller
     {
         $type = $request->type;
         $search = $request->search;
-        $sections = Section::select('id','hidden', 'image_id', 'created_at', 'created_by', 'updated_at', 'updated_by')
+        $sections = Section::select('id','hidden', 'image_id', 'created_at', 'created_by', 'updated_at', 'updated_by','province_id')
             ->when($search, function ($q) use ($search) {
                 return $q->where(function ($q) use ($search) {
                     return $q->where('title_ar', 'like', "%$search%")
@@ -38,7 +38,7 @@ class SectionController extends Controller
             })->when(Auth::user()->type == 'user', function ($q) {
                 return $q->where('province_id', Auth::user()->province_id);
             })->where('type', $type)
-            ->with(['province:id','sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
+            ->with(['province:id,name_ar','sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
             ->latest()
             ->paginate();
             // return $sections;

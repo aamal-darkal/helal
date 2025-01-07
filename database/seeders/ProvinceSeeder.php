@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Province;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProvinceSeeder extends Seeder
 {
@@ -60,5 +61,6 @@ class ProvinceSeeder extends Seeder
             $menu->url = "search?province=$province->id";
             $menu->save();
         }
+        DB::raw("update section set province_id = 1");
     }
 }

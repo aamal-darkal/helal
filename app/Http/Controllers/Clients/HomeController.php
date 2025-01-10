@@ -80,9 +80,9 @@ class HomeController extends Controller
 
         $detail = "sectionDetail_$locale";
 
-        $section->title = $section->$detail->title;
-        $section->content = $section->$detail->content;
-        $section->lang = $section->$detail->lang;
+        $section->title = $section->$detail? $section->$detail->title:"";
+        $section->content = $section->$detail? $section->$detail->content:"";
+        $section->lang = $section->$detail? $section->$detail->lang:"";
 
         return view('home.show', compact('section'));
     }

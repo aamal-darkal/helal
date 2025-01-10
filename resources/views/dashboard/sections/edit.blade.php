@@ -3,7 +3,7 @@
 @section('content')
 
     <h4 class="title"> تعديل {{ __("helal.section-types.$type.singular") }} </h4>
-{{ var_dump($errors->all()) }}
+
     <form action="{{ route('dashboard.sections.update', $section) }}" method="post" enctype="multipart/form-data"
         onsubmit="readRich()"
          name="sectionForm">
@@ -22,13 +22,13 @@
         @enderror
 
 
-        <x-checkbox onchange="enable_ar()" name="arabic" label="عربي" :dbValue="$section->arabic" required/>
+        <x-checkbox onchange="toggleAr()" name="arabic" label="عربي" :dbValue="$section->arabic" />
         <div class="group-fields p-2 d-none">
             <x-input name="title_ar" label="العنوان بالعربي" :dbValue="$section->sectionDetail_ar?$section->sectionDetail_ar->title:''" />
 
             <label for="content_ar" class="form-label"> المحتوى بالعربي </label>
-            <div id="content_ar" class="w-100"></div>
-            <textarea name="content_ar" class="d-none">{!! old('content_ar', $section->sectionDetail_ar?$section->sectionDetail_ar->content:'') !!}</textarea>
+            <div id="rich_ar" class="w-100"></div>
+            <textarea name="content_ar" id="content_ar" class="d-none">{!! old('content_ar', $section->sectionDetail_ar?$section->sectionDetail_ar->content:'') !!}</textarea>
             @error('content_ar')
                 <div class="text-danger">
                     {{ $message }}
@@ -36,13 +36,13 @@
             @enderror
         </div>
 
-        <x-checkbox onchange="enable_en()" name="english" label="انكليزي" :dbValue="$section->english"/>
+        <x-checkbox onchange="toggleEn()" name="english" label="انكليزي" :dbValue="$section->english"/>
         <div class="group-fields p-2 d-none">
-            <x-input name="title_en" label="العنوان بالانكليزي" class="dir-ltr" :dbValue="$section->sectionDetail_en?$section->sectionDetail_en->title:''"  required/>
+            <x-input name="title_en" label="العنوان بالانكليزي" class="dir-ltr" :dbValue="$section->sectionDetail_en?$section->sectionDetail_en->title:''"  />
 
             <label for="content_en" class="form-label"> المحتوى بالانكليزي </label>
-            <div id="content_en" class="w-100"></div>
-            <textarea name="content_en" class="d-none">{!! old('content_en', $section->sectionDetail_en?$section->sectionDetail_en->content:'') !!}</textarea>
+            <div id="rich_en" class="w-100"></div>
+            <textarea name="content_en" id="content_en" class="d-none">{!! old('content_en', $section->sectionDetail_en?$section->sectionDetail_en->content:'') !!}</textarea>
             @error('content_en')
                 <div class="text-danger">
                     {{ $message }}
@@ -94,8 +94,8 @@
 
     <script>
         // Initiating the multi-select  & richtext  
-        var editor_ar = new RichTextEditor("#content_ar");
-        var editor_en = new RichTextEditor("#content_en");
+        var editor_ar = new RichTextEditor("#rich_ar");
+        var editor_en = new RichTextEditor("#rich_en");
 
 
         $(document).ready(function() {
@@ -120,11 +120,11 @@
             editor_en.setHTMLCode(sectionForm.content_en.value);
         }
 
-        function enable_ar() {
+        function toggleAr() {
             document.getElementById("content_ar").parentNode.classList.toggle('d-none')
         }
 
-        function enable_en() {
+        function toggleEn() {
             document.getElementById("content_en").parentNode.classList.toggle('d-none')
         }
         

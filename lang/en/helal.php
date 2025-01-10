@@ -60,7 +60,7 @@ return [
         'news' => ['singular' => 'news', 'plural' => 'news'],
         'story' => ['singular' => 'story', 'plural' => 'stories'],
         'section' => ['singular' => 'article', 'plural' => 'articles'],
-        'xxxxx' => ['singular' => 'xxxxx', 'plural' => 'xxxxxes'],
+        'vacancy' => ['singular' => 'vacancy', 'plural' => 'vacancies'],
         'page' => ['singular' => 'page', 'plural' => 'pages'],
     ]
 ];

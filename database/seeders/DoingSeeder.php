@@ -424,21 +424,19 @@ class DoingSeeder extends Seeder
 		Doing::find(9)->keywords()->attach([13 , 14]);
 
 		/** إرشادات وتوعية */
-		$doingGuidance = [ 'title_ar' => 'إرشادات وتوعية', 'title_en' => 'ِAwaerness an Guidance', 'hidden' => true];
-		$menuGuidance =    ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => "", 'order' => 6, 'permit' => 'none'];
+		$doingGuidance = [ 'id' => 10 ,'title_ar' => 'إرشادات وتوعية', 'title_en' => 'ِAwaerness an Guidance', 'hidden' => true];
+		$menuGuidance =    [ 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => "search?doing=10", 'order' => 1, 'permit' => 'none' , 'menu_id' => '6'];
 		$menu = Menu::create($menuGuidance);
 		$doing = $menu->doing()->create($doingGuidance);
-		$menu->url = "search?doing=10";
-		$menu->save();		
+		
 
 		/**  */
-		// $doingPress = ['title_ar' => 'البيانات الصحفية', 'title_en' => 'Press Releases', 'hidden' => true];
-		// $menuPress =    [ 'title_en' => 'Press Releases', 'title_ar' => 'البيانات الصحفية', 'url' => 'show/6', 'order' => 4,  'permit' => 'update', 'menu_id' => 4 ,'section_id' => 6];
+		$doingPress = ['id' => 11, 'title_ar' => 'البيانات الصحفية', 'title_en' => 'Press Releases', 'hidden' => true];
+		$menuPress =    [ 'title_en' => 'Press Releases', 'title_ar' => 'البيانات الصحفية', 'url' => 'search?doing=11', 'order' => 2,  'permit' => 'none', 'menu_id' => 6 ];
 		            
 
-		// $menu = Menu::create($menuGuidance);
-		// $doing = $menu->doing()->create($doingGuidance);
-		// $menu->url = "search?doing=10";
-		// $menu->save();		
+		$menu = Menu::create($menuPress);
+		$doing = $menu->doing()->create($doingPress);
+		
     }
 }

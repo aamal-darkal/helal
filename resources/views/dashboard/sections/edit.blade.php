@@ -3,9 +3,10 @@
 @section('content')
 
     <h4 class="title"> تعديل {{ __("helal.section-types.$type.singular") }} </h4>
-
+{{ var_dump($errors->all()) }}
     <form action="{{ route('dashboard.sections.update', $section) }}" method="post" enctype="multipart/form-data"
-        onsubmit="readRich()" name="sectionForm">
+        onsubmit="readRich()"
+         name="sectionForm">
         @csrf
         @method('put')
 
@@ -62,7 +63,7 @@
 
         <x-select-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings :dbValues="$currDoings" />
 
-        <x-select name="province_id" label="المحافظة" :dbValue="$section->province_id" :options=$provinces />
+        <x-select-multiple element_id="provinces" name="provinces[]" label="المحافظة" :options=$provinces :dbValues="$currProvinces" />
 
 
         <div class="mb-3">
@@ -99,6 +100,8 @@
 
         $(document).ready(function() {
             $("#doings").chosen();
+            $("#provinces").chosen();
+
             fillRich()
             if(sectionForm.arabic.checked)
                 document.getElementById("content_ar").parentNode.classList.remove('d-none')

@@ -65,8 +65,9 @@
         </div>
 
         <x-select-multiple element_id="doings" name="doings[]" label="الخدمات" :options=$doings />
-
-        <x-select name="province_id" label="المحافظة" :options=$provinces required />
+        
+        <x-select-multiple element_id="provinces" name="provinces[]" label="المحافظة" :options=$provinces />
+        
 
         <div class="mb-3">
             <label for="summary_length" class="form-label">عدد محارف الجزء المعروض في الصفحة الرئيسية</label>
@@ -103,6 +104,7 @@
 
         $(document).ready(function() {
             $("#doings").chosen();
+            $("#provinces").chosen();
             fillRich()
             if(sectionForm.arabic.checked)
                 document.getElementById("content_ar").parentNode.classList.remove('d-none')

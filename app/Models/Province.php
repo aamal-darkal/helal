@@ -12,7 +12,7 @@ class Province extends Model
     public $fillable = ['name_ar' , 'name_en' ,'location_ar','location_en' , 'phone'];
 
     function sections(){
-        return $this->hasMany(Section::class);
+        return $this->belongsToMany(Section::class);
     }
     
     function users(){

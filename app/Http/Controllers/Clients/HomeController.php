@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
         $locale =   app()->getLocale();
 
-        $provinces = Province::select("id", "name_en", "name_$locale as name")->get();
+        $provinces = Province::select("id", "name_en",    "name_$locale as name")->get();
         foreach ($provinces as $province)
             $cities[$province->name_en] = ['id' => $province['id'], 'name' => $province['name']];
         return $cities;

@@ -29,7 +29,7 @@ class SectionController extends Controller
     {
         $type = $request->type;
         $search = $request->search;
-        $sections = Section::select('id','hidden', 'image_id', 'created_at', 'created_by', 'updated_at', 'updated_by','province_id')
+        $sections = Section::select('id','hidden', 'image_id', 'created_at', 'created_by', 'updated_at', 'updated_by')
             ->when($search, function ($q) use ($search) {
                 return $q->where(function ($q) use ($search) {
                     return $q->where('title_ar', 'like', "%$search%")
@@ -38,7 +38,7 @@ class SectionController extends Controller
             })->when(Auth::user()->type == 'user', function ($q) {
                 return $q->where('province_id', Auth::user()->province_id);
             })->where('type', $type)
-            ->with(['province:id,name_ar','sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
+            ->with(['sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
             ->latest()
             ->paginate();
             // return $sections;
@@ -97,6 +97,9 @@ class SectionController extends Controller
         /** saving relation to doings if exists*/
         if ($request->doings)
             $section->doings()->attach($request['doings']);
+        
+        if ($request->provinces)
+            $section->provinces()->attach($request['provinces']);
 
         /** saving related menu if exists */
         $menu_id = $request->menu_id;
@@ -133,12 +136,13 @@ class SectionController extends Controller
             })->get();
 
         $doings = Doing::select('id', DB::raw("concat(title_ar , ' - ' , title_en) as name"))->get();
-        $currDoings = $section->doings->modelKeys();
+        $currDoings =$section->doings->modelKeys();
+        $currProvinces = $section->provinces? $section->provinces->modelKeys():[];
 
         $section->arabic  = (bool) $section->sectionDetail_ar;
         $section->english = (bool) $section->sectionDetail_en;
 
-        return view('dashboard.sections.edit', compact('type', 'provinces', 'doings', 'currDoings', 'section', 'menu'));
+        return view('dashboard.sections.edit', compact('type', 'provinces', 'doings', 'currDoings', 'currProvinces', 'section', 'menu'));
     }
 
     /**
@@ -187,6 +191,9 @@ class SectionController extends Controller
 
         if ($request->doings) {
             $section->doings()->sync($validated['doings']);
+        }
+        if ($request->provinces) {
+            $section->provinces()->sync($validated['provinces']);
         }
 
         $menu_id = $request->menu_id;

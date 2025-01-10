@@ -423,12 +423,22 @@ class DoingSeeder extends Seeder
 		Doing::find(8)->keywords()->attach([11,12]);
 		Doing::find(9)->keywords()->attach([13 , 14]);
 
-
-		$doingGuidance = ['id' => env('DOING_GUIDANCE '), 'title_ar' => 'إرشادات وتوعية', 'title_en' => 'ِAwaerness an Guidance', 'hidden' => true];
+		/** إرشادات وتوعية */
+		$doingGuidance = [ 'title_ar' => 'إرشادات وتوعية', 'title_en' => 'ِAwaerness an Guidance', 'hidden' => true];
 		$menuGuidance =    ['id' => 6, 'title_en' => 'Awareness and Guidance', 'title_ar' => 'توعية وإرشادات', 'url' => "", 'order' => 6, 'permit' => 'none'];
 		$menu = Menu::create($menuGuidance);
 		$doing = $menu->doing()->create($doingGuidance);
 		$menu->url = "search?doing=10";
 		$menu->save();		
+
+		/**  */
+		// $doingPress = ['title_ar' => 'البيانات الصحفية', 'title_en' => 'Press Releases', 'hidden' => true];
+		// $menuPress =    [ 'title_en' => 'Press Releases', 'title_ar' => 'البيانات الصحفية', 'url' => 'show/6', 'order' => 4,  'permit' => 'update', 'menu_id' => 4 ,'section_id' => 6];
+		            
+
+		// $menu = Menu::create($menuGuidance);
+		// $doing = $menu->doing()->create($doingGuidance);
+		// $menu->url = "search?doing=10";
+		// $menu->save();		
     }
 }

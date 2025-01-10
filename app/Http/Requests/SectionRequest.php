@@ -35,8 +35,13 @@ class SectionRequest extends FormRequest
             'date' =>'nullable|date',
             'hidden' => "nullable|in:1,0",
             'image_id' => 'nullable|file|max:5000',
-            'province_id' => 'required|exists:provinces,id',
+
             'doings' => 'nullable|array',
+            'doings.*' => 'required|exists:doings,id',
+            
+            'provinces' => 'required|array',
+            'provinces.*' => 'required|exists:provinces,id',
+            
         ];
     }
     function messages()

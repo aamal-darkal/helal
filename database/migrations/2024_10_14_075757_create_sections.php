@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('date')->default(DB::raw('CURDATE()'))->index();
             $table->boolean('hidden')->default(false);
             $table->foreignId('image_id')->nullable()->constrained();
-            $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();

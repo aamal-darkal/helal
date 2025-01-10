@@ -22,7 +22,6 @@
                 <th> # </th>
                 <th> العنوان بالعربي </th>
                 <th> العنوان بالانكليزي</th>
-                <th> المحافظة</th>
                 <th> مخفي</th>
                 <th> الصورة </th>
                 <th> المدخل </th>
@@ -38,7 +37,6 @@
                     <td> {{ $section->id }}</td>
                     <td> {{ $section->sectionDetail_ar ? $section->sectionDetail_ar->title : '' }}</td>
                     <td> {{ $section->sectionDetail_en ? $section->sectionDetail_en->title : '' }}</td>
-                    <td> {{ $section->province->name_ar }}</td>                    
                     <td> <input type="checkbox" @checked($section->hidden) disabled></td>
                     <td><img src="{{ getImgUrl($section->image_id) }}" width="75"></td>
                     <td> {{ $section->created_by ? $section->createdBy->name : '' }} </td>

@@ -36,7 +36,9 @@ class SectionController extends Controller
                         ->orWhere('title_en', 'like', "%$search%");
                 });
             })->when(Auth::user()->type == 'user', function ($q) {
-                return $q->where('province_id', Auth::user()->province_id);
+                return $q->whereHas('provinces', function($q){
+                    return $q->where('id' , Auth::user()->province_id);
+                });            
             })->where('type', $type)
             ->with(['sectionDetail_ar:section_id,title', 'sectionDetail_en:section_id,title','createdBy:id,name', 'updatedBy:id,name'])
             ->latest()

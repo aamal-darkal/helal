@@ -108,7 +108,9 @@ class HomeController extends Controller
             
             /** for certain province */
             ->when($province, function ($q) use ($province) {
-                return $q->Where('province_id', $province);
+                return $q->WhereHas('provinces', function($q) use ($province){
+                    return $q->where('id' , $province);
+                });
             })
             /** for certain type */
             ->when($type, function ($q) use ($type) {
